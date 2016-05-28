@@ -3,12 +3,16 @@ package Anwser;
 import java.util.LinkedList;
 import java.util.List;
 
-public class MapAnswer implements Answer{
+public class MapAnswer extends Answer{
 
 	List<String> side1 = new LinkedList<String>();
 	List<String> side2 = new LinkedList<String>();
 	List<Integer> map = new LinkedList<Integer>();
-	
+
+	public MapAnswer(int type) {
+		super(Answer.MAP);
+	}
+
 	@Override
 	public String getAnswer() {
 		// TODO Auto-generated method stub
@@ -44,13 +48,6 @@ public class MapAnswer implements Answer{
 		}
 		return ret;
 	}
-
-
-	@Override
-	public int getType() {
-		return 5;
-	}
-
 
 	@Override
 	public boolean match(Answer answer) {

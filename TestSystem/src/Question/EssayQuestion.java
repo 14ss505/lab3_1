@@ -14,13 +14,13 @@ public class EssayQuestion extends Question {
 
 	@Override
 	public void setAnswer(String answer) {
-		// TODO Auto-generated method stub
+		//Do nothing
 		
 	}
 
 	@Override
 	public boolean match(Answer answer) {
-		// TODO Auto-generated method stub
+		//Do nothing
 		return false;
 	}
 }

@@ -3,11 +3,16 @@ package Anwser;
 import java.util.LinkedList;
 import java.util.List;
 
-public class RankAnswer implements Answer{
+public class RankAnswer extends Answer{
 	
 	List<Integer> rank = new LinkedList<Integer>();
 	List<String> question = new LinkedList<String>();
-	
+
+
+	public RankAnswer(int type) {
+		super(Answer.RANK);
+	}
+
 	@Override
 	public String getAnswer() {
 		// TODO Auto-generated method stub
@@ -42,15 +47,8 @@ public class RankAnswer implements Answer{
 	}
 
 	@Override
-	public int getType() {
-		// TODO Auto-generated method stub
-		return 4;
-	}
-
-	@Override
 	public boolean match(Answer answer) {
 		return answer.writeAnswer().equals(this.writeAnswer());
-
 	}
 
 }

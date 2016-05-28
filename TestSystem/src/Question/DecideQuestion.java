@@ -1,13 +1,11 @@
 package Question;
 
-import Anwser.Answer;
 import Anwser.DecideAnswer;
 
 public class DecideQuestion extends PromptQuestion {
-	DecideAnswer answer;
-	
 	public DecideQuestion(){
 		super(0);
+		answer = new DecideAnswer();
 	}
 
 	
@@ -17,13 +15,4 @@ public class DecideQuestion extends PromptQuestion {
 		return ret;
 	}
 	
-	@Override
-	public void setAnswer(String anwser){
-		answer = new DecideAnswer();
-		answer.setAnswer(anwser);
-	}
-	
-	public boolean match(String answer) {
-		return this.answer.getAnswer().equals(answer);
-	}
 }

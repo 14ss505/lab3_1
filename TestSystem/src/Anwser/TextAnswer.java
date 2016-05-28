@@ -1,9 +1,13 @@
 package Anwser;
 
-public class TextAnswer implements Answer{
+public class TextAnswer extends Answer{
 	
 	String text;
-	
+
+	public TextAnswer(int type) {
+		super(Answer.TEXT);
+	}
+
 	@Override
 	public String getAnswer() {
 		// TODO Auto-generated method stub
@@ -20,11 +24,6 @@ public class TextAnswer implements Answer{
 	public String writeAnswer() {
 		// TODO Auto-generated method stub
 		return text;
-	}
-
-	@Override
-	public int getType() {
-		return 2;
 	}
 
 	@Override

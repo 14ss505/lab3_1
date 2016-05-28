@@ -2,11 +2,14 @@ package Anwser;
 
 import java.util.List;
 
-public class ChoiceAnswer implements Answer{
-	
+public class ChoiceAnswer extends Answer{
 	int[] anwser;
 	List<String> item;
-	
+
+	public ChoiceAnswer(int type) {
+		super(Answer.CHOICE);
+	}
+
 	@Override
 	public String getAnswer() {
 		// TODO Auto-generated method stub
@@ -38,11 +41,6 @@ public class ChoiceAnswer implements Answer{
 	
 	public void setItem(List<String> item){
 		this.item = item;
-	}
-
-	@Override
-	public int getType() {
-		return 1;
 	}
 
 	@Override

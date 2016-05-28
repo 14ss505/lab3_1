@@ -1,9 +1,14 @@
 package Anwser;
 
-public class DecideAnswer implements Answer{
+public class DecideAnswer extends Answer{
 	
 	int anwser;
-	
+
+	public DecideAnswer(int type, int anwser) {
+		super(Answer.DECIDE);
+		this.anwser = anwser;
+	}
+
 	@Override
 	public String getAnswer() {
 		// TODO Auto-generated method stub
@@ -24,13 +29,6 @@ public class DecideAnswer implements Answer{
 		// TODO Auto-generated method stub
 		return anwser+"";
 	}
-
-
-	@Override
-	public int getType() {
-		return 0;
-	}
-
 
 	@Override
 	public boolean match(Answer answer) {

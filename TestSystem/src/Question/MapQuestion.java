@@ -7,13 +7,13 @@ import Anwser.Answer;
 import Anwser.MapAnswer;
 
 public class MapQuestion extends Question {
-	MapAnswer answer;
 	List<String> side1 = new LinkedList<String>();
 	List<String> side2 = new LinkedList<String>();
 	int side;
 	
 	public MapQuestion(){
 		super(5);
+		this.answer = new MapAnswer();
 	}
 	
 	public void setItem(String item) {
@@ -27,17 +27,10 @@ public class MapQuestion extends Question {
 
 	@Override
 	public void setAnswer(String answer) {
-		// TODO Auto-generated method stub
-		this.answer = new MapAnswer();
-		this.answer.setQuestion(side1, side2);
-		this.answer.setAnswer(answer);
+        super.setAnswer(answer);
+        ((MapAnswer)this.answer).setQuestion(side1, side2);
 	}
 
-	public boolean match(String answer) {
-		// TODO Auto-generated method stub
-		return this.answer.getAnswer().equals(answer);
-	}
-	
 	public void setSide(int side){
 		this.side = side;
 	}
