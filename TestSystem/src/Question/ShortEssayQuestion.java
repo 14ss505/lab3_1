@@ -24,16 +24,4 @@ public class ShortEssayQuestion extends PromptQuestion {
 		this.answer = new TextAnswer();
 		this.answer.setAnswer(answer);
 	}
-
-	@Override
-	public Answer getAnswer() {
-		// TODO Auto-generated method stub
-		return answer;
-	}
-
-
-	@Override
-	public boolean match(Answer answer) {
-		return this.answer.match(answer);
-	}
 }

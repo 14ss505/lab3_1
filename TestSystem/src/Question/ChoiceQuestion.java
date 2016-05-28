@@ -7,16 +7,10 @@ import Anwser.Answer;
 import Anwser.ChoiceAnswer;
 
 public class ChoiceQuestion extends ItemQuestion {
-	List<String> items = new LinkedList<String>();
 	ChoiceAnswer answer;
 	
 	public ChoiceQuestion(){
 		super(1);
-	}
-	
-	@Override
-	public void setItem(String item) {
-		this.items.add(item);
 	}
 
 	@Override
@@ -24,11 +18,6 @@ public class ChoiceQuestion extends ItemQuestion {
 		this.answer = new ChoiceAnswer();
 		this.answer.setItem(items);
 		this.answer.setAnswer(answer);
-	}
-
-	@Override
-	public Answer getAnswer() {
-		return answer;
 	}
 
 	public boolean match(String answer) {
@@ -79,10 +68,4 @@ public class ChoiceQuestion extends ItemQuestion {
 		}
 		return false;
 	}
-
-	@Override
-	public boolean match(Answer answer) {
-		return this.answer.match(answer);
-	}
-
 }

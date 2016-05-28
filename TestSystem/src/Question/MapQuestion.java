@@ -7,7 +7,6 @@ import Anwser.Answer;
 import Anwser.MapAnswer;
 
 public class MapQuestion extends Question {
-	
 	MapAnswer answer;
 	List<String> side1 = new LinkedList<String>();
 	List<String> side2 = new LinkedList<String>();
@@ -32,12 +31,6 @@ public class MapQuestion extends Question {
 		this.answer = new MapAnswer();
 		this.answer.setQuestion(side1, side2);
 		this.answer.setAnswer(answer);
-	}
-
-	@Override
-	public Answer getAnswer() {
-		// TODO Auto-generated method stub
-		return answer;
 	}
 
 	public boolean match(String answer) {
@@ -115,10 +108,5 @@ public class MapQuestion extends Question {
 			return true;
 		}
 		return false;
-	}
-
-	@Override
-	public boolean match(Answer answer) {
-		return this.answer.match(answer);
 	}
 }

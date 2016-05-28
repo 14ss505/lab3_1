@@ -46,7 +46,6 @@ public class IO {
 			file = new FileInputStream("xml/pageInfo.xml");
 			Document document = builder.build(file);//获得文档对象
 			root = document.getRootElement();//获得根节点
-
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -60,8 +59,8 @@ public class IO {
 		
 		List<Element> pageList = root.getChildren("pageName");
 		List<String>[] pageName = new List[2];
-		pageName[0] = new LinkedList<String>();
-		pageName[1] = new LinkedList<String>();
+		pageName[0] = new LinkedList<String>();//survey
+		pageName[1] = new LinkedList<String>();//test
 		for(int i=0; i<pageList.size(); i++){
 			if(pageList.get(i).getAttributeValue("type").equals("test")){
 				pageName[1].add(pageList.get(i).getText());
@@ -127,10 +126,8 @@ public class IO {
 			Test test = new Test();
 			test.setTotalScore(Integer.parseInt(root.getChildText("score")));
 			page = test;
-			page.setType("test");
 		}else{
 			page = new Survey();
-			page.setType("survey");
 		}
 		page.setPageName(pageName);
 		System.out.println(page.getPageName());
@@ -241,9 +238,9 @@ public class IO {
 	
 	public void writePage(Page page){
 		Element root = new Element("Page");
-		root.setAttribute("type", page.getType());
+		root.setAttribute("type", page.getType()+"");
 		root.addContent(new Element("pageName").setText(page.getPageName()));
-		if(page.getType().equals("test")){
+		if(page.getType()==1){
 			root.addContent(new Element("score").setText(((Test)page).getTotalScore()+""));
 		}
 		
