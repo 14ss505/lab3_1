@@ -1,6 +1,6 @@
 package Question;
 
-import Anwser.Answer;
+import Answer.Answer;
 
 public class EssayQuestion extends Question {
 	public EssayQuestion(){

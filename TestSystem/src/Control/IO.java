@@ -15,12 +15,12 @@ import org.jdom.input.SAXBuilder;
 import org.jdom.output.Format;
 import org.jdom.output.XMLOutputter;
 
-import Anwser.Answer;
-import Anwser.ChoiceAnswer;
-import Anwser.DecideAnswer;
-import Anwser.MapAnswer;
-import Anwser.RankAnswer;
-import Anwser.TextAnswer;
+import Answer.Answer;
+import Answer.ChoiceAnswer;
+import Answer.DecideAnswer;
+import Answer.MapAnswer;
+import Answer.RankAnswer;
+import Answer.TextAnswer;
 import Paper.Iterator;
 import Paper.Page;
 import Paper.Record;
@@ -47,13 +47,10 @@ public class IO {
 			Document document = builder.build(file);//获得文档对象
 			root = document.getRootElement();//获得根节点
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (JDOMException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -95,10 +92,8 @@ public class IO {
 	        outputter.output(doc, out);  
 	        out.close();  
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} 
 	}

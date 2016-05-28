@@ -3,8 +3,7 @@ package Question;
 import java.util.LinkedList;
 import java.util.List;
 
-import Anwser.Answer;
-import Anwser.MapAnswer;
+import Answer.MapAnswer;
 
 public class MapQuestion extends Question {
 	List<String> side1 = new LinkedList<String>();

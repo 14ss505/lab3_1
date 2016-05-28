@@ -1,6 +1,6 @@
 package Question;
 
-import Anwser.DecideAnswer;
+import Answer.DecideAnswer;
 
 public class DecideQuestion extends PromptQuestion {
 	public DecideQuestion(){

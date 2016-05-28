@@ -1,6 +1,6 @@
 package Question;
 
-import Anwser.ChoiceAnswer;
+import Answer.ChoiceAnswer;
 
 public class ChoiceQuestion extends ItemQuestion {
 	public ChoiceQuestion(){

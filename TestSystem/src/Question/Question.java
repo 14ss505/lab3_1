@@ -1,6 +1,6 @@
 package Question;
 
-import Anwser.Answer;
+import Answer.Answer;
 
 
 public abstract class Question {

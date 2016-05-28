@@ -1,6 +1,6 @@
 package Question;
 
-import Anwser.RankAnswer;
+import Answer.RankAnswer;
 
 public class RankQuestion extends ItemQuestion {
 	public RankQuestion(){
