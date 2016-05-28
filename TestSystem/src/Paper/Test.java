@@ -4,7 +4,16 @@ import Question.Question;
 
 public class Test extends Page {
 	int totalScore;
-	
+
+	public Test(int totalScore) {
+		type = "test";
+		this.totalScore = totalScore;
+	}
+
+	public Test() {
+		type = "test";
+	}
+
 	public void setTotalScore(int score){
 		totalScore = score;
 	}

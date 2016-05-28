@@ -6,11 +6,9 @@ import java.util.List;
 import Question.Question;
 
 public class Page {
-	
-	String pageName;
-	String type;
-	
-	List<Question> questionList = new LinkedList<Question>();
+	protected String pageName;
+	protected String type;
+	protected List<Question> questionList = new LinkedList<Question>();
 	
 	public void setPageName(String pageName){
 		this.pageName = pageName;
@@ -32,7 +30,7 @@ public class Page {
 		}
 	}
 	
-	public List<Question> getQuestionList(){
+	public List<Question> getQuestionList(){// TODO: avoid
 		return questionList;
 	}
 	
@@ -44,12 +42,20 @@ public class Page {
 		return type;
 	}
 	
-	public void setType(String type){
-		this.type = type;
-	}
-	
 	public Iterator<Question> iterator(){
 		return new IteratorQuestion();
+	}
+
+	public void display() {
+		Iterator<Question> questions = this.iterator();
+		while(questions.hasNext()) {
+			Question q = questions.next();
+			System.out.println(q.getQuestion());
+			int ty = q.getType();
+			if(type.equals("test") && ty != Question.ESSAY){
+				System.out.println("The correct answer is " + q.getAnswer().writeAnswer());
+			}
+		}
 	}
 	
 	class IteratorQuestion implements Iterator<Question>{
@@ -57,7 +63,6 @@ public class Page {
 
 		@Override
 		public boolean hasNext() {
-			// TODO Auto-generated method stub
 			if(questionList.size() > questionIndex)
 				return true;
 			return false;
@@ -65,7 +70,6 @@ public class Page {
 
 		@Override
 		public Question next() {
-			// TODO Auto-generated method stub
 			return questionList.get(questionIndex++);
 		}
 		

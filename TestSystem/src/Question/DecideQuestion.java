@@ -23,19 +23,7 @@ public class DecideQuestion extends PromptQuestion {
 		answer.setAnswer(anwser);
 	}
 	
-	@Override
-	public Answer getAnswer(){
-		return answer;
-	}
-
 	public boolean match(String answer) {
-		// TODO Auto-generated method stub
 		return this.answer.getAnswer().equals(answer);
-	}
-
-
-	@Override
-	public boolean match(Answer answer) {
-		return this.answer.match(answer);
 	}
 }

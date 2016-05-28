@@ -16,20 +16,10 @@ public class RankQuestion extends ItemQuestion {
 	}
 	
 	@Override
-	public void setItem(String item) {
-		items.add(item);		
-	}
-
-	@Override
 	public void setAnswer(String answer) {
 		this.answer = new RankAnswer();
 		this.answer.setQuestion(items);
 		this.answer.setAnswer(answer);
-	}
-
-	@Override
-	public Answer getAnswer() {
-		return this.answer;
 	}
 
 	public boolean match(String answer) {
@@ -83,10 +73,4 @@ public class RankQuestion extends ItemQuestion {
 		}
 		return false;
 	}
-
-	@Override
-	public boolean match(Answer answer) {
-		return this.answer.match(answer);
-	}
-
 }

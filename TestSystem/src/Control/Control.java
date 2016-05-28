@@ -26,31 +26,19 @@ import Question.RankQuestion;
 import Question.ShortEssayQuestion;
 
 public class Control {
-	
-	
-	List<String>[] pageNameList;
-	Page page;
-	Question question;
-	int index;
-	Record record;
-	IO io = new IO();
-	List<String> recordName;
-	Iterator<Question> iterator;
+	protected List<String>[] pageNameList;
+	protected Page page;
+	protected Question question;
+	protected int index;
+	protected Record record;
+	protected IO io = new IO();
+	protected List<String> recordName;
+	protected Iterator<Question> iterator;
 	
 	public Control(){
 		pageNameList = io.readInfo();
 	}
 	
-	public void createPage(int type){
-		if(type == 0){
-			page = new Survey();
-			page.setType("survey");
-		}else{
-			page = new Test();
-			page.setType("test");
-		}
-	}
-		
 	public void setPageName(String name){
 		page.setPageName(name);
 		if(page.getType().equals("test")){
@@ -92,23 +80,12 @@ public class Control {
 		return pageNameList[type];
 	}
 	
-	public List<String> displayPage(int index, int type){
-		List<String> ret = new LinkedList<String>();
+	public void displayPage(int index, int type){
 		if(pageNameList[type].size() <= index){
-			return ret;
+			System.out.println("index out of bound!");
 		}else{
 			page = io.readPage(pageNameList[type].get(index));
-			Iterator<Question> questions = page.iterator();
-			while(questions.hasNext()){
-				Question q = questions.next();
-				int ty = q.getType();
-				String answer = "";
-				if(type == 1 && ty != 3){
-					answer = "\nThe correct answer is " + q.getAnswer().writeAnswer();
-				}
-				ret.add(q.getQuestion()+answer+"\n");
-			}
-			return ret;
+			page.display();
 		}
 	}
 	
@@ -123,6 +100,7 @@ public class Control {
 	
 	public int modify(int index){
 		if(index >= page.getQuestionList().size()){
+			System.out.println("Index out of bound!");
 			return -1;
 		}else{
 			question = page.getQuestion(index);

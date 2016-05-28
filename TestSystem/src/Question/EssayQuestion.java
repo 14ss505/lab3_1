@@ -19,12 +19,6 @@ public class EssayQuestion extends Question {
 	}
 
 	@Override
-	public Answer getAnswer() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public boolean match(Answer answer) {
 		// TODO Auto-generated method stub
 		return false;

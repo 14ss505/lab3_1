@@ -4,9 +4,17 @@ import Anwser.Answer;
 
 
 public abstract class Question {
-	String prompt;
-	int score;
-	int type;
+	public static final int DECIDE = 0;
+	public static final int CHOICE = 1;
+	public static final int SHORTESSAY = 2;
+	public static final int ESSAY = 3;
+	public static final int RANK = 4;
+	public static final int MAP = 5;
+
+	protected String prompt;
+	protected int score;
+	protected int type;
+	protected Answer answer;
 	
 	public Question(int type){
 		this.type = type;
@@ -16,7 +24,7 @@ public abstract class Question {
 		return type;
 	}
 	
-	public String getQuestion(){
+	public String getQuestion(){// TODO: why not abstract 
 		return null;
 	}
 	
@@ -38,6 +46,11 @@ public abstract class Question {
 	
 	public abstract void setAnswer(String answer);
 	
-	public abstract Answer getAnswer();
-	public abstract boolean match(Answer answer);
+	public Answer getAnswer() {
+		return answer;
+	}
+
+	public boolean match(Answer answer) {
+		return this.answer.match(answer);
+	}
 }
