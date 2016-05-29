@@ -233,9 +233,9 @@ public class IO {
 	
 	public void writePage(Page page){
 		Element root = new Element("Page");
-		root.setAttribute("type", page.getType());
+		root.setAttribute("type", page.getType()+"");
 		root.addContent(new Element("pageName").setText(page.getPageName()));
-		if(page.getType().equals("test")){
+		if(page.getType()==1){
 			root.addContent(new Element("score").setText(((Test)page).getTotalScore()+""));
 		}
 		
