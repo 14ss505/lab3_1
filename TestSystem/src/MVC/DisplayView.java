@@ -32,4 +32,5 @@ public class DisplayView {
 	public void setPageNameList(List<String> pageNameList) {
 		this.pageNameList = pageNameList;
 	}
+
 }

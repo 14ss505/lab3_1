@@ -6,12 +6,12 @@ public class Test extends Page {
 	int totalScore;
 
 	public Test(int totalScore) {
-		type = 1;
+		type = TEST;
 		this.totalScore = totalScore;
 	}
 
 	public Test() {
-		type = 1;
+		type = TEST;
 	}
 
 	public void setTotalScore(int score){

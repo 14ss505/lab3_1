@@ -23,59 +23,63 @@ public class ComandView {
 	Scanner sc = new Scanner(System.in);
 	int type;
 
-	public void printFirstMenu() {
-		Menu menu = new Menu();
-		menu.setMenu("1) Create a new Survey\n" + "2) Create a new Test\n" + "3) Display Survey\n"
-				+ "4) Display a Test \n" + "5) Save a Survey\n" + "6) Save a Test \n" + "7) Modify a Survey\n"
-				+ "8) Modify a Test\n" + "9) Take a Survey\n" + "10)Take a Test\n" + "11)Look survey outcome\n"
-				+ "12)Look test outcome\n" + "13) Quit\n");
-		MenuView view = new MenuView();
-		MenuControl mc = new MenuControl(menu,view);
-		mc.printMenu();
-		/*System.out.println("1) Create a new Survey\n" + "2) Create a new Test\n" + "3) Display Survey\n"
-				+ "4) Display a Test \n" + "5) Save a Survey\n" + "6) Save a Test \n" + "7) Modify a Survey\n"
-				+ "8) Modify a Test\n" + "9) Take a Survey\n" + "10)Take a Test\n" + "11)Look survey outcome\n"
-				+ "12)Look test outcome\n" + "13) Quit\n");
-		int next = sc.nextInt();*/
-		//switch (next) {
-		/*case 1:
-			createPage(SURVEY);
-			break;
-		case 2:
-			createPage(TEST);
-			break;
-		case 3:
-			this.display(SURVEY);
-			break;
-		case 4:
-			this.display(TEST);
-			break;*/
-		case 5:
-		case 6:
-			control.save();
-			break;
-		case 7:
-			this.modify(SURVEY);
-			break;
-		case 8:
-			this.modify(TEST);
-			break;
-	/*	case 9:
-			this.answer(SURVEY);
-			break;
-		case 10:
-			this.answer(TEST);
-			break;*/
-	/*	case 11:
-			this.displayOutcome(SURVEY);
-			break;
-		case 12:
-			this.displayOutcome(TEST);
-			break;*/
-		case 13:
-			System.exit(0);
-		}
-	}
+    public void printFirstMenu() {
+        Menu menu = new Menu();
+        menu.setMenu("1) Create a new Survey\n"
+                + "2) Create a new Test\n"
+                + "3) Display Survey\n"
+                + "4) Display a Test \n"
+                + "5) Save a Survey\n"
+                + "6) Save a Test \n"
+                + "7) Modify a Survey\n"
+                + "8) Modify a Test\n"
+                + "9) Take a Survey\n"
+                + "10)Take a Test\n"
+                + "11)Look survey outcome\n"
+                + "12)Look test outcome\n"
+                + "13) Quit\n");
+        MenuView view = new MenuView();
+        MenuControl mc = new MenuControl(menu, view);
+        mc.printMenu();
+        switch (next) {
+            case 1:
+                createPage(SURVEY);
+                break;
+            case 2:
+                createPage(TEST);
+                break;
+            case 3:
+                this.display(SURVEY);
+                break;
+            case 4:
+                this.display(TEST);
+                break;
+            case 5:
+            case 6:
+                control.save();
+                break;
+            case 7:
+                this.modify(SURVEY);
+                break;
+            case 8:
+                this.modify(TEST);
+                break;
+            case 9:
+                this.answer(SURVEY);
+                break;
+            case 10:
+                this.answer(TEST);
+                break;
+            case 11:
+                this.displayOutcome(SURVEY);
+                break;
+            case 12:
+                this.displayOutcome(TEST);
+                break;
+            case 13:
+                System.exit(0);
+        }
+    }
 
 	public void displayOutcome(int type) {
 		System.out.println("choose the page:");

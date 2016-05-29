@@ -6,6 +6,9 @@ import java.util.List;
 import Question.Question;
 
 public class Page {
+	public static final int SURVEY = 0;
+	public static final int TEST = 1;
+
 	protected String pageName;
 	protected int type;
 	protected List<Question> questionList = new LinkedList<Question>();
@@ -52,7 +55,7 @@ public class Page {
 			Question q = questions.next();
 			System.out.println(q.getQuestion());
 			int ty = q.getType();
-			if(type==1 && ty != Question.ESSAY){
+			if(type==TEST && ty != Question.ESSAY){
 				System.out.println("The correct answer is " + q.getAnswer().writeAnswer());
 			}
 		}

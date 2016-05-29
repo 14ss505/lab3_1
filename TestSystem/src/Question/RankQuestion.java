@@ -1,32 +1,19 @@
 package Question;
 
-import java.util.LinkedList;
-import java.util.List;
-
-import Anwser.Answer;
-import Anwser.RankAnswer;
+import Answer.RankAnswer;
 
 public class RankQuestion extends ItemQuestion {
-	
-	RankAnswer answer;
-	List<String> items = new LinkedList<String>();
-	
 	public RankQuestion(){
 		super(4);
-	}
+        answer = new RankAnswer();
+    }
 	
 	@Override
 	public void setAnswer(String answer) {
-		this.answer = new RankAnswer();
-		this.answer.setQuestion(items);
-		this.answer.setAnswer(answer);
+        super.setAnswer(answer);
+        ((RankAnswer)this.answer).setQuestion(items);
 	}
 
-	public boolean match(String answer) {
-		// TODO Auto-generated method stub
-		return this.answer.getAnswer().equals(answer);
-	}
-	
 	@Override
 	public String getQuestion(){
 		String ret = "Rank: "+prompt + "\n";
@@ -36,41 +23,4 @@ public class RankQuestion extends ItemQuestion {
 		return ret;
 	}
 
-	@Override
-	public List<String> getItem() {
-		// TODO Auto-generated method stub
-		return items;
-	}
-
-	@Override
-	public boolean remove(int index) {
-		// TODO Auto-generated method stub
-		if(items.size() > index){
-			items.remove(index);
-			return true;
-		}
-		return false;
-	}
-
-	@Override
-	public boolean changeItem(int index, String item) {
-		// TODO Auto-generated method stub
-		if(items.size() > index){
-			items.remove(index);
-			items.add(index, item);
-			return true;
-		}
-		return false;
-	}
-
-	@Override
-	public boolean changeItemNumber(int num) {
-		if(items.size() > num){
-			for(int i=num; i < items.size(); i++){
-				items.remove(i);
-			}
-			return true;
-		}
-		return false;
-	}
 }

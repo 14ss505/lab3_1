@@ -5,12 +5,12 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import Anwser.Answer;
-import Anwser.ChoiceAnswer;
-import Anwser.DecideAnswer;
-import Anwser.MapAnswer;
-import Anwser.RankAnswer;
-import Anwser.TextAnswer;
+import Answer.Answer;
+import Answer.ChoiceAnswer;
+import Answer.DecideAnswer;
+import Answer.MapAnswer;
+import Answer.RankAnswer;
+import Answer.TextAnswer;
 import Paper.Iterator;
 import Paper.Page;
 import Paper.Record;
@@ -129,10 +129,10 @@ public class Control {
 		return ((ItemQuestion)question).changeItemNumber(num);
 	}
 	
-	/*public void loadPage(int index, int type){
+	public void loadPage(int index, int type){
 		page = io.readPage(pageNameList[type].get(index));
 		record = new Record();
-	}*/
+	}
 	
 	public void setRecordName(String name){
 		record.setPersonName(name);
@@ -180,7 +180,7 @@ public class Control {
 		if(page.getType()==1){
 			this.grade();
 		}
-		io.writeReordInfo(page.getPageName(), recordName);
+		io.writeRecordInfo(page.getPageName(), recordName);
 		io.writeRecord(page.getPageName()+"-"+record.getPersonName(), record);
 	}
 	
