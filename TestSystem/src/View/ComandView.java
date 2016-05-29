@@ -60,18 +60,18 @@ public class ComandView {
 		case 8:
 			this.modify(TEST);
 			break;
-		case 9:
+	/*	case 9:
 			this.answer(SURVEY);
 			break;
 		case 10:
 			this.answer(TEST);
-			break;
-		case 11:
+			break;*/
+	/*	case 11:
 			this.displayOutcome(SURVEY);
 			break;
 		case 12:
 			this.displayOutcome(TEST);
-			break;
+			break;*/
 		case 13:
 			System.exit(0);
 		}

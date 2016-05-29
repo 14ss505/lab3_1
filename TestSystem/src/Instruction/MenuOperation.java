@@ -24,7 +24,6 @@ public class MenuOperation {
 		AddQuestionView aqview = new AddQuestionView();
 		AddQuestionControl aqcontrol = new AddQuestionControl(page, aqview);
 		aqcontrol.addQuestion();
-
 	}
 
 	public void display(int type) {

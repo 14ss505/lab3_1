@@ -36,7 +36,7 @@ public class MenuControl {
 			order = new DisplayPage(ComandView.TEST, o);
 			break;
 		// add more
-		case 5:
+		/*case 5:
 		case 6:
 			control.save();
 			break;
@@ -45,7 +45,7 @@ public class MenuControl {
 			break;
 		case 8:
 			this.modify(TEST);
-			break;
+			break;*/
 		case 9:
 			this.answer(SURVEY);
 			break;

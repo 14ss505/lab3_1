@@ -108,14 +108,6 @@ public class Control {
 		}
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
 	public boolean remove(int index){
 		if(question.getType() == 5){
 			return ((MapQuestion)question).remove(index);
@@ -137,10 +129,10 @@ public class Control {
 		return ((ItemQuestion)question).changeItemNumber(num);
 	}
 	
-	public void loadPage(int index, int type){
+	/*public void loadPage(int index, int type){
 		page = io.readPage(pageNameList[type].get(index));
 		record = new Record();
-	}
+	}*/
 	
 	public void setRecordName(String name){
 		record.setPersonName(name);
