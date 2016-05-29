@@ -1,11 +1,7 @@
 package Instruction;
 
-import MVC.AddQuestionControl;
-import MVC.AddQuestionView;
-import MVC.CreatePageControl;
-import MVC.CreatePageView;
-import MVC.DisplayControl;
-import MVC.DisplayView;
+import MVC.control.*;
+import MVC.view.*;
 import Paper.Page;
 import util.PageFactory;
 
@@ -31,5 +27,17 @@ public class MenuOperation {
 		DisplayView dv = new DisplayView();
 		DisplayControl dc = new DisplayControl(dv);
 		dc.display(type);
+	}
+
+	public void save(int pageType) {
+		SaveView saveView = new SaveView();
+		SaveControl control = new SaveControl(saveView);
+		control.save(pageType);
+	}
+
+	public void modify(int pageType) {
+		ModifyView modifyView = new ModifyView();
+		ModifyControl modifyControl = new ModifyControl(modifyView);
+		modifyControl.modify(pageType);
 	}
 }

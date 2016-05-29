@@ -1,6 +1,6 @@
 package Question;
 
-import Anwser.Answer;
+import Answer.Answer;
 
 
 public abstract class Question {
@@ -44,7 +44,9 @@ public abstract class Question {
 		return this.score;
 	}
 	
-	public abstract void setAnswer(String answer);
+	public void setAnswer(String answer) {
+		this.answer.setAnswer(answer);
+	}
 	
 	public Answer getAnswer() {
 		return answer;

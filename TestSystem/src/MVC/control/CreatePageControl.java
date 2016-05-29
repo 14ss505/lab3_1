@@ -1,8 +1,9 @@
-package MVC;
+package MVC.control;
 
 import java.util.List;
 
 import Control.IO;
+import MVC.view.CreatePageView;
 import Paper.Page;
 
 public class CreatePageControl {

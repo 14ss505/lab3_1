@@ -1,4 +1,6 @@
-package Instruction;
+package Instruction.add;
+
+import Instruction.QuestionCreator;
 
 import java.util.Scanner;
 

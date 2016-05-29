@@ -1,4 +1,4 @@
-package Instruction;
+package Instruction.add;
 
 import Paper.Page;
 
