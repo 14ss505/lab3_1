@@ -6,8 +6,11 @@ import java.util.List;
 import Question.Question;
 
 public class Page {
+	public static final int SURVEY = 0;
+	public static final int TEST = 1;
+
 	protected String pageName;
-	protected String type;
+	protected int type;
 	protected List<Question> questionList = new LinkedList<Question>();
 	
 	public void setPageName(String pageName){
@@ -38,7 +41,7 @@ public class Page {
 		return questionList.size();
 	}
 	
-	public String getType(){
+	public int getType(){
 		return type;
 	}
 	
@@ -52,7 +55,7 @@ public class Page {
 			Question q = questions.next();
 			System.out.println(q.getQuestion());
 			int ty = q.getType();
-			if(type.equals("test") && ty != Question.ESSAY){
+			if(type==TEST && ty != Question.ESSAY){
 				System.out.println("The correct answer is " + q.getAnswer().writeAnswer());
 			}
 		}
