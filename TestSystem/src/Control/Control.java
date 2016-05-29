@@ -107,14 +107,6 @@ public class Control {
 		}
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
 	public boolean remove(int index){
 		if(question.getType() == 5){
 			return ((MapQuestion)question).remove(index);

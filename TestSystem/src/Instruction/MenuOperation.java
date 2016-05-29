@@ -32,4 +32,12 @@ public class MenuOperation {
 		DisplayControl dc = new DisplayControl(dv);
 		dc.display(type);
 	}
+
+	public void save(int pageType) {
+		// TODO: 16/5/29  
+	}
+
+	public void modify(int pageType) {
+		// TODO: 16/5/29  
+	}
 }

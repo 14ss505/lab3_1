@@ -1,11 +1,7 @@
 package MVC;
 
-import Instruction.CreatePage;
-import Instruction.DisplayPage;
-import Instruction.MenuAgent;
-import Instruction.MenuOperation;
-import Instruction.MenuOrder;
-import View.ComandView;
+import Instruction.*;
+import Paper.Page;
 
 public class MenuControl {
 	private Menu menu;
@@ -24,28 +20,30 @@ public class MenuControl {
 		MenuOrder order = null;
 		switch (next) {
 		case 1:
-			order = new CreatePage(ComandView.SURVEY, o);
+			order = new CreatePage(Page.SURVEY, o);
 			break;
 		case 2:
-			order = new CreatePage(ComandView.TEST, o);
+			order = new CreatePage(Page.TEST, o);
 			break;
 		case 3:
-			order = new DisplayPage(ComandView.SURVEY, o);
+			order = new DisplayPage(Page.SURVEY, o);
 			break;
 		case 4:
-			order = new DisplayPage(ComandView.TEST, o);
+			order = new DisplayPage(Page.TEST, o);
 			break;
-		// add more
 		case 5:
+			order = new SavePage(Page.SURVEY, o);
+			break;
 		case 6:
-			control.save();
+			order = new SavePage(Page.TEST, o);
 			break;
 		case 7:
-			this.modify(SURVEY);
+			order = new ModifyPage(Page.SURVEY, o);
 			break;
 		case 8:
-			this.modify(TEST);
+			order = new ModifyPage(Page.TEST, o);
 			break;
+			// TODO: ymm starts here
 		case 9:
 			this.answer(SURVEY);
 			break;

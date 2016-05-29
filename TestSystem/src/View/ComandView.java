@@ -4,6 +4,7 @@ import Control.Control;
 import MVC.Menu;
 import MVC.MenuControl;
 import MVC.MenuView;
+import Paper.Page;
 
 import java.util.List;
 import java.util.Scanner;
@@ -138,7 +139,7 @@ public class ComandView {
     public void modifyTFQuestion() {
         // Scanner scan = new Scanner(System.in);
         System.out.println("1. modify prompt: ");
-        if (type == TEST)
+        if (type == Page.TEST)
             System.out.println("2. modify answer");
         int next = sc.nextInt();
         if (next == 1) {
@@ -146,7 +147,7 @@ public class ComandView {
             // String prompt = scan.nextLine();
             String prompt = sc.nextLine();
             control.setPrompt(prompt);
-        } else if (next == 2 && type == TEST) {
+        } else if (next == 2 && type == Page.TEST) {
             System.out.println("Please input new anwser: ");
             // String answer = scan.nextLine();
             String answer = sc.nextLine();
@@ -160,7 +161,7 @@ public class ComandView {
         // Scanner scan = new Scanner(System.in);
         System.out.println("1.modify the prompt\n" + "2.modify the number of choices available\n" + "3.add choices\n"
                 + "4.remove choices\n" + "5.modify any choices\n" + "6.the number of selections allowed");
-        if (type == TEST)
+        if (type == Page.TEST)
             System.out.println("7. modify correct answer:");
         int next = sc.nextInt();
         switch (next) {
@@ -210,7 +211,7 @@ public class ComandView {
                 break;
             case 6:
             case 7:
-                if (type == SURVEY)
+                if (type == Page.SURVEY)
                     return;
                 System.out.println("Please input new answer:");
                 // String answer = scan.nextLine();
@@ -276,7 +277,7 @@ public class ComandView {
         // Scanner scan = new Scanner(System.in);
         System.out.println("1. modify the prompt\n" + "2. modify the number of items available\n"
                 + "3. modify the items on the left\n" + "4. modify the items on the right\n");
-        if (type == TEST)
+        if (type == Page.TEST)
             System.out.println("5. modify correct answer:");
         int next = sc.nextInt();
         switch (next) {
