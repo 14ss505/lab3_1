@@ -1,12 +1,13 @@
-package MVC;
+package MVC.view;
 
 import java.util.Scanner;
 
-public class MenuView {
+public class MenuView implements View{
     Scanner sc = new Scanner(System.in);
     private String menu;
     private int next;
 
+    @Override
     public void display() {
         setMenu("1) Create a new Survey\n"
                 + "2) Create a new Test\n"

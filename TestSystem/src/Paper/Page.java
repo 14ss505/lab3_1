@@ -49,7 +49,7 @@ public class Page {
 		return new IteratorQuestion();
 	}
 
-	public void display() {
+	public void display() {// TODO: 16/5/29 return string
 		Iterator<Question> questions = this.iterator();
 		while(questions.hasNext()) {
 			Question q = questions.next();

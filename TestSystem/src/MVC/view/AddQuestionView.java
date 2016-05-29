@@ -1,14 +1,13 @@
-package MVC;
+package MVC.view;
 
 import java.util.Scanner;
 
-import View.ComandView;
-
-public class AddQuestionView {
+public class AddQuestionView implements View{
 	Scanner sc = new Scanner(System.in);
 	private int next;
 	private int next2;
 
+	@Override
 	public void display() {
 		System.out.println("1. add a new Question\n"
                 + "2. compele this page\n");

@@ -1,6 +1,7 @@
 package Instruction;
 
-import MVC.*;
+import MVC.control.*;
+import MVC.view.*;
 import Paper.Page;
 import util.PageFactory;
 
@@ -29,12 +30,14 @@ public class MenuOperation {
 	}
 
 	public void save(int pageType) {
-		// TODO: 16/5/29  
+		SaveView saveView = new SaveView();
+		SaveControl control = new SaveControl(saveView);
+		control.save(pageType);
 	}
 
-	public void modify(Page page) {
+	public void modify(int pageType) {
 		ModifyView modifyView = new ModifyView();
 		ModifyControl modifyControl = new ModifyControl(modifyView);
-		modifyControl.modify();
+		modifyControl.modify(pageType);
 	}
 }

@@ -1,6 +1,7 @@
 package MVC;
 
 import Instruction.*;
+import MVC.view.MenuView;
 import Paper.Page;
 
 public class MenuControl {

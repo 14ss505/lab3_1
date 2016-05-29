@@ -1,4 +1,4 @@
-package MVC;
+package MVC.control;
 
 import Instruction.add.AddChoiceQuestion;
 import Instruction.add.AddDecideQuestion;
@@ -9,6 +9,7 @@ import Instruction.add.AddQuestionAgent;
 import Instruction.add.AddRankQuestion;
 import Instruction.add.AddTextQuestion;
 import Instruction.QuestionCreator;
+import MVC.view.AddQuestionView;
 import Paper.Page;
 
 public class AddQuestionControl {

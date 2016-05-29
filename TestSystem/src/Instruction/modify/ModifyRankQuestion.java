@@ -7,20 +7,18 @@ import java.util.Scanner;
 /**
  * Created by mayezhou on 16/5/29.
  */
-public class ModifyChoiceQuestion extends ModifyQuestion {
-
-    public ModifyChoiceQuestion(Page page, int index) {
+public class ModifyRankQuestion extends ModifyQuestion {
+    public ModifyRankQuestion(Page page, int index) {
         super(page, index);
     }
-
 
     @Override
     public void execute() {
         Scanner scan = new Scanner(System.in);
-        System.out.println("1.modify the prompt\n" + "2.modify the number of choices available\n" + "3.add choices\n"
-                + "4.remove choices\n" + "5.modify any choices\n" + "6.the number of selections allowed");
+        System.out.println("1. modify the prompt\n" + "2. modify the number of items available\n"
+                + "3. modify the items to be ranked\n");
         if (page.getType() == Page.TEST)
-            System.out.println("7. modify correct answer:");
+            System.out.println("4. modify correct answer:");
         int next = scan.nextInt();
         switch (next) {
             case 1:
@@ -29,7 +27,7 @@ public class ModifyChoiceQuestion extends ModifyQuestion {
                 setPrompt(prompt);
                 break;
             case 2:
-                System.out.println("Please input new item number");
+                System.out.println("Please input new number:");
                 int num = scan.nextInt();
                 boolean outcome2 = changeItemNumber(num);
                 if (outcome2) {
@@ -37,35 +35,20 @@ public class ModifyChoiceQuestion extends ModifyQuestion {
                 } else {
                     System.out.println("We don't have this item");
                 }
-            case 3:
-                System.out.println("Please input new choice:");
-                String item = scan.nextLine();
-                setItem(item);
                 break;
-            case 4:
-                System.out.println("Please input the index of the choice");
+            case 3:
+                System.out.println("Please input the item index: ");
                 int index = scan.nextInt();
-                boolean outcome = remove(index);
+                System.out.println("Please input the new item");
+                String item = scan.nextLine();
+                boolean outcome = changeItem(index, item);
                 if (outcome) {
                     System.out.println("Ok, it has changed");
                 } else {
                     System.out.println("We don't have this item");
                 }
                 break;
-            case 5:
-                System.out.println("Please input the index of the choice:");
-                int index1 = scan.nextInt();
-                System.out.println("Please input the new item:");
-                String item1 = scan.nextLine();
-                boolean outcome1 = changeItem(index1, item1);
-                if (outcome1) {
-                    System.out.println("Ok, it has changed");
-                } else {
-                    System.out.println("We don't have this item");
-                }
-                break;
-            case 6:
-            case 7:
+            case 4:
                 if (page.getType() == Page.SURVEY)
                     return;
                 System.out.println("Please input new answer:");
