@@ -1,11 +1,6 @@
 package Instruction;
 
-import MVC.AddQuestionControl;
-import MVC.AddQuestionView;
-import MVC.CreatePageControl;
-import MVC.CreatePageView;
-import MVC.DisplayControl;
-import MVC.DisplayView;
+import MVC.*;
 import Paper.Page;
 import util.PageFactory;
 
@@ -37,7 +32,9 @@ public class MenuOperation {
 		// TODO: 16/5/29  
 	}
 
-	public void modify(int pageType) {
-		// TODO: 16/5/29  
+	public void modify(Page page) {
+		ModifyView modifyView = new ModifyView();
+		ModifyControl modifyControl = new ModifyControl(modifyView);
+		modifyControl.modify();
 	}
 }

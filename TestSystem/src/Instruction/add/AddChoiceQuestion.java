@@ -1,4 +1,7 @@
-package Instruction;
+package Instruction.add;
+
+import Instruction.QuestionCreator;
+import Paper.Page;
 
 import java.util.Scanner;
 
@@ -23,7 +26,7 @@ public class AddChoiceQuestion extends AddQuestion {
 			System.out.println("\nEnter your choice " + i);
 			items[i] = scan.nextLine();
 		}
-		if (type == 1) {
+		if (type == Page.TEST) {
 			System.out.println("Please enter you anwser:\n");
 			String answer = scan.nextLine();
 			System.out.println("Please enter your score\n");

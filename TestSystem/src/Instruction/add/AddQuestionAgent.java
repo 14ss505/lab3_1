@@ -1,4 +1,4 @@
-package Instruction;
+package Instruction.add;
 
 public class AddQuestionAgent {
 	//private ArrayList<AddQuestion> queue = new ArrayList<AddQuestion>();

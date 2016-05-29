@@ -1,13 +1,13 @@
 package MVC;
 
-import Instruction.AddChoiceQuestion;
-import Instruction.AddDecideQuestion;
-import Instruction.AddEssayQuestion;
-import Instruction.AddMapQuestion;
-import Instruction.AddQuestion;
-import Instruction.AddQuestionAgent;
-import Instruction.AddRankQuestion;
-import Instruction.AddTextQuestion;
+import Instruction.add.AddChoiceQuestion;
+import Instruction.add.AddDecideQuestion;
+import Instruction.add.AddEssayQuestion;
+import Instruction.add.AddMapQuestion;
+import Instruction.add.AddQuestion;
+import Instruction.add.AddQuestionAgent;
+import Instruction.add.AddRankQuestion;
+import Instruction.add.AddTextQuestion;
 import Instruction.QuestionCreator;
 import Paper.Page;
 

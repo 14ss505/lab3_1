@@ -115,14 +115,14 @@ public class Control {
 	}
 	
 	public boolean changeItem(int index, String item){
-		if(question.getType() == 5){
+		if(question.getType() == Question.MAP){
 			return ((MapQuestion)question).changeItem(index, item);		
 		}
 		return ((ItemQuestion)question).changeItem(index, item);
 	}
 	
 	public boolean changeItemNumber(int num){
-		if(question.getType() == 5){
+		if(question.getType() == Question.MAP){
 			return ((MapQuestion)question).changeItemNumber(num);		
 		}
 		return ((ItemQuestion)question).changeItemNumber(num);

@@ -32,57 +32,6 @@ public class ComandView {
         MenuView view = new MenuView();
         MenuControl mc = new MenuControl(menu, view);
         mc.printMenu();
-        switch (next) {
-            case 1:
-                createPage(SURVEY);
-                break;
-            case 2:
-                createPage(TEST);
-                break;
-            case 3:
-                this.display(SURVEY);
-                break;
-            case 4:
-                this.display(TEST);
-                break;
-            case 5:
-            case 6:
-                control.save();
-                break;
-            case 7:
-                this.modify(SURVEY);
-                break;
-            case 8:
-                this.modify(TEST);
-                break;
-            case 9:
-                this.answer(SURVEY);
-                break;
-            case 10:
-                this.answer(TEST);
-                break;
-            case 11:
-                this.displayOutcome(SURVEY);
-                break;
-            case 12:
-                this.displayOutcome(TEST);
-                break;
-            case 13:
-                System.exit(0);
-        }
-    }
-
-    public void displayOutcome(int type) {
-        System.out.println("choose the page:");
-        Scanner scan = new Scanner(System.in);
-        List<String> pageNameList = control.getPageName(type);
-        for (int i = 0; i < pageNameList.size(); i++) {
-            System.out.println(i + ": " + pageNameList.get(i));
-        }
-        int index = sc.nextInt();
-        System.out.println(control.getOutcome(index, type));
-        System.out.println("Enter any key to continu");
-        scan.nextLine();
     }
 
     public void answer(int type) {
@@ -277,7 +226,7 @@ public class ComandView {
         // Scanner scan = new Scanner(System.in);
         System.out.println("1. modify the prompt\n" + "2. modify the number of items available\n"
                 + "3. modify the items on the left\n" + "4. modify the items on the right\n");
-        if (type == Page.TEST)
+        if (type == TEST)
             System.out.println("5. modify correct answer:");
         int next = sc.nextInt();
         switch (next) {
