@@ -9,14 +9,14 @@ import MVC.control.DisplayOutcomeControl;
 import MVC.control.ModifyControl;
 import MVC.control.SaveControl;
 import MVC.model.Paper.Page;
-import MVC.view.AddAnswerView;
-import MVC.view.AddQuestionView;
-import MVC.view.AnswerPageView;
-import MVC.view.CreatePageView;
-import MVC.view.DisplayOutcomeView;
-import MVC.view.DisplayView;
-import MVC.view.ModifyView;
-import MVC.view.SaveView;
+import exclude.AddAnswerViewcmd;
+import exclude.AddQuestionViewcmd;
+import exclude.AnswerPageViewcmd;
+import exclude.CreatePageViewcmd;
+import exclude.DisplayOutcomeViewcmd;
+import exclude.DisplayViewcmd;
+import exclude.ModifyViewcmd;
+import exclude.SaveViewcmd;
 import util.PageFactory;
 
 public class MenuOperation {
@@ -28,16 +28,15 @@ public class MenuOperation {
 	private SaveControl control;
 	private ModifyControl modifyControl;
 	private DisplayOutcomeControl docontrol;
-
+	private Page page;
+	
 	public void createPage(int type) {
-		Page page = PageFactory.createPage(type);
+		page = PageFactory.createPage(type);
 		cpcontrol = new CreatePageControl(page);
 		cpcontrol.setPageName();
-		this.addQuestion(page);
-		System.out.println();
 	}
 
-	public void addQuestion(Page page) {
+	public void addQuestion() {
 		aqcontrol = new AddQuestionControl(page);
 		aqcontrol.addQuestion();
 	}
@@ -59,13 +58,13 @@ public class MenuOperation {
 	}
 
 	public void save(int pageType) {
-		SaveView saveView = new SaveView();
+		SaveViewcmd saveView = new SaveViewcmd();
 		SaveControl control = new SaveControl(saveView);
 		control.save(pageType);
 	}
 
 	public void modify(int pageType) {
-		ModifyView modifyView = new ModifyView();
+		ModifyViewcmd modifyView = new ModifyViewcmd();
 		ModifyControl modifyControl = new ModifyControl(modifyView);
 		modifyControl.modify(pageType);
 	}

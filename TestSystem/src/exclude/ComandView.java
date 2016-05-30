@@ -7,7 +7,6 @@ import MVC.CreatePageView;
 import MVC.DisplayControl;
 import MVC.DisplayView;
 import MVC.MenuControl;
-import MVC.MenuView;
 
 import java.util.List;
 import java.util.Scanner;
@@ -38,7 +37,7 @@ public class ComandView {
 				+ "4) Display a Test \n" + "5) Save a Survey\n" + "6) Save a Test \n" + "7) Modify a Survey\n"
 				+ "8) Modify a Test\n" + "9) Take a Survey\n" + "10)Take a Test\n" + "11)Look survey outcome\n"
 				+ "12)Look test outcome\n" + "13) Quit\n";
-		MenuView view = new MenuView();
+		MenuViewcmd view = new MenuViewcmd();
 		Menu menu = new Menu(s);
 		MenuControl mc = new MenuControl(menu, view);
 		mc.printMenu();

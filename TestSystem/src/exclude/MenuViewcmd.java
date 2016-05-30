@@ -1,23 +1,25 @@
-package MVC;
+package exclude;
 
-import MVC.view.View;
+import MVC.Menu;
+import MVC.MenuControl;
 import observer.MenuObserver;
 
 import java.util.Scanner;
 
 
 
-public class MenuView implements View, MenuObserver {
+public class MenuViewcmd implements View, MenuObserver {
 	private int next;
 	private Menu m;
 	private MenuControl mc;
 	
 	
 
-	public MenuView(MenuControl mc, Menu m) {
+	public MenuViewcmd(MenuControl mc, Menu m) {
 		this.mc = mc;
 		this.m = m;
 		m.regObserver(this);
+		mc.setView(this);
 	}
 
 	@Override

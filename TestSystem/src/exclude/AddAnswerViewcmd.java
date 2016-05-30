@@ -1,4 +1,4 @@
-package MVC.view;
+package exclude;
 
 import java.util.Scanner;
 
@@ -6,15 +6,16 @@ import MVC.control.AddAnswerControl;
 import MVC.model.Paper.Iterator;
 import MVC.model.Question.Question;
 
-public class AddAnswerView {
+public class AddAnswerViewcmd extends AddAnswerView{
 	private int num;
 	private String personName;
 	Scanner sc = new Scanner(System.in);
 	private Iterator<Question> iterator;
 	private AddAnswerControl aac;
 	
-	public AddAnswerView(AddAnswerControl aac){
+	public AddAnswerViewcmd(AddAnswerControl aac){
 		this.aac = aac;
+		this.aac.setView(this);
 	}
 	
 	public void display() {

@@ -1,17 +1,18 @@
-package MVC.view;
+package exclude;
 
 import java.util.Scanner;
 
 import MVC.control.AddQuestionControl;
 
-public class AddQuestionView implements View{
+public class AddQuestionViewcmd extends AddQuestionView implements View{
 	Scanner sc = new Scanner(System.in);
 	private int next;
 	private int next2;
 	private AddQuestionControl aqc;
 	
-	public AddQuestionView(AddQuestionControl aqc){
+	public AddQuestionViewcmd(AddQuestionControl aqc){
 		this.setAqc(aqc);
+		aqc.setView(this);
 	}
 	
 	@Override

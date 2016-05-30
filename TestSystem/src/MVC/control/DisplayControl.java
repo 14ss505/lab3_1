@@ -3,18 +3,18 @@ package MVC.control;
 import java.util.List;
 
 import util.IO;
-import MVC.view.DisplayView;
 import MVC.model.Paper.Page;
+import exclude.DisplayViewcmd;
 
 public class DisplayControl {
 	private Page page;
-	private DisplayView view;
+	private DisplayViewcmd view;
 	private List<String>[] pageNameList;
 	private IO io = new IO();
 
 	public DisplayControl() {
 		this.pageNameList = io.readInfo();
-		this.view = new DisplayView(this);
+		this.view = new DisplayViewcmd(this);
 	}
 	
 	public void display(int type){

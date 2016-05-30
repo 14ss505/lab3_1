@@ -1,17 +1,17 @@
-package MVC.view;
+package exclude;
 
 import java.util.List;
 import java.util.Scanner;
 
 import MVC.control.DisplayOutcomeControl;
 
-public class DisplayOutcomeView {
+public class DisplayOutcomeViewcmd {
 	private int num;
 	Scanner sc = new Scanner(System.in);
 	private List<String> pageNameList;
 	DisplayOutcomeControl doc;
 
-	public DisplayOutcomeView(DisplayOutcomeControl doc) {
+	public DisplayOutcomeViewcmd(DisplayOutcomeControl doc) {
 		this.doc = doc;
 	}
 

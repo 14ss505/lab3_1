@@ -3,27 +3,27 @@ package MVC.control;
 import java.util.List;
 
 import util.IO;
-import MVC.view.CreatePageView;
 import MVC.model.Paper.Page;
+import exclude.CreatePageViewcmd;
 
 public class CreatePageControl {
-	private CreatePageView view;
+	private CreatePageViewcmd view;
 	private Page page;
 	private List<String>[] pageNameList;
 	private IO io = new IO();
 
 	public CreatePageControl(Page page) {
-		view = new CreatePageView(this);
+		view = new CreatePageViewcmd(this);
 		this.pageNameList = io.readInfo();
 		this.page = page;
 		
 	}
 
-	public CreatePageView getView() {
+	public CreatePageViewcmd getView() {
 		return view;
 	}
 
-	public void setView(CreatePageView view) {
+	public void setView(CreatePageViewcmd view) {
 		this.view = view;
 	}
 	

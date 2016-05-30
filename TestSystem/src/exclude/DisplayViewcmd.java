@@ -1,4 +1,4 @@
-package MVC.view;
+package exclude;
 
 import java.util.List;
 import java.util.Scanner;
@@ -6,13 +6,13 @@ import java.util.Scanner;
 import MVC.control.DisplayControl;
 import MVC.model.Paper.Page;
 
-public class DisplayView implements View{
+public class DisplayViewcmd implements View{
 	private int num;
 	Scanner sc = new Scanner(System.in);
 	private List<String> pageNameList;
 	DisplayControl dvc;
 	
-	public DisplayView(DisplayControl dvc){
+	public DisplayViewcmd(DisplayControl dvc){
 		this.dvc = dvc;
 	}
 

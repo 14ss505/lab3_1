@@ -4,7 +4,8 @@ import Instruction.RecordCreator;
 import MVC.model.Paper.Iterator;
 import MVC.model.Paper.Page;
 import MVC.model.Question.Question;
-import MVC.view.AddAnswerView;
+import exclude.AddAnswerView;
+import exclude.AddAnswerViewcmd;
 
 public class AddAnswerControl {
 	AddAnswerView view;
@@ -12,25 +13,32 @@ public class AddAnswerControl {
 	private Iterator<Question> iterator;
 
 	public AddAnswerControl(Page page) {
-		this.view = new AddAnswerView(this);
+		this.view = new AddAnswerViewcmd(this);
 		this.page = page;
-		this.iterator=page.iterator();
+		this.iterator = page.iterator();
 	}
-	
-	public void addAnswer(){
-		view.setIterator(iterator);
-		view.display();
-		
-		RecordCreator rc = new RecordCreator(view.getPersonName(),page);
-       
-        while (iterator.hasNext()) {
-          	Question q = iterator.next();
-           	String answer = view.displayQuestion(iterator);
-           	//TODO:if answer == NULL
-            rc.answerQuestion(q,answer);
-         }
-  
-    	view.finishAnswer();
-        rc.saveAnswer();
+
+	public void setView(AddAnswerView view) {
+		this.view = view;
+	}
+
+	public void addAnswer() {
+		if (view instanceof AddAnswerViewcmd) {
+			AddAnswerViewcmd view = (AddAnswerViewcmd) this.view;
+			view.setIterator(iterator);
+			view.display();
+
+			RecordCreator rc = new RecordCreator(view.getPersonName(), page);
+
+			while (iterator.hasNext()) {
+				Question q = iterator.next();
+				String answer = view.displayQuestion(iterator);
+				rc.answerQuestion(q, answer);
+			}
+			view.finishAnswer();
+			rc.saveAnswer();
+		} else {
+			// gui view
+		}
 	}
 }

@@ -3,20 +3,20 @@ package MVC.control;
 import java.util.List;
 
 import MVC.model.Paper.Page;
-import MVC.view.AnswerPageView;
+import exclude.AnswerPageViewcmd;
 import util.IO;
 
 
 
 public class AnswerPageControl {
 	private Page page;
-	private AnswerPageView view;
+	private AnswerPageViewcmd view;
 	private List<String>[] pageNameList;
 	private IO io = new IO();
 	
 	public AnswerPageControl() {
 		this.pageNameList = io.readInfo();
-		this.view = new AnswerPageView(this,page);
+		this.view = new AnswerPageViewcmd(this,page);
 	}
 
 	public void answer(int type) {

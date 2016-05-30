@@ -1,4 +1,4 @@
-package MVC.view;
+package exclude;
 
 import java.util.List;
 import java.util.Scanner;
@@ -6,7 +6,7 @@ import java.util.Scanner;
 /**
  * Created by mayezhou on 16/5/29.
  */
-public class SaveView implements View {
+public class ModifyViewcmd implements View{
     private int num;
     private Scanner sc = new Scanner(System.in);
     private List<String> pageNameList;

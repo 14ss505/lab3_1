@@ -1,15 +1,15 @@
-package MVC.view;
+package exclude;
 
 import java.util.Scanner;
 
 import MVC.control.CreatePageControl;
 
-public class CreatePageView implements View {
+public class CreatePageViewcmd implements View {
 	private String name;
 	Scanner sc = new Scanner(System.in);
 	CreatePageControl cpc;
 
-	public CreatePageView(CreatePageControl cpc) {
+	public CreatePageViewcmd(CreatePageControl cpc) {
 		this.cpc = cpc;
 	}
 
