@@ -1,7 +1,8 @@
 package MVC;
 
 import Instruction.*;
-import Paper.Page;
+import Interface.MenuOperation;
+import MVC.model.Paper.Page;
 
 public class MenuControl {
 	private Menu menu;

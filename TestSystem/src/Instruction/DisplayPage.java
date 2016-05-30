@@ -1,5 +1,7 @@
 package Instruction;
 
+import Interface.MenuOperation;
+
 public class DisplayPage extends MenuOrder{
 	private MenuOperation o;
 	private int pageType;

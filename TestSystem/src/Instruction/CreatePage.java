@@ -1,5 +1,7 @@
 package Instruction;
 
+import Interface.MenuOperation;
+
 public class CreatePage extends MenuOrder {
 	private MenuOperation o;
 	private int pageType;
