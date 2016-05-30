@@ -1,16 +1,21 @@
-package MVC;
+package MVC.view;
 
-import java.util.List;
 import java.util.Scanner;
 
-import Paper.Iterator;
-import Question.Question;
+import MVC.control.AddAnswerControl;
+import MVC.model.Paper.Iterator;
+import MVC.model.Question.Question;
 
 public class AddAnswerView {
 	private int num;
 	private String personName;
 	Scanner sc = new Scanner(System.in);
 	private Iterator<Question> iterator;
+	private AddAnswerControl aac;
+	
+	public AddAnswerView(AddAnswerControl aac){
+		this.aac = aac;
+	}
 	
 	public void display() {
 		System.out.println("Input your name: ");

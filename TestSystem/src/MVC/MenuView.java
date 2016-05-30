@@ -1,31 +1,42 @@
-package MVC.view;
+package MVC;
+
+import MVC.view.View;
+import observer.MenuObserver;
 
 import java.util.Scanner;
 
-public class MenuView implements View{
-    Scanner sc = new Scanner(System.in);
-    private String menu;
-    private int next;
 
-    @Override
-    public void display() {
-        System.out.println(menu);
-        setNext(sc.nextInt());
-    }
 
-    public String getMenu() {
-        return menu;
-    }
+public class MenuView implements View, MenuObserver {
+	private int next;
+	private Menu m;
+	private MenuControl mc;
+	
+	
 
-    public void setMenu(String menu) {
-        this.menu = menu;
-    }
+	public MenuView(MenuControl mc, Menu m) {
+		this.mc = mc;
+		this.m = m;
+		m.regObserver(this);
+	}
 
-    public int getNext() {
-        return next;
-    }
+	@Override
+	public void display() {
+		System.out.println(m.getMenu());
+		Scanner sc = new Scanner(System.in);
+		setNext(sc.nextInt());
+		mc.getNextMenu();
+	}
 
-    public void setNext(int next) {
-        this.next = next;
-    }
+	public void nextView() {
+		
+	}
+
+	public int getNext() {
+		return next;
+	}
+
+	public void setNext(int next) {
+		this.next = next;
+	}
 }

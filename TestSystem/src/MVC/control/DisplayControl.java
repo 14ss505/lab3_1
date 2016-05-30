@@ -12,9 +12,9 @@ public class DisplayControl {
 	private List<String>[] pageNameList;
 	private IO io = new IO();
 
-	public DisplayControl(DisplayView view) {
+	public DisplayControl() {
 		this.pageNameList = io.readInfo();
-		this.view = view;
+		this.view = new DisplayView(this);
 	}
 	
 	public void display(int type){

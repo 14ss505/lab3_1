@@ -1,18 +1,12 @@
-package MVC;
+package MVC.control;
 
 import java.util.List;
-import java.util.Scanner;
 
-import Answer.ChoiceAnswer;
-import Answer.DecideAnswer;
-import Answer.MapAnswer;
-import Answer.RankAnswer;
-import Answer.TextAnswer;
-import Control.IO;
-import Paper.Iterator;
-import Paper.Page;
-import Paper.Record;
-import Question.Question;
+import MVC.model.Paper.Page;
+import MVC.view.AnswerPageView;
+import util.IO;
+
+
 
 public class AnswerPageControl {
 	private Page page;
@@ -20,9 +14,9 @@ public class AnswerPageControl {
 	private List<String>[] pageNameList;
 	private IO io = new IO();
 	
-	public AnswerPageControl(AnswerPageView view) {
+	public AnswerPageControl() {
 		this.pageNameList = io.readInfo();
-		this.view = view;
+		this.view = new AnswerPageView(this,page);
 	}
 
 	public void answer(int type) {

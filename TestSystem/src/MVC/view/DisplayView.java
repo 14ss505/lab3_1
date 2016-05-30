@@ -3,10 +3,18 @@ package MVC.view;
 import java.util.List;
 import java.util.Scanner;
 
+import MVC.control.DisplayControl;
+import MVC.model.Paper.Page;
+
 public class DisplayView implements View{
 	private int num;
 	Scanner sc = new Scanner(System.in);
 	private List<String> pageNameList;
+	DisplayControl dvc;
+	
+	public DisplayView(DisplayControl dvc){
+		this.dvc = dvc;
+	}
 
 	@Override
 	public void display() {
