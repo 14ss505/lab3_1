@@ -1,6 +1,13 @@
 package View;
 
 import Control.Control;
+import MVC.AddQuestionControl;
+import MVC.AddQuestionView;
+import MVC.CreatePageControl;
+import MVC.CreatePageView;
+import MVC.DisplayControl;
+import MVC.DisplayView;
+import MVC.Menu;
 import MVC.MenuControl;
 import MVC.view.MenuView;
 
@@ -53,8 +60,8 @@ public class ComandView {
 		System.out.println("choose the page:");
 		Scanner scan = new Scanner(System.in);
 		List<String> pageNameList = control.getPageName(type);
-		for(int i=0; i<pageNameList.size(); i++){
-			System.out.println(i+": "+pageNameList.get(i));
+		for (int i = 0; i < pageNameList.size(); i++) {
+			System.out.println(i + ": " + pageNameList.get(i));
 		}
 		int index = sc.nextInt();
 		System.out.println(control.getOutcome(index, type));
@@ -75,7 +82,7 @@ public class ComandView {
 		String personName = scan.nextLine();
 		control.setRecordName(personName);
 
-		while(control.hasNextQuestion()){
+		while (control.hasNextQuestion()) {
 			System.out.println(control.nextQuestion());
 			String answer = scan.nextLine();
 			control.answerQuestion(answer);
@@ -85,30 +92,41 @@ public class ComandView {
 		control.saveAnswer();
 	}
 
-	public void mofify(int type){
+	public void modify(int type) {
 		this.type = type;
 		this.display(type);
 		System.out.println("Please choose which question that you want to modify: ");
 		int index = sc.nextInt();
-		int next  = control.modify(index);
-		switch(next){
-		case 0:this.modifyTFQuestion();break;
-		case 1:this.modifyChooicQuestion();break;
-		case 2:this.modifyTFQuestion();break;
-		case 3:this.modifyEssayQuestion();break;
-		case 4:this.modifyRankQuestion();break;
-		case 5:this.modifyMapQuestion();break;
-		case -1:return;
+		int next = control.modify(index);
+		switch (next) {
+		case 0:
+			this.modifyTFQuestion();
+			break;
+		case 1:
+			this.modifyChoiceQuestion();
+			break;
+		case 2:
+			this.modifyTFQuestion();
+			break;
+		case 3:
+			this.modifyEssayQuestion();
+			break;
+		case 4:
+			this.modifyRankQuestion();
+			break;
+		case 5:
+			this.modifyMapQuestion();
+			break;
 		}
 	}
 
 	public void modifyTFQuestion(){
 		Scanner scan = new Scanner(System.in);
 		System.out.println("1. modify prompt: ");
-		if(type == 1)
+		if (type == TEST)
 			System.out.println("2. modify answer");
 		int next = sc.nextInt();
-		if(next == 1){
+		if (next == 1) {
 			System.out.println("Please input new prompt: ");
 			String prompt = scan.nextLine();
 			control.setPrompt(prompt);
@@ -116,7 +134,7 @@ public class ComandView {
 			System.out.println("Please input new anwser: ");
 			String answer = scan.nextLine();
 			control.setAnswer(answer);
-		}else{
+		} else {
 			System.out.println("We don't hava this item");
 		}
 	}
@@ -132,142 +150,165 @@ public class ComandView {
 		if(type == 1)
 			System.out.println("7. modify correct answer:");
 		int next = sc.nextInt();
-		switch(next){
-		case 1: System.out.println("Please input new prompt:");
-				String prompt = scan.nextLine();
-				control.setPrompt(prompt);
-				break;
-		case 2: System.out.println("Please input new item number");
-				int num = sc.nextInt();
-				boolean outcome2 = control.changeItemNumber(num);
-				if(outcome2){
-					System.out.println("Ok, it has changed");
-				}{
-					System.out.println("We don't have this item");
-				}
-		case 3: System.out.println("Please input new choice:");
-				String item = scan.nextLine();
-				control.setItem(item);
-				break;
-		case 4: System.out.println("Please input the index of the choice");
-				int index = sc.nextInt();
-				boolean outcome = control.remove(index);
-				if(outcome){
-					System.out.println("Ok, it has changed");
-				}{
-					System.out.println("We don't have this item");
-				}
-				break;
-		case 5: System.out.println("Please input the index of the choice:");
-				int index1 = sc.nextInt();
-				System.out.println("Please input the new item:");
-				String item1 = scan.nextLine();
-				boolean outcome1 = control.changeItem(index1, item1);
-				if(outcome1){
-					System.out.println("Ok, it has changed");
-				}{
-					System.out.println("We don't have this item");
-				}
-				break;
+		switch (next) {
+		case 1:
+			System.out.println("Please input new prompt:");
+			// String prompt = scan.nextLine();
+			String prompt = sc.nextLine();
+			control.setPrompt(prompt);
+			break;
+		case 2:
+			System.out.println("Please input new item number");
+			int num = sc.nextInt();
+			boolean outcome2 = control.changeItemNumber(num);
+			if (outcome2) {
+				System.out.println("Ok, it has changed");
+			} else {
+				System.out.println("We don't have this item");
+			}
+		case 3:
+			System.out.println("Please input new choice:");
+			String item = sc.nextLine();
+			// String item = scan.nextLine();
+			control.setItem(item);
+			break;
+		case 4:
+			System.out.println("Please input the index of the choice");
+			int index = sc.nextInt();
+			boolean outcome = control.remove(index);
+			if (outcome) {
+				System.out.println("Ok, it has changed");
+			} else {
+				System.out.println("We don't have this item");
+			}
+			break;
+		case 5:
+			System.out.println("Please input the index of the choice:");
+			int index1 = sc.nextInt();
+			System.out.println("Please input the new item:");
+			// String item1 = scan.nextLine();
+			String item1 = sc.nextLine();
+			boolean outcome1 = control.changeItem(index1, item1);
+			if (outcome1) {
+				System.out.println("Ok, it has changed");
+			} else {
+				System.out.println("We don't have this item");
+			}
+			break;
 		case 6:
-		case 7: if(type == 0)
-					return;
-				System.out.println("Please input new answer:");
-				String answer = scan.nextLine();
-				control.setAnswer(answer);
-				break;
-		default: System.out.println("This is a wrong input");
+		case 7:
+			if (type == SURVEY)
+				return;
+			System.out.println("Please input new answer:");
+			// String answer = scan.nextLine();
+			String answer = sc.nextLine();
+			control.setAnswer(answer);
+			break;
+		default:
+			System.out.println("This is a wrong input");
 		}
 	}
 
-	public void modifyRankQuestion(){
-		Scanner scan = new Scanner(System.in);
-		System.out.println("1. modify the prompt\n"
-							+"2. modify the number of items available\n"
-							+"3. modify the items to be ranked\n"	);
-		if(type == 1)
+	public void modifyRankQuestion() {
+		// Scanner scan = new Scanner(System.in);
+		System.out.println("1. modify the prompt\n" + "2. modify the number of items available\n"
+				+ "3. modify the items to be ranked\n");
+		if (type == 1)
 			System.out.println("4. modify correct answer:");
 		int next = sc.nextInt();
-		switch(next){
-		case 1: System.out.println("Please input new prompt:");
-				String prompt = scan.nextLine();
-				control.setPrompt(prompt);
-				break;
-		case 2: System.out.println("Please input new number:");
-				int num = sc.nextInt();
-				boolean outcome2 = control.changeItemNumber(num);
-				if(outcome2){
-					System.out.println("Ok, it has changed");
-				}{
-					System.out.println("We don't have this item");
-				}
-				break;
-		case 3: System.out.println("Please input the item index: ");
-				int index = sc.nextInt();
-				System.out.println("Please input the new item");
-				String item = scan.nextLine();
-				boolean outcome = control.changeItem(index, item);
-				if(outcome){
-					System.out.println("Ok, it has changed");
-				}{
-					System.out.println("We don't have this item");
-				}
-				break;
-		case 4: if(type == 0)
-					return;
-				System.out.println("Please input new answer:");
-				String answer = scan.nextLine();
-				control.setAnswer(answer);
-				break;
-		default: System.out.println("This is a wrong input");
+		switch (next) {
+		case 1:
+			System.out.println("Please input new prompt:");
+			// String prompt = scan.nextLine();
+			String prompt = sc.nextLine();
+			control.setPrompt(prompt);
+			break;
+		case 2:
+			System.out.println("Please input new number:");
+			int num = sc.nextInt();
+			boolean outcome2 = control.changeItemNumber(num);
+			if (outcome2) {
+				System.out.println("Ok, it has changed");
+			} else {
+				System.out.println("We don't have this item");
+			}
+			break;
+		case 3:
+			System.out.println("Please input the item index: ");
+			int index = sc.nextInt();
+			System.out.println("Please input the new item");
+			// String item = scan.nextLine();
+			String item = sc.nextLine();
+			boolean outcome = control.changeItem(index, item);
+			if (outcome) {
+				System.out.println("Ok, it has changed");
+			} else {
+				System.out.println("We don't have this item");
+			}
+			break;
+		case 4:
+			if (type == 0)
+				return;
+			System.out.println("Please input new answer:");
+			// String answer = scan.nextLine();
+			String answer = sc.nextLine();
+			control.setAnswer(answer);
+			break;
+		default:
+			System.out.println("This is a wrong input");
 		}
 	}
 
-	public void modifyMapQuestion(){
-		Scanner scan = new Scanner(System.in);
-		System.out.println("1. modify the prompt\n"
-							+"2. modify the number of items available\n"
-							+"3. modify the items on the left\n"
-							+"4. modify the items on the right\n");
-		if(type == 1)
+	public void modifyMapQuestion() {
+		// Scanner scan = new Scanner(System.in);
+		System.out.println("1. modify the prompt\n" + "2. modify the number of items available\n"
+				+ "3. modify the items on the left\n" + "4. modify the items on the right\n");
+		if (type == TEST)
 			System.out.println("5. modify correct answer:");
 		int next = sc.nextInt();
-		switch(next){
-		case 1: System.out.println("Please input new prompt:");
-				String prompt = scan.nextLine();
-				control.setPrompt(prompt);
-				break;
-		case 2: System.out.println("Please input new Number: ");
-				int num = sc.nextInt();
-				boolean outcome2 = control.changeItemNumber(num);
-				if(outcome2){
-					System.out.println("Ok, it has changed");
-				}{
-					System.out.println("We don't have this item");
-				}
-				break;
-		case 3: control.setSide(1);
-				boolean outcome = this.changeItem();
-				if(outcome){
-					System.out.println("Ok, it has changed");
-				}{
-					System.out.println("We don't have this item");
-				}
-				break;
-		case 4: control.setSide(2);
-				boolean outcome1 = this.changeItem();
-				if(outcome1){
-					System.out.println("Ok, it has changed");
-				}{
-					System.out.println("We don't have this item");
-				}
-				break;
-		case 5: if(type == 0)
-					return;
-				System.out.println("Please input new answer: ");
-				String answer = scan.nextLine();
-				control.setAnswer(answer);
-				break;
+		switch (next) {
+		case 1:
+			System.out.println("Please input new prompt:");
+			// String prompt = scan.nextLine();
+			String prompt = sc.nextLine();
+			control.setPrompt(prompt);
+			break;
+		case 2:
+			System.out.println("Please input new Number: ");
+			int num = sc.nextInt();
+			boolean outcome2 = control.changeItemNumber(num);
+			if (outcome2) {
+				System.out.println("Ok, it has changed");
+			} else {
+				System.out.println("We don't have this item");
+			}
+			break;
+		case 3:
+			control.setSide(1);
+			boolean outcome = this.changeItem();
+			if (outcome) {
+				System.out.println("Ok, it has changed");
+			} else {
+				System.out.println("We don't have this item");
+			}
+			break;
+		case 4:
+			control.setSide(2);
+			boolean outcome1 = this.changeItem();
+			if (outcome1) {
+				System.out.println("Ok, it has changed");
+			} else {
+				System.out.println("We don't have this item");
+			}
+			break;
+		case 5:
+			if (type == 0)
+				return;
+			System.out.println("Please input new answer: ");
+			// String answer = scan.nextLine();
+			String answer = sc.nextLine();
+			control.setAnswer(answer);
+			break;
 		}
 	}
 

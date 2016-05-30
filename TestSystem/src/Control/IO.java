@@ -406,7 +406,7 @@ public class IO {
 		return records;
 	}
 	
-	public void writeReordInfo(String pageName, List<String> recordName){
+	public void writeRecordInfo(String pageName, List<String> recordName){
 		Element root = new Element("Records");
 		for(int i=0; i<recordName.size(); i++){
 			Element record = new Element("record");
