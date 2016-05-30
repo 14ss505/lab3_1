@@ -1,7 +1,10 @@
 package MVC;
 
+import observer.MenuObserver;
+
 public class Menu {
 	private String menu;
+	MenuObserver mo;
 
 	public Menu(String s) {
 		menu = s;
@@ -13,6 +16,14 @@ public class Menu {
 
 	public void setMenu(String menu) {
 		this.menu = menu;
+	}
+
+	public void regObserver(MenuObserver mo) {
+		this.mo = mo;
+	}
+	
+	public void getNextMenu(int next){
+		
 	}
 
 }

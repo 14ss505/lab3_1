@@ -1,10 +1,13 @@
 package MVC.view;
 
-import java.util.List;
 import java.util.Scanner;
 
-import Paper.Iterator;
-import Question.Question;
+import MVC.model.Paper.Iterator;
+import MVC.model.Question.Question;
+
+
+
+
 
 public class AddAnswerView {
 	private int num;

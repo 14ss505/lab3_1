@@ -1,13 +1,10 @@
 package MVC.control;
 
-
-import Control.IO;
 import Instruction.RecordCreator;
+import MVC.model.Paper.Iterator;
+import MVC.model.Paper.Page;
+import MVC.model.Question.Question;
 import MVC.view.AddAnswerView;
-import Paper.Iterator;
-import Paper.Page;
-import Paper.Record;
-import Question.Question;
 
 public class AddAnswerControl {
 	AddAnswerView view;

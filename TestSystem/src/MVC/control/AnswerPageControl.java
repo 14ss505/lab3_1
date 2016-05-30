@@ -1,19 +1,12 @@
 package MVC.control;
 
 import java.util.List;
-import java.util.Scanner;
 
-import Answer.ChoiceAnswer;
-import Answer.DecideAnswer;
-import Answer.MapAnswer;
-import Answer.RankAnswer;
-import Answer.TextAnswer;
-import Control.IO;
+import MVC.model.Paper.Page;
 import MVC.view.AnswerPageView;
-import Paper.Iterator;
-import Paper.Page;
-import Paper.Record;
-import Question.Question;
+import util.IO;
+
+
 
 public class AnswerPageControl {
 	private Page page;

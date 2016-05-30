@@ -2,17 +2,19 @@ package Instruction;
 
 import java.util.List;
 
-import Answer.Answer;
-import Answer.ChoiceAnswer;
-import Answer.DecideAnswer;
-import Answer.MapAnswer;
-import Answer.RankAnswer;
-import Answer.TextAnswer;
-import Control.IO;
-import Paper.Iterator;
-import Paper.Page;
-import Paper.Record;
-import Question.Question;
+import MVC.model.Answer.Answer;
+import MVC.model.Answer.ChoiceAnswer;
+import MVC.model.Answer.DecideAnswer;
+import MVC.model.Answer.MapAnswer;
+import MVC.model.Answer.RankAnswer;
+import MVC.model.Answer.TextAnswer;
+import MVC.model.Paper.Iterator;
+import MVC.model.Paper.Page;
+import MVC.model.Paper.Record;
+import MVC.model.Question.Question;
+import util.IO;
+
+
 
 public class RecordCreator {
 	private Record record;

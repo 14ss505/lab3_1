@@ -5,13 +5,13 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import Answer.Answer;
-import Control.IO;
+import MVC.model.Answer.Answer;
+import MVC.model.Paper.Iterator;
+import MVC.model.Paper.Page;
+import MVC.model.Paper.Record;
+import MVC.model.Question.Question;
 import MVC.view.DisplayOutcomeView;
-import Paper.Iterator;
-import Paper.Page;
-import Paper.Record;
-import Question.Question;
+import util.IO;
 
 public class DisplayOutcomeControl {
 	private Page page;

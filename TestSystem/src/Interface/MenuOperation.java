@@ -1,6 +1,7 @@
 package Interface;
 
 import MVC.control.AddAnswerControl;
+import MVC.control.AddQuestionControl;
 import MVC.control.AnswerPageControl;
 import MVC.control.CreatePageControl;
 import MVC.control.DisplayControl;
@@ -8,6 +9,7 @@ import MVC.control.ModifyControl;
 import MVC.control.SaveControl;
 import MVC.model.Paper.Page;
 import MVC.view.AddAnswerView;
+import MVC.view.AddQuestionView;
 import MVC.view.AnswerPageView;
 import MVC.view.CreatePageView;
 import MVC.view.DisplayView;
@@ -30,6 +32,7 @@ public class MenuOperation {
 		AddQuestionView aqview = new AddQuestionView();
 		AddQuestionControl aqcontrol = new AddQuestionControl(page, aqview);
 		aqcontrol.addQuestion();
+	}
 
 	public void answerPage(int pageType) {
 		AnswerPageView apview = new AnswerPageView();
