@@ -2,9 +2,9 @@ package MVC.control;
 
 import java.util.List;
 
-import Control.IO;
+import util.IO;
 import MVC.view.CreatePageView;
-import Paper.Page;
+import MVC.model.Paper.Page;
 
 public class CreatePageControl {
 	private Page page;

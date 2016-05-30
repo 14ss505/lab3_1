@@ -9,7 +9,7 @@ public class AddQuestionView implements View{
 
 	@Override
 	public void display() {
-		System.out.println("1. add a new Question\n"
+		System.out.println("1. add a new MVC.model.Question\n"
                 + "2. compele this page\n");
         setNext(sc.nextInt());
 	}

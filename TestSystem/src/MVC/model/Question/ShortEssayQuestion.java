@@ -1,0 +1,21 @@
+package MVC.model.Question;
+
+import MVC.model.Answer.TextAnswer;
+
+public class ShortEssayQuestion extends PromptQuestion {
+	
+	public ShortEssayQuestion() {
+		super(2);
+		answer = new TextAnswer();
+	}
+	
+	@Override
+	public String getQuestion(){
+		return "Text: "+prompt;
+	}
+	
+	@Override
+	public void setAnswer(String answer) {
+		this.answer.setAnswer(answer);
+	}
+}

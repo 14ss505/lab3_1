@@ -1,12 +1,12 @@
 package Interface;
 
-import Paper.Page;
-import Question.ChoiceQuestion;
-import Question.DecideQuestion;
-import Question.EssayQuestion;
-import Question.MapQuestion;
-import Question.RankQuestion;
-import Question.ShortEssayQuestion;
+import MVC.model.Paper.Page;
+import MVC.model.Question.ChoiceQuestion;
+import MVC.model.Question.DecideQuestion;
+import MVC.model.Question.EssayQuestion;
+import MVC.model.Question.MapQuestion;
+import MVC.model.Question.RankQuestion;
+import MVC.model.Question.ShortEssayQuestion;
 
 public class QuestionCreator {
 	private Page page;

@@ -1,11 +1,12 @@
 package MVC.control;
 
-import Control.IO;
+import util.IO;
+import Instruction.modify.ModifyQuestion;
 import Instruction.modify.*;
 import Interface.QuestionModifier;
 import MVC.view.ModifyView;
-import Paper.Page;
-import Question.Question;
+import MVC.model.Paper.Page;
+import MVC.model.Question.Question;
 
 import java.util.List;
 import java.util.Scanner;
@@ -77,7 +78,6 @@ public class ModifyControl {
 			break;
 		}
 		ModifyQuestionAgent agent = new ModifyQuestionAgent();
-		
-		mq.execute();
+		agent.placeQuestion(mq);
 	}
 }

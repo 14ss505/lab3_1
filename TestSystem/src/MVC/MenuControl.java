@@ -1,11 +1,8 @@
 package MVC;
 
-import Instruction.CreatePage;
-import Instruction.DisplayPage;
-import Instruction.MenuAgent;
-import Instruction.MenuOperation;
-import Instruction.MenuOrder;
-import View.ComandView;
+import Instruction.*;
+import Interface.MenuOperation;
+import MVC.model.Paper.Page;
 
 public class MenuControl {
 	private Menu menu;

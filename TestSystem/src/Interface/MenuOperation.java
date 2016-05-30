@@ -2,11 +2,6 @@ package Interface;
 
 import MVC.control.*;
 import MVC.view.*;
-import Answer.ChoiceAnswer;
-import Answer.DecideAnswer;
-import Answer.MapAnswer;
-import Answer.RankAnswer;
-import Answer.TextAnswer;
 import MVC.AddAnswerControl;
 import MVC.AddAnswerView;
 import MVC.AddQuestionControl;
@@ -19,7 +14,7 @@ import MVC.DisplayControl;
 import MVC.DisplayOutcomeControl;
 import MVC.DisplayOutcomeView;
 import MVC.DisplayView;
-import Paper.Page;
+import MVC.model.Paper.Page;
 import util.PageFactory;
 
 public class MenuOperation {

@@ -1,4 +1,4 @@
-package Answer;
+package MVC.model.Answer;
 
 public abstract class Answer {
 	public static final int CHOICE = 1;

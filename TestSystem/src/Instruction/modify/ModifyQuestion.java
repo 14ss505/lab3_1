@@ -1,9 +1,7 @@
 package Instruction.modify;
 
-import Paper.Page;
-import Question.Question;
-import Question.ItemQuestion;
-import Question.MapQuestion;
+import MVC.model.Paper.Page;
+import MVC.model.Question.Question;
 
 /**
  * Created by mayezhou on 16/5/29.

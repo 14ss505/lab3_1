@@ -1,8 +1,8 @@
 package util;
 
-import Paper.Page;
-import Paper.Survey;
-import Paper.Test;
+import MVC.model.Paper.Page;
+import MVC.model.Paper.Survey;
+import MVC.model.Paper.Test;
 
 /**
  * Created by mayezhou on 16/5/28.

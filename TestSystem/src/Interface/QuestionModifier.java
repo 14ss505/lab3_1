@@ -1,9 +1,9 @@
 package Interface;
 
-import Paper.Page;
-import Question.ItemQuestion;
-import Question.MapQuestion;
-import Question.Question;
+import MVC.model.Paper.Page;
+import MVC.model.Question.ItemQuestion;
+import MVC.model.Question.MapQuestion;
+import MVC.model.Question.Question;
 
 public class QuestionModifier {
 	private Page page;
