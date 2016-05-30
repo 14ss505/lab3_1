@@ -1,3 +1,5 @@
+package MVC.view.gui;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

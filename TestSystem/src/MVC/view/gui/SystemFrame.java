@@ -1,3 +1,5 @@
+package MVC.view.gui;
+
 import java.awt.*;
 
 import javax.swing.*;

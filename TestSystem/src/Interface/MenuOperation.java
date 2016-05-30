@@ -30,15 +30,15 @@ public class MenuOperation {
 	private DisplayOutcomeControl docontrol;
 	private Page page;
 	
-	public void createPage(int type) {
+	public void createPage(int type,String name) {
 		page = PageFactory.createPage(type);
 		cpcontrol = new CreatePageControl(page);
-		cpcontrol.setPageName();
+		cpcontrol.setPageName(name);
 	}
 
-	public void addQuestion() {
+	public void addQuestion(int type) {
 		aqcontrol = new AddQuestionControl(page);
-		aqcontrol.addQuestion();
+		aqcontrol.addQuestion(type);
 	}
 
 	public void answerPage(int pageType) {

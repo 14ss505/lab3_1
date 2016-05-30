@@ -1,9 +1,14 @@
+package MVC.view.gui;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.*;
+
+import Interface.MenuOperation;
+import MVC.model.Paper.Page;
 
 public class FirstMenuPanel extends MenuPanel {
 
@@ -12,6 +17,7 @@ public class FirstMenuPanel extends MenuPanel {
 
     JPanel rightPanel;
     public ArrayList<ZButton> jbtGroup = new ArrayList<ZButton>();
+    MenuOperation mo = new MenuOperation();
 
     public FirstMenuPanel(JPanel controlledPanel, JPanel rightPanel) {
         super(controlledPanel);
@@ -135,6 +141,7 @@ public class FirstMenuPanel extends MenuPanel {
                 if (jrbT.isSelected()) {
                     //add every input panel for test
                     addRightCreatePanel(true);
+                    mo.createPage(Page.TEST,"huhu");
 
                 } else {
                     addRightCreatePanel(false);
