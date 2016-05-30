@@ -7,17 +7,26 @@ import MVC.view.CreatePageView;
 import MVC.model.Paper.Page;
 
 public class CreatePageControl {
-	private Page page;
 	private CreatePageView view;
+	private Page page;
 	private List<String>[] pageNameList;
 	private IO io = new IO();
 
-	public CreatePageControl(Page page, CreatePageView view) {
+	public CreatePageControl(Page page) {
+		view = new CreatePageView(this);
 		this.pageNameList = io.readInfo();
 		this.page = page;
-		this.view = view;
+		
 	}
 
+	public CreatePageView getView() {
+		return view;
+	}
+
+	public void setView(CreatePageView view) {
+		this.view = view;
+	}
+	
 	public void setPageName() {
 		view.display();
 		page.setPageName(view.getName());
@@ -26,6 +35,9 @@ public class CreatePageControl {
 		} else {
 			pageNameList[0].add(page.getPageName());
 		}
+		
 	}
+
+	
 
 }

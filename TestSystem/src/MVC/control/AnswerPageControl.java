@@ -14,9 +14,9 @@ public class AnswerPageControl {
 	private List<String>[] pageNameList;
 	private IO io = new IO();
 	
-	public AnswerPageControl(AnswerPageView view) {
+	public AnswerPageControl() {
 		this.pageNameList = io.readInfo();
-		this.view = view;
+		this.view = new AnswerPageView(this,page);
 	}
 
 	public void answer(int type) {

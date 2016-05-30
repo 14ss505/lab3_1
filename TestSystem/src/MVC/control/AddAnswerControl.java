@@ -11,8 +11,8 @@ public class AddAnswerControl {
 	Page page;
 	private Iterator<Question> iterator;
 
-	public AddAnswerControl(Page page,AddAnswerView view) {
-		this.view = view;
+	public AddAnswerControl(Page page) {
+		this.view = new AddAnswerView(this);
 		this.page = page;
 		this.iterator=page.iterator();
 	}

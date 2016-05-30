@@ -2,9 +2,16 @@ package MVC.view;
 
 import java.util.Scanner;
 
-public class CreatePageView implements View{
+import MVC.control.CreatePageControl;
+
+public class CreatePageView implements View {
 	private String name;
 	Scanner sc = new Scanner(System.in);
+	CreatePageControl cpc;
+
+	public CreatePageView(CreatePageControl cpc) {
+		this.cpc = cpc;
+	}
 
 	@Override
 	public void display() {

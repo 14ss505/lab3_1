@@ -16,8 +16,8 @@ public class AddQuestionControl {
 	AddQuestionView view;
 	Page page;
 
-	public AddQuestionControl(Page page,AddQuestionView view) {
-		this.view = view;
+	public AddQuestionControl(Page page) {
+		this.view = new AddQuestionView(this);
 		this.page = page;
 	}
 	
