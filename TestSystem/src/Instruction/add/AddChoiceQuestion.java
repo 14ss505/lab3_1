@@ -1,9 +1,10 @@
 package Instruction.add;
 
-import Instruction.QuestionCreator;
 import Paper.Page;
 
 import java.util.Scanner;
+
+import Interface.QuestionCreator;
 
 public class AddChoiceQuestion extends AddQuestion {
 

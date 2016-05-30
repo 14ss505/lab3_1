@@ -4,14 +4,17 @@ import Paper.Page;
 
 import java.util.Scanner;
 
+import Interface.QuestionModifier;
+
 /**
  * Created by mayezhou on 16/5/29.
  */
 public class ModifyTFQuestion extends ModifyQuestion {
-    public ModifyTFQuestion(Page page, int index) {
-        super(page, index);
-    }
+	private QuestionModifier qm = new QuestionModifier();
 
+	public ModifyTFQuestion(QuestionModifier qm) {
+		this.qm = qm;
+	}
     @Override
     public void execute() {
         Scanner scan = new Scanner(System.in);
@@ -22,11 +25,11 @@ public class ModifyTFQuestion extends ModifyQuestion {
         if (next == Page.TEST) {
             System.out.println("Please input new prompt: ");
             String prompt = scan.nextLine();
-            setPrompt(prompt);
+            qm.setPrompt(prompt);
         } else if (next == 2 && page.getType() == Page.TEST) {
             System.out.println("Please input new anwser: ");
             String answer = scan.nextLine();
-            setAnswer(answer);
+            qm.setAnswer(answer);
         } else {
             System.out.println("We don't hava this item");
         }

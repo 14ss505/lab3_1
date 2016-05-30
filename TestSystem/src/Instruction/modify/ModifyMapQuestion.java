@@ -5,13 +5,17 @@ import Question.MapQuestion;
 
 import java.util.Scanner;
 
+import Interface.QuestionModifier;
+
 /**
  * Created by mayezhou on 16/5/29.
  */
 public class ModifyMapQuestion extends ModifyQuestion {
-    public ModifyMapQuestion(Page page, int index) {
-        super(page, index);
-    }
+	private QuestionModifier qm = new QuestionModifier();
+
+	public ModifyMapQuestion(QuestionModifier qm) {
+		this.qm = qm;
+	}
 
     public void setSide(int side) {
         MapQuestion map = (MapQuestion) question;
@@ -30,12 +34,12 @@ public class ModifyMapQuestion extends ModifyQuestion {
             case 1:
                 System.out.println("Please input new prompt:");
                 String prompt = scan.nextLine();
-                setPrompt(prompt);
+                qm.setPrompt(prompt);
                 break;
             case 2:
                 System.out.println("Please input new Number: ");
                 int num = scan.nextInt();
-                boolean outcome2 = changeItemNumber(num);
+                boolean outcome2 = qm.changeItemNumber(num);
                 if (outcome2) {
                     System.out.println("Ok, it has changed");
                 } else {
@@ -65,7 +69,7 @@ public class ModifyMapQuestion extends ModifyQuestion {
                     return;
                 System.out.println("Please input new answer: ");
                 String answer = scan.nextLine();
-                setAnswer(answer);
+                qm.setAnswer(answer);
                 break;
         }
     }
@@ -76,6 +80,6 @@ public class ModifyMapQuestion extends ModifyQuestion {
         int index = scan.nextInt();
         System.out.println("Please input new item");
         String item = scan.nextLine();
-        return super.changeItem(index, item);
+        return qm.changeItem(index, item);
     }
 }

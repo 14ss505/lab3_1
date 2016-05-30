@@ -1,6 +1,7 @@
 package MVC;
 
 import Instruction.*;
+import Interface.MenuOperation;
 import MVC.view.MenuView;
 import Paper.Page;
 

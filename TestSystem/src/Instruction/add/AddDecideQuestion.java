@@ -1,8 +1,8 @@
 package Instruction.add;
 
-import Instruction.QuestionCreator;
-
 import java.util.Scanner;
+
+import Interface.QuestionCreator;
 
 public class AddDecideQuestion extends AddQuestion {
 

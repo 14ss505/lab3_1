@@ -1,4 +1,4 @@
-package Instruction;
+package Interface;
 
 import MVC.control.*;
 import MVC.view.*;
