@@ -2,8 +2,7 @@ package MVC;
 
 import Instruction.*;
 import Interface.MenuOperation;
-import MVC.view.MenuView;
-import Paper.Page;
+import MVC.model.Paper.Page;
 
 public class MenuControl {
 	private Menu menu;
@@ -45,18 +44,17 @@ public class MenuControl {
 		case 8:
 			order = new ModifyPage(Page.TEST, o);
 			break;
-			// TODO: ymm starts here
 		case 9:
-			this.answer(SURVEY);
+			order = new AnswerPage(Page.SURVEY, o);
 			break;
 		case 10:
-			this.answer(TEST);
+			order = new AnswerPage(Page.TEST, o);
 			break;
 		case 11:
-			this.displayOutcome(SURVEY);
+			order = new DisplayOutcome(Page.SURVEY, o);
 			break;
 		case 12:
-			this.displayOutcome(TEST);
+			order = new DisplayOutcome(Page.TEST, o);
 			break;
 		case 13:
 			System.exit(0);

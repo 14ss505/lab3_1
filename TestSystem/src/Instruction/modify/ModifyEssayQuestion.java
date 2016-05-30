@@ -1,7 +1,5 @@
 package Instruction.modify;
 
-import Paper.Page;
-
 import java.util.Scanner;
 
 import Interface.QuestionModifier;

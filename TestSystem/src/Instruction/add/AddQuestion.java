@@ -1,6 +1,6 @@
 package Instruction.add;
 
-import Paper.Page;
+import MVC.model.Paper.Page;
 
 public abstract class AddQuestion {
 	protected int type;

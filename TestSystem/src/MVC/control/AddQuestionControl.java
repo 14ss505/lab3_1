@@ -10,7 +10,7 @@ import Instruction.add.AddRankQuestion;
 import Instruction.add.AddTextQuestion;
 import Interface.QuestionCreator;
 import MVC.view.AddQuestionView;
-import Paper.Page;
+import MVC.model.Paper.Page;
 
 public class AddQuestionControl {
 	AddQuestionView view;

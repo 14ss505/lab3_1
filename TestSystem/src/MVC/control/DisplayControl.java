@@ -2,9 +2,9 @@ package MVC.control;
 
 import java.util.List;
 
-import Control.IO;
+import util.IO;
 import MVC.view.DisplayView;
-import Paper.Page;
+import MVC.model.Paper.Page;
 
 public class DisplayControl {
 	private Page page;

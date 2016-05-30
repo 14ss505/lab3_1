@@ -1,6 +1,6 @@
 package main;
 
-import View.ComandView;
+import exclude.ComandView;
 
 public class StartUp {
 	public static void main(String[] args){

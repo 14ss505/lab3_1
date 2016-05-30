@@ -1,6 +1,6 @@
 package Instruction.modify;
 
-import Paper.Page;
+import MVC.model.Paper.Page;
 
 import java.util.Scanner;
 

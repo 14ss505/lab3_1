@@ -1,7 +1,7 @@
 package Instruction.modify;
 
-import Paper.Page;
-import Question.MapQuestion;
+import MVC.model.Paper.Page;
+import MVC.model.Question.MapQuestion;
 
 import java.util.Scanner;
 

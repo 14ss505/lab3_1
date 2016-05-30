@@ -1,9 +1,9 @@
 package MVC.control;
 
-import Control.IO;
+import util.IO;
 import MVC.view.SaveView;
-import Paper.Page;
-import Paper.Test;
+import MVC.model.Paper.Page;
+import MVC.model.Paper.Test;
 
 import java.util.List;
 

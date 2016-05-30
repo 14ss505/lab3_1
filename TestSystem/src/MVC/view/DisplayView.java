@@ -32,4 +32,5 @@ public class DisplayView implements View{
 	public void setPageNameList(List<String> pageNameList) {
 		this.pageNameList = pageNameList;
 	}
+
 }
