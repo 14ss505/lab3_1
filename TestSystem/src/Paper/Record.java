@@ -4,14 +4,13 @@ import java.util.LinkedList;
 import java.util.List;
 
 import Anwser.Answer;
+import Paper.Record.AnswerIterator;
 
 public class Record {
-	
-	List<Answer> answerList = new LinkedList<Answer>();
-	int score;
-	String personName;
-	int index;
-	
+	protected List<Answer> answerList = new LinkedList<Answer>();
+	protected int score;
+	protected String personName;
+
 	public int getScore() {
 		return score;
 	}
@@ -29,36 +28,22 @@ public class Record {
 		answerList.add(answer);
 	}
 	
-	public Answer getAnswer(int index){
+	public Answer getAnswer(int index){// TODO: prerequirement
 		if(index < answerList.size()){
 			return answerList.get(index); 
 		}
 		return null;
 	}
-	
-	public Answer getAnswer(){
-		return answerList.get(index++);
-	}
-	
-	public boolean hasNext(){
-		if(index >= answerList.size()){
-			index = 0;
-			return false;
-		}
-		return true;
-	}	
-	
+
 	public Iterator<Answer> iterator(){
 		return new AnswerIterator();
 	}
 	
 	class AnswerIterator implements Iterator<Answer>{
-		
 		int answerIndex = 0;
 		
 		@Override
 		public boolean hasNext() {
-			// TODO Auto-generated method stub
 			if(answerIndex < answerList.size()){
 				return true;
 			}
@@ -66,10 +51,42 @@ public class Record {
 		}
 
 		@Override
-		public Anwser.Answer next() {
-			// TODO Auto-generated method stub
+		public Answer next() {
 			return answerList.get(answerIndex++);
 		}
 		
 	}
+
+	public void save() {
+		/*//TODO
+		public void saveAnswer(){
+			List<String> recordName = io.readRecordInfo(page.getPageName());
+			recordName.add(page.getPageName()+"-"+record.getPersonName());
+			if(page.getType()==1){
+				this.grade();
+			}
+			io.writeRecordInfo(page.getPageName(), recordName);
+			io.writeRecord(page.getPageName()+"-"+record.getPersonName(), record);
+		}
+		*/
+	}
+	
+	public void grade(){
+		/*
+		Iterator<Question> questionIterator = page.iterator();
+		Iterator<Answer> answerIterator = record.iterator();
+		if(questionIterator.hasNext()){
+			Question q = questionIterator.next();
+			if(q.IsGradable()){
+				if(q.match(answerIterator.next())){
+					record.addScore(q.getScore());
+				}
+			}else{
+				answerIterator.next();
+			}
+		}
+		*/
+	}
+	
+>>>>>>> refs/heads/mmy
 }
