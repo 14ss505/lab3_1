@@ -1,6 +1,6 @@
-package MVC.model.Question;
+package Question;
 
-import MVC.model.Answer.DecideAnswer;
+import Answer.DecideAnswer;
 
 public class DecideQuestion extends PromptQuestion {
 	public DecideQuestion(){

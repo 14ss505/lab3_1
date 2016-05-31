@@ -1,6 +1,6 @@
-package MVC.model.Question;
+package Question;
 
-import MVC.model.Answer.RankAnswer;
+import Answer.RankAnswer;
 
 public class RankQuestion extends ItemQuestion {
 	public RankQuestion(){

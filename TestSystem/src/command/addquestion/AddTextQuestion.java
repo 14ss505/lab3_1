@@ -2,7 +2,8 @@ package command.addquestion;
 
 import java.util.Scanner;
 
-import Interface.QuestionCreator;
+import command.AddQuestion;
+import receiver.QuestionCreator;
 
 public class AddTextQuestion extends AddQuestion {
 

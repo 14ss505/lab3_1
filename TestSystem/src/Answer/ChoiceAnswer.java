@@ -1,4 +1,4 @@
-package MVC.model.Answer;
+package Answer;
 
 import java.util.List;
 

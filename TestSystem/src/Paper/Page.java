@@ -1,9 +1,9 @@
-package MVC.model.Paper;
+package Paper;
 
 import java.util.LinkedList;
 import java.util.List;
 
-import MVC.model.Question.Question;
+import Question.Question;
 import util.IO;
 
 public class Page {
@@ -70,15 +70,17 @@ public class Page {
 			}
 		}
 	}
-	
+
+	public void setType(int type) {
+		this.type = type;
+	}
+
 	class IteratorQuestion implements Iterator<Question>{
 		int questionIndex;
 
 		@Override
 		public boolean hasNext() {
-			if(questionList.size() > questionIndex)
-				return true;
-			return false;
+			return questionList.size() > questionIndex;
 		}
 
 		@Override

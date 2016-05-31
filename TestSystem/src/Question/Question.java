@@ -1,7 +1,6 @@
-package MVC.model.Question;
+package Question;
 
-import MVC.model.Answer.Answer;
-import MVC.view.ModifyObserver;
+import Answer.Answer;
 
 import java.util.ArrayList;
 

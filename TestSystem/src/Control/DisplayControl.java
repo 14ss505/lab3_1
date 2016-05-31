@@ -1,10 +1,9 @@
-package MVC.control;
+package Control;
 
 import java.util.List;
 
+import Paper.Page;
 import util.IO;
-import MVC.model.Paper.Page;
-import exclude.DisplayViewcmd;
 
 public class DisplayControl {
 	private Page page;

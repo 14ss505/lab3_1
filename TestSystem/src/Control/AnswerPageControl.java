@@ -1,10 +1,9 @@
-package MVC.control;
+package Control;
 
 import java.util.List;
 
-import MVC.model.Paper.Page;
-import MVC.model.Paper.Record;
-import exclude.AnswerPageViewcmd;
+import Paper.Page;
+import Paper.Record;
 import util.IO;
 
 

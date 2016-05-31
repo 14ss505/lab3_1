@@ -1,6 +1,6 @@
-package MVC.model.Question;
+package Question;
 
-import MVC.model.Answer.ChoiceAnswer;
+import Answer.ChoiceAnswer;
 
 public class ChoiceQuestion extends ItemQuestion {
 	public ChoiceQuestion(){

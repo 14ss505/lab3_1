@@ -1,8 +1,8 @@
 package command.addanswer;
 
-import Interface.AnswerCreator;
-import MVC.model.Question.Question;
 import command.AddAnswer;
+import receiver.AnswerCreator;
+import Question.Question;
 
 public class AddRankAnswer  extends AddAnswer{
 	private AnswerCreator creator;

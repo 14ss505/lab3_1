@@ -5,12 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import Anwser.Answer;
-import Anwser.ChoiceAnswer;
-import Anwser.DecideAnswer;
-import Anwser.MapAnswer;
-import Anwser.RankAnswer;
-import Anwser.TextAnswer;
+import Answer.*;
 import Paper.Iterator;
 import Paper.Page;
 import Paper.Record;
@@ -24,6 +19,7 @@ import Question.MapQuestion;
 import Question.Question;
 import Question.RankQuestion;
 import Question.ShortEssayQuestion;
+import util.IO;
 
 public class Control {
 	

@@ -1,6 +1,6 @@
-package MVC.model.Question;
+package Question;
 
-import MVC.model.Answer.Answer;
+import Answer.Answer;
 
 public class EssayQuestion extends Question {
 	public EssayQuestion(){

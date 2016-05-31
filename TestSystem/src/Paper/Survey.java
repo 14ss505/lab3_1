@@ -1,4 +1,4 @@
-package MVC.model.Paper;
+package Paper;
 
 public class Survey extends Page {
     public Survey() {

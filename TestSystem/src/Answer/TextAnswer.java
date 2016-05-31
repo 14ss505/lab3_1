@@ -1,4 +1,4 @@
-package MVC.model.Answer;
+package Answer;
 
 public class TextAnswer extends Answer{
 	

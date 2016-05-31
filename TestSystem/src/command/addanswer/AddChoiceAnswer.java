@@ -1,11 +1,10 @@
 package command.addanswer;
 
-
-import Interface.AnswerCreator;
-import MVC.model.Question.Question;
 import command.AddAnswer;
+import receiver.AnswerCreator;
+import Question.Question;
 
-public class AddChoiceAnswer extends AddAnswer{
+public class AddChoiceAnswer extends AddAnswer {
 	private AnswerCreator creator;
 	private String answer;
 	private Question question;

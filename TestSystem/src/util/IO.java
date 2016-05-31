@@ -1,13 +1,8 @@
 package util;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.LinkedList;
-import java.util.List;
+import Answer.*;
+import Paper.*;
+import Question.*;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.JDOMException;
@@ -15,26 +10,9 @@ import org.jdom.input.SAXBuilder;
 import org.jdom.output.Format;
 import org.jdom.output.XMLOutputter;
 
-import Anwser.Answer;
-import Anwser.ChoiceAnswer;
-import Anwser.DecideAnswer;
-import Anwser.MapAnswer;
-import Anwser.RankAnswer;
-import Anwser.TextAnswer;
-import Paper.Iterator;
-import Paper.Page;
-import Paper.Record;
-import Paper.Survey;
-import Paper.Test;
-import Question.ChoiceQuestion;
-import Question.DecideQuestion;
-import Question.EssayQuestion;
-import Question.ItemQuestion;
-import Question.MapQuestion;
-import Question.PromptQuestion;
-import Question.Question;
-import Question.RankQuestion;
-import Question.ShortEssayQuestion;
+import java.io.*;
+import java.util.LinkedList;
+import java.util.List;
 
 public class IO {
 	SAXBuilder builder = new SAXBuilder();

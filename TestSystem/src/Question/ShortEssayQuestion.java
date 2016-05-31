@@ -1,6 +1,6 @@
-package MVC.model.Question;
+package Question;
 
-import MVC.model.Answer.TextAnswer;
+import Answer.TextAnswer;
 
 public class ShortEssayQuestion extends PromptQuestion {
 	

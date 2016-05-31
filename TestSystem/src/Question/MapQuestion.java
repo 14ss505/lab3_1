@@ -1,6 +1,6 @@
-package MVC.model.Question;
+package Question;
 
-import MVC.model.Answer.MapAnswer;
+import Answer.MapAnswer;
 
 import java.util.LinkedList;
 import java.util.List;

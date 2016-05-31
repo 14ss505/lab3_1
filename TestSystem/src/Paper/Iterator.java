@@ -1,7 +1,7 @@
-package MVC.model.Paper;
+package Paper;
 
 public interface Iterator<O> {
 	
-	public boolean hasNext();
-	public <O> O next();
+	boolean hasNext();
+	<O> O next();
 }

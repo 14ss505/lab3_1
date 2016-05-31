@@ -1,10 +1,10 @@
-package MVC.control;
+package Control;
 
 import java.util.List;
 
+import Paper.Page;
+import View.FirstMenuPanel;
 import util.IO;
-import MVC.model.Paper.Page;
-import MVC.view.gui.FirstMenuPanel;
 
 public class CreatePageControl {
 	private FirstMenuPanel view;

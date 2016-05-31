@@ -1,4 +1,4 @@
-package MVC.model.Question;
+package Question;
 
 public abstract class PromptQuestion extends Question{// TODO: useless?
 

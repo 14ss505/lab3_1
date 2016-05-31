@@ -1,16 +1,15 @@
-package MVC.control;
+package Control;
 
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import MVC.model.Answer.Answer;
-import MVC.model.Paper.Iterator;
-import MVC.model.Paper.Page;
-import MVC.model.Paper.Record;
-import MVC.model.Question.Question;
-import exclude.DisplayOutcomeViewcmd;
+import Answer.Answer;
+import Paper.Iterator;
+import Paper.Page;
+import Paper.Record;
+import Question.Question;
 import util.IO;
 
 public class DisplayOutcomeControl {
