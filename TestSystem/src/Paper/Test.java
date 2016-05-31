@@ -1,6 +1,6 @@
-package Paper;
+package MVC.model.Paper;
 
-import Question.Question;
+import MVC.model.Question.Question;
 
 public class Test extends Page {
 	int totalScore;

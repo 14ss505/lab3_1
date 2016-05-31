@@ -1,4 +1,4 @@
-package Question;
+package MVC.model.Question;
 
 import java.util.LinkedList;
 import java.util.List;

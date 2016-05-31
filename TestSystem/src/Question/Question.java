@@ -1,8 +1,9 @@
-package Question;
+package MVC.model.Question;
+
+import MVC.model.Answer.Answer;
+import MVC.view.ModifyObserver;
 
 import java.util.ArrayList;
-
-import Anwser.Answer;
 
 
 public abstract class Question {

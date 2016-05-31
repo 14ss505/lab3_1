@@ -1,4 +1,4 @@
-package Paper;
+package MVC.model.Paper;
 
 public interface Iterator<O> {
 	

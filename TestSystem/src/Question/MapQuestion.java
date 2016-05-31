@@ -1,9 +1,9 @@
-package Question;
+package MVC.model.Question;
+
+import MVC.model.Answer.MapAnswer;
 
 import java.util.LinkedList;
 import java.util.List;
-
-import Anwser.MapAnswer;
 
 public class MapQuestion extends Question {
     protected List<String> side1 = new LinkedList<String>();

@@ -1,9 +1,9 @@
-package Paper;
+package MVC.model.Paper;
 
 import java.util.LinkedList;
 import java.util.List;
 
-import Question.Question;
+import MVC.model.Question.Question;
 import util.IO;
 
 public class Page {
@@ -90,12 +90,6 @@ public class Page {
 	}
 	public void save(){
 		io.writePage(this);
-	}
-
-	public void setType(int t) {
-		// TODO Auto-generated method stub
-		this.type = t;
-		
 	}
 	
 }
