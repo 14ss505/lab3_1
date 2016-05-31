@@ -6,6 +6,7 @@ public class DecideQuestion extends PromptQuestion {
 	public DecideQuestion(){
 		super(0);
 		answer = new DecideAnswer();
+		 this.isGradable = true;
 	}
 
 	

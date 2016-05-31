@@ -1,6 +1,24 @@
 package MVC.control;
 
 import util.IO;
+<<<<<<< HEAD
+import MVC.model.Paper.Page;
+import MVC.model.Paper.Test;
+import exclude.SaveViewcmd;
+
+import java.util.List;
+
+/**
+ * Created by mayezhou on 16/5/29.
+ */
+public class SaveControl {
+    private SaveViewcmd view;
+    private Page page;
+    private List<String>[] pageNameList;
+    private IO io = new IO();
+
+    public SaveControl(SaveViewcmd view) {
+=======
 import MVC.view.SaveView;
 import MVC.model.Paper.Page;
 import MVC.model.Paper.Test;
@@ -17,6 +35,7 @@ public class SaveControl {
     private IO io = new IO();
 
     public SaveControl(SaveView view) {
+>>>>>>> refs/heads/mmy
         this.view = view;
     }
 

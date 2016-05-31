@@ -7,6 +7,7 @@ public class ShortEssayQuestion extends PromptQuestion {
 	public ShortEssayQuestion() {
 		super(2);
 		answer = new TextAnswer();
+		 this.isGradable = false;
 	}
 	
 	@Override

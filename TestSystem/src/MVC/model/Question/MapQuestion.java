@@ -15,11 +15,11 @@ public class MapQuestion extends Question {
         this.answer = new MapAnswer();
     }
 
-    @Override
-    public void setAnswer(String answer) {
+	@Override
+	public void setAnswer(String answer) {
         super.setAnswer(answer);
-        ((MapAnswer) this.answer).setQuestion(side1, side2);
-    }
+        ((MapAnswer)this.answer).setQuestion(side1, side2);
+	}
 
     @Override
     public String getQuestion() {

@@ -18,6 +18,7 @@ public abstract class Question {
     protected int score;
     protected int type;
     protected Answer answer;
+    protected boolean isGradable;
     protected ArrayList<ModifyObserver> modifyObservers = new ArrayList<>();
 
     public Question(int type) {
@@ -53,6 +54,14 @@ public abstract class Question {
 
     public String getPrompt() {
         return prompt;
+    }
+
+    public boolean IsGradable(){
+    	return isGradable;
+    }
+
+    public void setIsGradable(boolean isGradable){
+    	this.isGradable=isGradable;
     }
 
     public void setPrompt(String prompt) {

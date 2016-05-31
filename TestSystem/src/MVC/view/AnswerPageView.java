@@ -3,21 +3,11 @@ package MVC.view;
 import java.util.List;
 import java.util.Scanner;
 
-import MVC.control.AnswerPageControl;
-import MVC.model.Paper.Page;
-
 
 public class AnswerPageView {
 	private int num;
 	Scanner sc = new Scanner(System.in);
 	private List<String> pageNameList;
-	private AnswerPageControl apc;
-	private Page page;
-	
-	public AnswerPageView(AnswerPageControl apc,Page page){
-		this.apc = apc;
-		this.page = page;
-	}
 	
 	public void display() {
 		for (int i = 0; i < pageNameList.size(); i++) {

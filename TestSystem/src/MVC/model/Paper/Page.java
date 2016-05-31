@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import MVC.model.Question.Question;
+import util.IO;
 
 public class Page {
 	public static final int SURVEY = 0;
@@ -12,6 +13,7 @@ public class Page {
 	protected String pageName;
 	protected int type;
 	protected List<Question> questionList = new LinkedList<Question>();
+	private IO io = new IO();
 	
 	public void setPageName(String pageName){
 		this.pageName = pageName;
@@ -77,6 +79,9 @@ public class Page {
 		}
 		
 		
+	}
+	public void save(){
+		io.writePage(this);
 	}
 	
 }

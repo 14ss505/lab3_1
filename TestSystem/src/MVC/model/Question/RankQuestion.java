@@ -6,6 +6,7 @@ public class RankQuestion extends ItemQuestion {
 	public RankQuestion(){
 		super(4);
         answer = new RankAnswer();
+        this.isGradable = true;
     }
 	
 	@Override

@@ -10,30 +10,27 @@ import MVC.model.Paper.Iterator;
 import MVC.model.Paper.Page;
 import MVC.model.Paper.Record;
 import MVC.model.Question.Question;
-import MVC.view.DisplayOutcomeView;
+import exclude.DisplayOutcomeViewcmd;
 import util.IO;
 
 public class DisplayOutcomeControl {
 	private Page page;
-	private DisplayOutcomeView view;
+	private DisplayOutcomeViewcmd view;
 	private List<String>[] pageNameList;
 	private IO io = new IO();
 
 	public DisplayOutcomeControl() {
-		this.pageNameList = io.readInfo();
-		this.view = new DisplayOutcomeView(this);
+		//this.pageNameList = io.readInfo();
+		this.view = new DisplayOutcomeViewcmd(this);
 	}
 
-	public void displayOutcome(int type) {
-		view.setPageNameList(pageNameList[type]);
-		view.display();
-		int index = view.getNum();
+	public void displayOutcome(int type,int index) {
+		this.pageNameList = io.readAllPageNames(type);
 		if (view.getPageNameList().size() <= index) {
 			System.out.println("index out of bound!");
 		} else {
 			getOutcome(index, type);
 		}
-		view.displayContinue();
 	}
 
 	public String getOutcome(int index, int type) {

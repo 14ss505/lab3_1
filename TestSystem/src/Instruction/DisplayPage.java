@@ -1,7 +1,6 @@
 package Instruction;
 
 import Interface.MenuOperation;
-import MVC.model.Paper.Page;
 
 public class DisplayPage extends MenuOrder{
 	private MenuOperation o;
