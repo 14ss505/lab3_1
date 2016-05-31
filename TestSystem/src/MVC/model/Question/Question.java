@@ -1,58 +1,81 @@
 package MVC.model.Question;
 
 import MVC.model.Answer.Answer;
+import MVC.view.ModifyObserver;
+
+import java.util.ArrayList;
 
 
 public abstract class Question {
-	public static final int DECIDE = 0;
-	public static final int CHOICE = 1;
-	public static final int SHORTESSAY = 2;
-	public static final int ESSAY = 3;
-	public static final int RANK = 4;
-	public static final int MAP = 5;
+    public static final int DECIDE = 0;
+    public static final int CHOICE = 1;
+    public static final int SHORTESSAY = 2;
+    public static final int ESSAY = 3;
+    public static final int RANK = 4;
+    public static final int MAP = 5;
 
-	protected String prompt;
-	protected int score;
-	protected int type;
-	protected Answer answer;
-	
-	public Question(int type){
-		this.type = type;
-	}
-	
-	public int getType(){
-		return type;
-	}
-	
-	public String getQuestion(){// TODO: why not abstract 
-		return null;
-	}
-	
-	public String getPrompt(){
-		return prompt;
-	}
-	
-	public void setPrompt(String prompt){
-		this.prompt = prompt;
-	}
-	
-	public void setScore(int score){
-		this.score = score;
-	}
-	
-	public int getScore(){
-		return this.score;
-	}
-	
-	public void setAnswer(String answer) {
-		this.answer.setAnswer(answer);
-	}
-	
-	public Answer getAnswer() {
-		return answer;
-	}
+    protected String prompt;
+    protected int score;
+    protected int type;
+    protected Answer answer;
+    protected ArrayList<ModifyObserver> modifyObservers = new ArrayList<>();
 
-	public boolean match(Answer answer) {
-		return this.answer.match(answer);
-	}
+    public Question(int type) {
+        this.type = type;
+    }
+
+    public void registerObserver(ModifyObserver o) {
+        modifyObservers.add(o);
+    }
+
+    public void notifyModifyObservers() {
+        for (ModifyObserver o :
+                modifyObservers) {
+            o.accomplishedModify();
+        }
+    }
+
+    public void removeObserver(ModifyObserver o) {
+        try {
+            modifyObservers.remove(o);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public String getQuestion() {// TODO: why not abstract
+        return null;
+    }
+
+    public String getPrompt() {
+        return prompt;
+    }
+
+    public void setPrompt(String prompt) {
+        this.prompt = prompt;
+    }
+
+    public int getScore() {
+        return this.score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
+
+    public Answer getAnswer() {
+        return answer;
+    }
+
+    public void setAnswer(String answer) {
+        this.answer.setAnswer(answer);
+    }
+
+    public boolean match(Answer answer) {
+        return this.answer.match(answer);
+    }
 }

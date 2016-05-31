@@ -54,11 +54,11 @@ public class QuestionModifier {
 		((ItemQuestion) question).setItem(item);
 	}
 
-	public boolean remove(int index) {
+	public void remove(int index) {
 		if (question.getType() == Question.MAP) {
-			return ((MapQuestion) question).remove(index);
+			((MapQuestion) question).remove(index);
 		}
-		return ((ItemQuestion) question).remove(index);
+		((ItemQuestion) question).remove(index);
 	}
 
 	public boolean changeItem(int index, String item) {

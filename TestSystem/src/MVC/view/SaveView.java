@@ -6,7 +6,7 @@ import java.util.Scanner;
 /**
  * Created by mayezhou on 16/5/29.
  */
-public class SaveView implements View {
+public class SaveView implements Observer {
     private int num;
     private Scanner sc = new Scanner(System.in);
     private List<String> pageNameList;

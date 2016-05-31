@@ -16,14 +16,12 @@ public abstract class ItemQuestion extends Question {
 
     public void setItem(String item) {
         items.add(item);
+        notifyModifyObservers();
     }
 
-    public boolean remove(int index) {// TODO: prerequirement, not here
-        if (items.size() > index) {
-            items.remove(index);
-            return true;
-        }
-        return false;
+    public void remove(int index) {
+        items.remove(index);
+        notifyModifyObservers();
     }
 
     public boolean changeItem(int index, String item) {
@@ -34,13 +32,10 @@ public abstract class ItemQuestion extends Question {
         return false;
     }
 
-    public boolean changeItemNumber(int num) {// TODO: prerequirement, not here
-        if (items.size() > num) {//decrease
-            for (int i = items.size() -1; i >= num; i--) {
-                items.remove(i);
-            }
-            return true;
+    public void changeItemNumber(int num) {
+        for (int i = items.size() - 1; i >= num; i--) {
+            items.remove(i);
         }
-        return false;
+        notifyModifyObservers();
     }
 }
