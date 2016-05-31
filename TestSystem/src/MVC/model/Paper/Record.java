@@ -10,7 +10,17 @@ public class Record {
 	protected List<Answer> answerList = new LinkedList<Answer>();
 	protected int score;
 	protected String personName;
+	private Page page;
 
+	public Record(){
+		
+	}
+	
+	public Record(Page page,String personName){
+		this.page=page;
+		this.personName=personName;
+	}
+	
 	public int getScore() {
 		return score;
 	}
@@ -57,35 +67,27 @@ public class Record {
 		
 	}
 
-	public void save() {
-		/*//TODO
-		public void saveAnswer(){
-			List<String> recordName = io.readRecordInfo(page.getPageName());
-			recordName.add(page.getPageName()+"-"+record.getPersonName());
-			if(page.getType()==1){
-				this.grade();
-			}
-			io.writeRecordInfo(page.getPageName(), recordName);
-			io.writeRecord(page.getPageName()+"-"+record.getPersonName(), record);
-		}
-		*/
-	}
-	
 	public void grade(){
-		/*
+		if(page.getType()==0)//survey
+			return;
 		Iterator<Question> questionIterator = page.iterator();
-		Iterator<Answer> answerIterator = record.iterator();
+		Iterator<Answer> answerIterator = this.iterator();
 		if(questionIterator.hasNext()){
 			Question q = questionIterator.next();
 			if(q.IsGradable()){
 				if(q.match(answerIterator.next())){
-					record.addScore(q.getScore());
+					this.addScore(q.getScore());
 				}
 			}else{
 				answerIterator.next();
 			}
 		}
-		*/
+	}
+	public Page getPage() {
+		return page;
+	}
+	public void setPage(Page page) {
+		this.page = page;
 	}
 	
 }

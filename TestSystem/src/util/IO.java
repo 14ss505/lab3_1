@@ -38,94 +38,10 @@ import MVC.model.Question.ShortEssayQuestion;
 
 public class IO {
 	SAXBuilder builder = new SAXBuilder();
-	/*
-	 List<String> readAllPageNames(int type);
-	 List<String> readAllPageNames(int type,String personName);
-	 Page readPage(String pageName);
-	 
-	 Question readDecideQuestion(Element question);
-	 Question readChoiceQuestion(Element question);
-	 Question readTextAnswer(Element question);
-	 Question readEssayQuestion(Element question);
-	 Question readRankQuestion(Element question)
-	 Question readMapQuestion(Element question);
-	 
-	 void writePage(Page page,String personName);
-	 void writePage(Page page);
-	 Element savePromptQuestion(Question question);
-	 Element saveItemQuestion(Question question);
-	 Element savaMapQuestion(Question question);
-	 Element saveEssayQuestion(Question question);
-	 List<String> readRecordInfo(String pageName);
-	 void writeRecordInfo(String pageName, List<String> recordName);
-	 void writeRecord(String recordName, Record record);
-	 Record readRecord(String recordName);
-	 */
 	
-	
-	
-	/*read all pages(tests or surveys) from pageInfo.xml : pageName,personName,type*/
-	public List<String> readAllPageNames(int type){
-		InputStream file;
-		Element root = null;
-		try {
-			file = new FileInputStream("xml/pageInfo.xml");
-			Document document = builder.build(file);//获得文档对象
-			root = document.getRootElement();//获得根节点
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (JDOMException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-		List<Element> pageList = root.getChildren("pageName");
-		List<String> pageName = new LinkedList<String>();
-		String typeStr;
-		if(type==Page.SURVEY){
-			typeStr = "survey";
-		}else typeStr = "test";
-		
-		for(int i=0; i<pageList.size(); i++){
-			if(pageList.get(i).getAttributeValue("type").equals(typeStr)){
-				pageName.add(pageList.get(i).getText());
-			}
-		}
-		return pageName;
-	}
-	
-	/*read all pages(tests or surveys) modified by 'personName' from pageInfo.xml : pageName,personName,type*/
-	public List<String> readAllPageNames(int type,String personName){
-		InputStream file;
-		Element root = null;
-		try {
-			file = new FileInputStream("xml/pageInfo.xml");
-			Document document = builder.build(file);//获得文档对象
-			root = document.getRootElement();//获得根节点
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (JDOMException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-		List<Element> pageList = root.getChildren("pageName");
-		List<String> pageName = new LinkedList<String>();
-		String typeStr;
-		if(type==Page.SURVEY){
-			typeStr = "survey";
-		}else typeStr = "test";
-		for(int i=0; i<pageList.size(); i++){
-			if(pageList.get(i).getAttributeValue("type").equals(typeStr)&&pageList.get(i).getAttributeValue("personName").equals(personName)){
-				pageName.add(pageList.get(i).getText());
-			}
-		}
-		return pageName;
-	}
-	/*read all pages(tests and surveys) from pageInfo.xml : pageName,personName,type*/
-	/*public List<String>[] readInfo(){
+
+	/*read all page(tests and surveys) from pageInfo.xml : pageName,personName,type*/
+	public List<String>[] readInfo(){
 		InputStream file;
 		Element root = null;
 		try {
@@ -152,10 +68,10 @@ public class IO {
 			}
 		}
 		return pageName;
-	}*/
+	}
 	
-	/*read all pages(tests and surveys) from pageInfo.xml : pageName,personName,type*/
-	private List<List<String>> readInfo(){
+	/*read all pages(tests or surveys) created by 'personName' from pageInfo.xml : pageName,personName,type*/
+	public List<String>[] readInfo(String personName){
 		InputStream file;
 		Element root = null;
 		try {
@@ -171,15 +87,51 @@ public class IO {
 		}
 		
 		List<Element> pageList = root.getChildren("pageName");
-		List<List<String>> pageListMessage = new LinkedList<List<String>>();//survey
+		List<String>[] pageName = new List[2];
+		pageName[0] = new LinkedList<String>();//survey
+		pageName[1] = new LinkedList<String>();//test
 		for(int i=0; i<pageList.size(); i++){
-			pageListMessage.get(i).add(pageList.get(i).getText());
-			pageListMessage.get(i).add(pageList.get(i).getAttributeValue("type"));
-			pageListMessage.get(i).add(pageList.get(i).getAttributeValue("personName"));
-			
+			if(pageList.get(i).getAttributeValue("type").equals("test")&&pageList.get(i).getAttributeValue("personName").equals(personName)){
+				pageName[1].add(pageList.get(i).getText());
+			}else if(pageList.get(i).getAttributeValue("personName").equals(personName)){
+				pageName[0].add(pageList.get(i).getText());
+			}
 		}
-		return pageListMessage;
+		return pageName;
 	}
+	
+	/*read all pages(tests and surveys) from pageInfo.xml : pageName,personName,type*/
+	
+	/*read all type-pageName-personName from pageInfo.xml : pageName,personName,type*/
+	public List<List<String>> readpageName_type_personNameInfo(){
+		InputStream file;
+		Element root = null;
+		try {
+			file = new FileInputStream("xml/pageInfo.xml");
+			Document document = builder.build(file);//获得文档对象
+			root = document.getRootElement();//获得根节点
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (JDOMException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		List<Element> pageList = root.getChildren("pageName");
+		List<List<String>> pageName_type_personName =new LinkedList<List<String>>();
+		
+		for(int i=0; i<pageList.size(); i++){
+			List<String> pair = new LinkedList<String>();
+			pair.add(pageList.get(i).getText());
+			pair.add(pageList.get(i).getAttributeValue("type"));
+			pair.add(pageList.get(i).getAttributeValue("personName"));
+			pageName_type_personName.add(pair);
+		}
+		return pageName_type_personName;
+	}
+	
+	/* read a certain page by pageName*/
 	
 	/*read a certain page from 'pageName'.xml : score,type,questions*/
 	public Page readPage(String pageName){
@@ -204,9 +156,12 @@ public class IO {
 		if(root.getAttribute("type").getValue().equals("test")){
 			Test test = new Test();
 			test.setTotalScore(Integer.parseInt(root.getChildText("score")));
+			test.setCreatorName(root.getChildText("personName"));
 			page = test;
 		}else{
-			page = new Survey();
+			Survey survey = new Survey();
+			survey.setCreatorName(root.getChildText("personName"));
+			page = survey;
 		}
 		page.setPageName(pageName);
 		
@@ -243,8 +198,7 @@ public class IO {
 			decide.setAnswer(question.getChildText("answer"));
 		}
 		return decide;
-	}
-	
+	}	
 	public Question readChoiceQuestion(Element question){
 		ChoiceQuestion choice = new ChoiceQuestion();
 		choice.setPrompt(question.getChildText("prompt"));
@@ -315,64 +269,20 @@ public class IO {
 		return map;
 	}
 	
-	/*save elements in pageInfo.xml : pageName,personName,type*/
-	/*public void writeInfo(List<String>[] pageName){
-		Element root = new Element("totalInfo");
-		for(int i=0; i<pageName[0].size(); i++){
-			Element page = new Element("pageName");
-			page.addContent(pageName[0].get(i));
-			page.setAttribute("type", "survey");
-			root.addContent(page);
-		}
-		for(int i=0; i<pageName[1].size(); i++){
-			Element page = new Element("pageName");
-			page.addContent(pageName[1].get(i));
-			page.setAttribute("type", "test");
-			root.addContent(page);
-		}
-		Document doc=new Document(root);  
-		 try {
-			FileOutputStream out=new FileOutputStream("xml/pageInfo.xml");
-			XMLOutputter outputter = new XMLOutputter();  
-	        Format f = Format.getPrettyFormat();  
-	        outputter.setFormat(f);  
-	        outputter.output(doc, out);  
-	        out.close();  
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} 
-	}*/
+
 	
 	/*save elements in pageInfo.xml : pageName,personName,type*/
-	public void writePage(Page page,String personName){
+	public void writeInfo(List<List<String>> pageName_type_personName){
 		Element root = new Element("totalInfo");
 		
-		//rewrite all the elements exits in the file before
-		List<List<String>> pageListMessage = this.readInfo();
-		for(int i=0; i<pageListMessage.size(); i++){
+		for(int i=0; i<pageName_type_personName.size(); i++){
 			Element pageEle = new Element("pageName");
-			pageEle.addContent(pageListMessage.get(i).get(0));
-			pageEle.setAttribute("type", pageListMessage.get(i).get(1));
-			pageEle.setAttribute("personName", pageListMessage.get(i).get(2));
+			pageEle.addContent(pageName_type_personName.get(i).get(0));
+			pageEle.setAttribute("type", pageName_type_personName.get(i).get(1));
+			pageEle.setAttribute("personName", pageName_type_personName.get(i).get(2));
 			root.addContent(pageEle);
 		}
 		
-		if(page.getType()==Page.SURVEY){
-			Element pageEle = new Element("pageName");
-			pageEle.addContent(page.getPageName());
-			pageEle.setAttribute("type", "survey");
-			pageEle.setAttribute("personName", personName);
-			root.addContent(pageEle);
-		}
-		if(page.getType()==Page.TEST){
-			Element pageEle = new Element("pageName");
-			pageEle.addContent(page.getPageName());
-			pageEle.setAttribute("type", "test");
-			pageEle.setAttribute("personName", personName);
-			root.addContent(pageEle);
-		}
 		Document doc=new Document(root);  
 		 try {
 			FileOutputStream out=new FileOutputStream("xml/pageInfo.xml");
@@ -391,6 +301,7 @@ public class IO {
 	public void writePage(Page page){
 		Element root = new Element("Page");
 		root.setAttribute("type", page.getType()+"");
+		root.setAttribute("type", page.getCreatorName()+"");
 		root.addContent(new Element("pageName").setText(page.getPageName()));
 		if(page.getType()==Page.TEST){
 			root.addContent(new Element("score").setText(((Test)page).getTotalScore()+""));
@@ -451,6 +362,7 @@ public class IO {
 		ret.addContent(new Element("score").setText(question.getScore()+""));
 		return ret;
 	}
+	
 	
 	public Element saveItemQuestion(Question question){
 		ItemQuestion item = (ItemQuestion) question;
@@ -531,6 +443,7 @@ public class IO {
 		return ret;
 	}
 	
+	/*get all recordNames of a page*/
 	public List<String> readRecordInfo(String pageName){
 		InputStream file;
 		Element root = null;
@@ -563,6 +476,63 @@ public class IO {
 		return records;
 	}
 	
+	/* read a certain record*/
+	public Record readRecord(String recordName){
+		
+		InputStream file;
+		Element root = null;
+		try {
+			file = new FileInputStream("xml/record/"+recordName+".xml");
+			Document document = builder.build(file);//获得文档对象
+			root = document.getRootElement();//获得根节点
+
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (JDOMException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		Record record = new Record();
+		record.setPersonName(root.getChildText("personName"));
+		record.addScore(Integer.parseInt(root.getChildText("score")));
+		Element answers = root.getChild("answers");
+		List<Element> answerList = answers.getChildren();
+		System.out.println(answerList.size());
+		for(int i=0; i<answerList.size(); i++){
+			Element answer = answerList.get(i);
+			int type = Integer.parseInt(answer.getAttributeValue("type"));
+			switch(type){
+			case 0: DecideAnswer decide = new DecideAnswer();
+					decide.setAnswer(answer.getText());
+					record.addAnwser(decide);
+					break;
+			case 1: ChoiceAnswer choice = new ChoiceAnswer();
+					choice.setAnswer(answer.getText());
+					record.addAnwser(choice);
+					break;
+			case 2: TextAnswer text = new TextAnswer();
+					text.setAnswer(answer.getText());
+					record.addAnwser(text);
+					break;
+			case 4: RankAnswer rank = new RankAnswer();
+					rank.setAnswer(answer.getText());
+					record.addAnwser(rank);
+					break;
+			case 5: MapAnswer map = new MapAnswer();
+					map.setAnswer(answer.getText());
+					record.addAnwser(map);
+					break;
+			}
+		}
+		return record;
+	}
+	
+	
 	public void writeRecordInfo(String pageName, List<String> recordName){
 		Element root = new Element("Records");
 		for(int i=0; i<recordName.size(); i++){
@@ -591,7 +561,7 @@ public class IO {
 	
 	public void writeRecord(String recordName, Record record){
 		Element root = new Element("Record");
-		Element personName = new Element("PersonName");
+		Element personName = new Element("personName");
 		personName.setText(record.getPersonName());
 		root.addContent(personName);
 		Element score = new Element("score");
@@ -626,60 +596,4 @@ public class IO {
 			e.printStackTrace();
 		} 
 	}
-	
-	public Record readRecord(String recordName){
-		
-		InputStream file;
-		Element root = null;
-		try {
-			file = new FileInputStream("xml/record/"+recordName+".xml");
-			Document document = builder.build(file);//获得文档对象
-			root = document.getRootElement();//获得根节点
-
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (JDOMException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		Record record = new Record();
-		record.setPersonName(root.getChildText("PersonName"));
-		record.addScore(Integer.parseInt(root.getChildText("score")));
-		Element answers = root.getChild("answers");
-		List<Element> answerList = answers.getChildren();
-		System.out.println(answerList.size());
-		for(int i=0; i<answerList.size(); i++){
-			Element answer = answerList.get(i);
-			int type = Integer.parseInt(answer.getAttributeValue("type"));
-			switch(type){
-			case 0: DecideAnswer decide = new DecideAnswer();
-					decide.setAnswer(answer.getText());
-					record.addAnwser(decide);
-					break;
-			case 1: ChoiceAnswer choice = new ChoiceAnswer();
-					choice.setAnswer(answer.getText());
-					record.addAnwser(choice);
-					break;
-			case 2: TextAnswer text = new TextAnswer();
-					text.setAnswer(answer.getText());
-					record.addAnwser(text);
-					break;
-			case 4: RankAnswer rank = new RankAnswer();
-					rank.setAnswer(answer.getText());
-					record.addAnwser(rank);
-					break;
-			case 5: MapAnswer map = new MapAnswer();
-					map.setAnswer(answer.getText());
-					record.addAnwser(map);
-					break;
-			}
-		}
-		return record;
-	}
-	
 }
