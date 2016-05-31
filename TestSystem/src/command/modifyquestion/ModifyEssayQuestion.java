@@ -3,17 +3,18 @@ package command.modifyquestion;
 import Paper.Page;
 import Question.Question;
 import command.ModifyQuestion;
+import receiver.QuestionModifier;
 
 /**
  * Created by mayezhou on 16/5/31.
  */
 public class ModifyEssayQuestion extends ModifyQuestion {
-    public ModifyEssayQuestion(Page page, Question question, String prompt, int score, String answer) {
-        super(page, question, prompt, score, answer);
+    public ModifyEssayQuestion(Page page, Question question, String prompt, int score, String answer, QuestionModifier modifier) {
+        super(page, question, prompt, score, answer, modifier);
     }
 
-    public ModifyEssayQuestion(Page page, Question question, String prompt) {
-        super(page, question, prompt);
+    public ModifyEssayQuestion(Page page, Question question, String prompt, QuestionModifier modifier) {
+        super(page, question, prompt, modifier);
     }
 
     @Override

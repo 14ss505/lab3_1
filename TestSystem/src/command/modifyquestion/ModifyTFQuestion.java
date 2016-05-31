@@ -10,12 +10,12 @@ import receiver.QuestionModifier;
  */
 public class ModifyTFQuestion extends ModifyQuestion {
 
-    public ModifyTFQuestion(Page page, Question question, String prompt, int score, String answer) {
-        super(page, question, prompt, score, answer);
+    public ModifyTFQuestion(Page page, Question question, String prompt, int score, String answer, QuestionModifier modifier) {
+        super(page, question, prompt, score, answer, modifier);
     }
 
-    public ModifyTFQuestion(Page page, Question question, String prompt) {
-        super(page, question, prompt);
+    public ModifyTFQuestion(Page page, Question question, String prompt, QuestionModifier modifier) {
+        super(page, question, prompt, modifier);
     }
 
     @Override

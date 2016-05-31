@@ -2,33 +2,26 @@ package command.addquestion;
 
 import java.util.Scanner;
 
+import Paper.Page;
 import command.AddQuestion;
 import receiver.QuestionCreator;
 
 public class AddTextQuestion extends AddQuestion {
 
-	private QuestionCreator creator;
+    public AddTextQuestion(Page page, String prompt, String answer, int score, QuestionCreator creator) {
+        super(page, prompt, answer, score, creator);
+    }
 
-	public AddTextQuestion(QuestionCreator creator) {
-		this.creator = creator;
-		this.page = creator.getPage();
-	}
+    public AddTextQuestion(Page page, String prompt, QuestionCreator creator) {
+        super(page, prompt, creator);
+    }
 
-	@Override
+    @Override
 	public void execute() {
-		System.out.println("Enter the prompt for you text question:");
-        Scanner scan = new Scanner(System.in);
-        String prompt = scan.nextLine();
-        if (type == 1) {
-            System.out.println("Please enter you anwser:\n");
-            String answer = scan.nextLine();
-            System.out.println("Please enter your score\n");
-            int score = scan.nextInt();
+        if (type == Page.TEST) {
             creator.createTextQuestion(prompt, score, answer);
-            return;
+        } else {
+            creator.createTextQuestion(prompt);
         }
-        creator.createTextQuestion(prompt);
-
 	}
-
 }

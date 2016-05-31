@@ -4,39 +4,26 @@ import Paper.Page;
 import command.AddQuestion;
 import receiver.QuestionCreator;
 
-import java.util.Scanner;
-
 
 public class AddChoiceQuestion extends AddQuestion {
+	private String[] items;
 
-	private QuestionCreator creator;
+	public AddChoiceQuestion(Page page, String promt, String answer, int score, String[] items, QuestionCreator creator) {
+		super(page, promt, answer, score, creator);
+		this.items = items;
+	}
 
-	public AddChoiceQuestion(QuestionCreator creator) {
-		this.creator = creator;
-		this.page = creator.getPage();
+	public AddChoiceQuestion(Page page, String promt, String[] items, QuestionCreator creator) {
+		super(page, promt, creator);
+		this.items = items;
 	}
 
 	@Override
 	public void execute() {
-		Scanner scan = new Scanner(System.in);
-		System.out.println("Enter the prompt for you Choice question:");
-		String prompt = scan.nextLine();
-		System.out.println("Please enter your choice number");
-		int number = scan.nextInt();
-		String[] items = new String[number];
-		for (int i = 0; i < number; i++) {
-			System.out.println("\nEnter your choice " + i);
-			items[i] = scan.nextLine();
-		}
 		if (type == Page.TEST) {
-			System.out.println("Please enter you anwser:\n");
-			String answer = scan.nextLine();
-			System.out.println("Please enter your score\n");
-			int score = scan.nextInt();
 			creator.createChoiceQuestion(prompt, items, score, answer);
-			return;
+		} else {
+			creator.createChoiceQuestion(prompt, items);
 		}
-		creator.createChoiceQuestion(prompt, items);
-
 	}
 }

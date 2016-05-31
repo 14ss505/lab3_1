@@ -11,13 +11,13 @@ import receiver.QuestionModifier;
 public class ModifyChoiceQuestion extends ModifyQuestion {
     protected String[] items;
 
-    public ModifyChoiceQuestion(Page page, Question question, String prompt, int score, String answer, String[] items) {
-        super(page, question, prompt, score, answer);
+    public ModifyChoiceQuestion(Page page, Question question, String prompt, int score, String answer, String[] items, QuestionModifier modifier) {
+        super(page, question, prompt, score, answer, modifier);
         this.items = items;
     }
 
-    public ModifyChoiceQuestion(Page page, Question question, String prompt, String[] items) {
-        super(page, question, prompt);
+    public ModifyChoiceQuestion(Page page, Question question, String prompt, String[] items, QuestionModifier modifier) {
+        super(page, question, prompt, modifier);
         this.items = items;
     }
 
