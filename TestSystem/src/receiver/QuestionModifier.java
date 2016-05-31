@@ -35,7 +35,7 @@ public class QuestionModifier {
 		page.resetQuestion(index, newQuestion);
 	}
 
-	public void modifyDecideQuestion(String prompt) {
+	public void modifyTFQuestion(String prompt) {
 		Question newQuestion = new DecideQuestion();
 		newQuestion.setPrompt(prompt);
 		page.resetQuestion(index, newQuestion);
