@@ -13,6 +13,7 @@ public class MapQuestion extends Question {
 	public MapQuestion(){
 		super(5);
 		this.answer = new MapAnswer();
+		this.isGradable = true;
 	}
 	
 	public void setItem(String item) {

@@ -5,6 +5,7 @@ import MVC.model.Answer.Answer;
 public class EssayQuestion extends Question {
 	public EssayQuestion(){
 		super(3);
+		this.isGradable = false;
 	}
 	
 	@Override

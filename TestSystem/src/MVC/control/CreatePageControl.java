@@ -17,8 +17,9 @@ public class CreatePageControl {
 		this.page = page;
 	}
 
-	public void setPageName(String pageName) {
+	public void setPageName(String pageName,String personName) {
 		page.setPageName(pageName);
+		page.setPersonName(personName);
 		if (page.getType() == 0) {
 			pageNameList[1].add(page.getPageName());
 		} else {

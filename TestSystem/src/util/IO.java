@@ -38,8 +38,94 @@ import MVC.model.Question.ShortEssayQuestion;
 
 public class IO {
 	SAXBuilder builder = new SAXBuilder();
+	/*
+	 List<String> readAllPageNames(int type);
+	 List<String> readAllPageNames(int type,String personName);
+	 Page readPage(String pageName);
+	 
+	 Question readDecideQuestion(Element question);
+	 Question readChoiceQuestion(Element question);
+	 Question readTextAnswer(Element question);
+	 Question readEssayQuestion(Element question);
+	 Question readRankQuestion(Element question)
+	 Question readMapQuestion(Element question);
+	 
+	 void writePage(Page page,String personName);
+	 void writePage(Page page);
+	 Element savePromptQuestion(Question question);
+	 Element saveItemQuestion(Question question);
+	 Element savaMapQuestion(Question question);
+	 Element saveEssayQuestion(Question question);
+	 List<String> readRecordInfo(String pageName);
+	 void writeRecordInfo(String pageName, List<String> recordName);
+	 void writeRecord(String recordName, Record record);
+	 Record readRecord(String recordName);
+	 */
 	
-	public List<String>[] readInfo(){
+	
+	
+	/*read all pages(tests or surveys) from pageInfo.xml : pageName,personName,type*/
+	public List<String> readAllPageNames(int type){
+		InputStream file;
+		Element root = null;
+		try {
+			file = new FileInputStream("xml/pageInfo.xml");
+			Document document = builder.build(file);//获得文档对象
+			root = document.getRootElement();//获得根节点
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (JDOMException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		List<Element> pageList = root.getChildren("pageName");
+		List<String> pageName = new LinkedList<String>();
+		String typeStr;
+		if(type==Page.SURVEY){
+			typeStr = "survey";
+		}else typeStr = "test";
+		
+		for(int i=0; i<pageList.size(); i++){
+			if(pageList.get(i).getAttributeValue("type").equals(typeStr)){
+				pageName.add(pageList.get(i).getText());
+			}
+		}
+		return pageName;
+	}
+	
+	/*read all pages(tests or surveys) modified by 'personName' from pageInfo.xml : pageName,personName,type*/
+	public List<String> readAllPageNames(int type,String personName){
+		InputStream file;
+		Element root = null;
+		try {
+			file = new FileInputStream("xml/pageInfo.xml");
+			Document document = builder.build(file);//获得文档对象
+			root = document.getRootElement();//获得根节点
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (JDOMException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		List<Element> pageList = root.getChildren("pageName");
+		List<String> pageName = new LinkedList<String>();
+		String typeStr;
+		if(type==Page.SURVEY){
+			typeStr = "survey";
+		}else typeStr = "test";
+		for(int i=0; i<pageList.size(); i++){
+			if(pageList.get(i).getAttributeValue("type").equals(typeStr)&&pageList.get(i).getAttributeValue("personName").equals(personName)){
+				pageName.add(pageList.get(i).getText());
+			}
+		}
+		return pageName;
+	}
+	/*read all pages(tests and surveys) from pageInfo.xml : pageName,personName,type*/
+	/*public List<String>[] readInfo(){
 		InputStream file;
 		Element root = null;
 		try {
@@ -66,38 +152,36 @@ public class IO {
 			}
 		}
 		return pageName;
-	}
+	}*/
 	
-	public void writeInfo(List<String>[] pageName){
-		
-		Element root = new Element("totalInfo");
-		for(int i=0; i<pageName[0].size(); i++){
-			Element page = new Element("pageName");
-			page.addContent(pageName[0].get(i));
-			page.setAttribute("type", "survey");
-			root.addContent(page);
-		}
-		for(int i=0; i<pageName[1].size(); i++){
-			Element page = new Element("pageName");
-			page.addContent(pageName[1].get(i));
-			page.setAttribute("type", "test");
-			root.addContent(page);
-		}
-		Document doc=new Document(root);  
-		 try {
-			FileOutputStream out=new FileOutputStream("xml/pageInfo.xml");
-			XMLOutputter outputter = new XMLOutputter();  
-	        Format f = Format.getPrettyFormat();  
-	        outputter.setFormat(f);  
-	        outputter.output(doc, out);  
-	        out.close();  
+	/*read all pages(tests and surveys) from pageInfo.xml : pageName,personName,type*/
+	private List<List<String>> readInfo(){
+		InputStream file;
+		Element root = null;
+		try {
+			file = new FileInputStream("xml/pageInfo.xml");
+			Document document = builder.build(file);//获得文档对象
+			root = document.getRootElement();//获得根节点
 		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (JDOMException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
-		} 
+		}
+		
+		List<Element> pageList = root.getChildren("pageName");
+		List<List<String>> pageListMessage = new LinkedList<List<String>>();//survey
+		for(int i=0; i<pageList.size(); i++){
+			pageListMessage.get(i).add(pageList.get(i).getText());
+			pageListMessage.get(i).add(pageList.get(i).getAttributeValue("type"));
+			pageListMessage.get(i).add(pageList.get(i).getAttributeValue("personName"));
+			
+		}
+		return pageListMessage;
 	}
 	
+	/*read a certain page from 'pageName'.xml : score,type,questions*/
 	public Page readPage(String pageName){
 		InputStream file;
 		Element root = null;
@@ -125,7 +209,7 @@ public class IO {
 			page = new Survey();
 		}
 		page.setPageName(pageName);
-		System.out.println(page.getPageName());
+		
 		Element questions =  root.getChild("questions");
 		List<Element> questionList = questions.getChildren();
 		for(int i=0; i<questionList.size(); i++){
@@ -231,11 +315,84 @@ public class IO {
 		return map;
 	}
 	
+	/*save elements in pageInfo.xml : pageName,personName,type*/
+	/*public void writeInfo(List<String>[] pageName){
+		Element root = new Element("totalInfo");
+		for(int i=0; i<pageName[0].size(); i++){
+			Element page = new Element("pageName");
+			page.addContent(pageName[0].get(i));
+			page.setAttribute("type", "survey");
+			root.addContent(page);
+		}
+		for(int i=0; i<pageName[1].size(); i++){
+			Element page = new Element("pageName");
+			page.addContent(pageName[1].get(i));
+			page.setAttribute("type", "test");
+			root.addContent(page);
+		}
+		Document doc=new Document(root);  
+		 try {
+			FileOutputStream out=new FileOutputStream("xml/pageInfo.xml");
+			XMLOutputter outputter = new XMLOutputter();  
+	        Format f = Format.getPrettyFormat();  
+	        outputter.setFormat(f);  
+	        outputter.output(doc, out);  
+	        out.close();  
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} 
+	}*/
+	
+	/*save elements in pageInfo.xml : pageName,personName,type*/
+	public void writePage(Page page,String personName){
+		Element root = new Element("totalInfo");
+		
+		//rewrite all the elements exits in the file before
+		List<List<String>> pageListMessage = this.readInfo();
+		for(int i=0; i<pageListMessage.size(); i++){
+			Element pageEle = new Element("pageName");
+			pageEle.addContent(pageListMessage.get(i).get(0));
+			pageEle.setAttribute("type", pageListMessage.get(i).get(1));
+			pageEle.setAttribute("personName", pageListMessage.get(i).get(2));
+			root.addContent(pageEle);
+		}
+		
+		if(page.getType()==Page.SURVEY){
+			Element pageEle = new Element("pageName");
+			pageEle.addContent(page.getPageName());
+			pageEle.setAttribute("type", "survey");
+			pageEle.setAttribute("personName", personName);
+			root.addContent(pageEle);
+		}
+		if(page.getType()==Page.TEST){
+			Element pageEle = new Element("pageName");
+			pageEle.addContent(page.getPageName());
+			pageEle.setAttribute("type", "test");
+			pageEle.setAttribute("personName", personName);
+			root.addContent(pageEle);
+		}
+		Document doc=new Document(root);  
+		 try {
+			FileOutputStream out=new FileOutputStream("xml/pageInfo.xml");
+			XMLOutputter outputter = new XMLOutputter();  
+	        Format f = Format.getPrettyFormat();  
+	        outputter.setFormat(f);  
+	        outputter.output(doc, out);  
+	        out.close();  
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} 
+	}
+	
 	public void writePage(Page page){
 		Element root = new Element("Page");
 		root.setAttribute("type", page.getType()+"");
 		root.addContent(new Element("pageName").setText(page.getPageName()));
-		if(page.getType()==1){
+		if(page.getType()==Page.TEST){
 			root.addContent(new Element("score").setText(((Test)page).getTotalScore()+""));
 		}
 		
@@ -271,7 +428,7 @@ public class IO {
 			e.printStackTrace();
 		} 
 	}
-	
+		
 	public Element savePromptQuestion(Question question){
 		PromptQuestion promptQuestion = (PromptQuestion) question;
 		Element ret = new Element("question");

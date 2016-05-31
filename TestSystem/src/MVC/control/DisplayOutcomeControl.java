@@ -20,20 +20,17 @@ public class DisplayOutcomeControl {
 	private IO io = new IO();
 
 	public DisplayOutcomeControl() {
-		this.pageNameList = io.readInfo();
+		//this.pageNameList = io.readInfo();
 		this.view = new DisplayOutcomeViewcmd(this);
 	}
 
-	public void displayOutcome(int type) {
-		view.setPageNameList(pageNameList[type]);
-		view.display();
-		int index = view.getNum();
+	public void displayOutcome(int type,int index) {
+		this.pageNameList = io.readAllPageNames(type);
 		if (view.getPageNameList().size() <= index) {
 			System.out.println("index out of bound!");
 		} else {
 			getOutcome(index, type);
 		}
-		view.displayContinue();
 	}
 
 	public String getOutcome(int index, int type) {

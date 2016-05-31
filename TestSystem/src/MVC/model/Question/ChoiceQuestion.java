@@ -6,6 +6,7 @@ public class ChoiceQuestion extends ItemQuestion {
 	public ChoiceQuestion(){
 		super(1);
         this.answer = new ChoiceAnswer();
+         this.isGradable = true;
     }
 
 	@Override

@@ -4,6 +4,7 @@ import util.IO;
 import Instruction.modify.ModifyQuestion;
 import Instruction.modify.*;
 import Interface.QuestionModifier;
+<<<<<<< HEAD
 import MVC.model.Paper.Page;
 import MVC.model.Question.Question;
 import exclude.ModifyViewcmd;
@@ -22,6 +23,26 @@ public class ModifyControl {
 	private IO io = new IO();
 
 	public ModifyControl(ModifyViewcmd view,Page page,Question question) {
+=======
+import MVC.view.ModifyView;
+import MVC.model.Paper.Page;
+import MVC.model.Question.Question;
+
+import java.util.List;
+import java.util.Scanner;
+
+/**
+ * Created by mayezhou on 16/5/29.
+ */
+public class ModifyControl {
+	protected ModifyView view;
+	private Page page;
+	private Question question;
+	private List<String>[] pageNameList;
+	private IO io = new IO();
+
+	public ModifyControl(ModifyView view,Page page,Question question) {
+>>>>>>> refs/heads/mmy
 		this.view = view;
 		this.page = page;
 		this.question = question;

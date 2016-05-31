@@ -3,6 +3,7 @@ package MVC.control;
 import java.util.List;
 
 import MVC.model.Paper.Page;
+import MVC.model.Paper.Record;
 import exclude.AnswerPageViewcmd;
 import util.IO;
 
@@ -19,16 +20,19 @@ public class AnswerPageControl {
 		this.view = new AnswerPageViewcmd(this,page);
 	}
 
-	public void answer(int type) {
-		view.setPageNameList(pageNameList[type]);
-		view.display();
-		int index = view.getNum();
+	public void answer(String personName,int type) {
+		pageNameList[type] = io.readAllPageNames(type);
+		int index = 0;//the page  test-taker chooses
 		
-		if(view.getPageNameList().size() <= index){
+		if(pageNameList[type] .size() <= index){
 			System.out.println("index out of bound!");
 		}else{
 			page = io.readPage(pageNameList[type].get(index));
-		}
+			page.display();
+		} 
+		Record record = new Record();
+		record.setPersonName(personName);
+		//io.writeRecord(page, personName);
 	}
 	
 	public Page getPage(){
