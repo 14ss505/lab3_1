@@ -8,7 +8,6 @@ import Instruction.add.AddQuestion;
 import Instruction.add.AddQuestionAgent;
 import Instruction.add.AddRankQuestion;
 import Instruction.add.AddTextQuestion;
-import Interface.QuestionCreator;
 <<<<<<< HEAD
 import MVC.model.Paper.Page;
 import exclude.AddQuestionView;

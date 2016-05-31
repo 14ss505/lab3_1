@@ -2,8 +2,6 @@ package Instruction.add;
 
 import java.util.Scanner;
 
-import Interface.QuestionCreator;
-
 public class AddTextQuestion extends AddQuestion {
 
 	private QuestionCreator creator;

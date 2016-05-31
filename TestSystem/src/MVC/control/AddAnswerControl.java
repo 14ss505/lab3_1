@@ -1,13 +1,6 @@
 package MVC.control;
 
 import Instruction.add.AddChoiceQuestion;
-import Instruction.add.AddDecideQuestion;
-import Instruction.add.AddEssayQuestion;
-import Instruction.add.AddMapQuestion;
-import Instruction.add.AddQuestion;
-import Instruction.add.AddQuestionAgent;
-import Instruction.add.AddRankQuestion;
-import Instruction.add.AddTextQuestion;
 import Instruction.answer.AddAnswer;
 import Instruction.answer.AddAnswerAgent;
 import Instruction.answer.AddChoiceAnswer;
@@ -17,7 +10,6 @@ import Instruction.answer.AddMapAnswer;
 import Instruction.answer.AddRankAnswer;
 import Instruction.answer.AddTextAnswer;
 import Interface.AnswerCreator;
-import Interface.QuestionCreator;
 import MVC.model.Paper.Iterator;
 import MVC.model.Paper.Page;
 import MVC.model.Paper.Record;
