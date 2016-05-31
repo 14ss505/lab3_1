@@ -4,12 +4,23 @@ import java.util.LinkedList;
 import java.util.List;
 
 import Answer.Answer;
+import Question.Question;
 
 public class Record {
 	protected List<Answer> answerList = new LinkedList<Answer>();
 	protected int score;
 	protected String personName;
+	private Page page;
 
+	public Record(){
+		
+	}
+	
+	public Record(Page page,String personName){
+		this.page=page;
+		this.personName=personName;
+	}
+	
 	public int getScore() {
 		return score;
 	}
@@ -43,7 +54,10 @@ public class Record {
 		
 		@Override
 		public boolean hasNext() {
-			return answerIndex < answerList.size();
+			if(answerIndex < answerList.size()){
+				return true;
+			}
+			return false;
 		}
 
 		@Override
@@ -52,4 +66,28 @@ public class Record {
 		}
 		
 	}
+
+	public void grade(){
+		if(page.getType()==0)//survey
+			return;
+		Iterator<Question> questionIterator = page.iterator();
+		Iterator<Answer> answerIterator = this.iterator();
+		if(questionIterator.hasNext()){
+			Question q = questionIterator.next();
+			if(q.IsGradable()){
+				if(q.match(answerIterator.next())){
+					this.addScore(q.getScore());
+				}
+			}else{
+				answerIterator.next();
+			}
+		}
+	}
+	public Page getPage() {
+		return page;
+	}
+	public void setPage(Page page) {
+		this.page = page;
+	}
+	
 }
