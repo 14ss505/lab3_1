@@ -1,4 +1,4 @@
-package MVC;
+package MVC.view;
 
 import MVC.view.View;
 

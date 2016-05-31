@@ -1,8 +1,11 @@
-package MVC;
+package MVC.control;
+
+import java.awt.Menu;
 
 import Instruction.*;
 import Interface.MenuOperation;
 import MVC.model.Paper.Page;
+import MVC.view.MenuView;
 
 public class MenuControl {
 	private Menu menu;
