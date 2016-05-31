@@ -16,22 +16,22 @@ public abstract class ModifyQuestion implements Command{
     protected int score;
     protected String answer;
 
-    public ModifyQuestion(Page page, Question question, String prompt, int score, String answer) {
+    public ModifyQuestion(Page page, Question question, String prompt, int score, String answer, QuestionModifier modifier) {
         this.page = page;
         this.type = page.getType();
         this.question = question;
         this.prompt = prompt;
         this.score = score;
         this.answer = answer;
-        this.modifier = new QuestionModifier(page, question);
+        this.modifier = modifier;
     }
 
-    public ModifyQuestion(Page page, Question question, String prompt) {
+    public ModifyQuestion(Page page, Question question, String prompt, QuestionModifier modifier) {
         this.page = page;
         this.type = page.getType();
         this.question = question;
         this.prompt = prompt;
-        this.modifier = new QuestionModifier(page, question);
+        this.modifier = modifier;
     }
 
     public void setPage(Page p) {

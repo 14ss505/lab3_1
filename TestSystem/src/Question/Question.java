@@ -18,12 +18,12 @@ public abstract class Question {
     protected int type;
     protected Answer answer;
     protected boolean isGradable;
-    protected ArrayList<ModifyObserver> modifyObservers = new ArrayList<>();
+//    protected ArrayList<ModifyObserver> modifyObservers = new ArrayList<>();
 
     public Question(int type) {
         this.type = type;
     }
-
+/*
     public void registerObserver(ModifyObserver o) {
         modifyObservers.add(o);
     }
@@ -42,7 +42,7 @@ public abstract class Question {
             System.out.println(e.getMessage());
         }
     }
-
+*/
     public int getType() {
         return type;
     }

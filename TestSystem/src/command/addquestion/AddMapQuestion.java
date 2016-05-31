@@ -2,46 +2,28 @@ package command.addquestion;
 
 import java.util.Scanner;
 
+import Paper.Page;
 import command.AddQuestion;
 import receiver.QuestionCreator;
 
 public class AddMapQuestion extends AddQuestion {
-	private QuestionCreator creator;
+	private String[] side1;
+    private String[] side2;
 
-	public AddMapQuestion(QuestionCreator creator) {
-		this.creator = creator;
-		this.page = creator.getPage();
-	}
+    public AddMapQuestion(Page page, String prompt, String answer, int score, QuestionCreator creator) {
+        super(page, prompt, answer, score, creator);
+    }
 
-	@Override
+    public AddMapQuestion(Page page, String prompt, QuestionCreator creator) {
+        super(page, prompt, creator);
+    }
+
+    @Override
 	public void execute() {
-		System.out.println("Enter the prompt for you map question:");
-        Scanner scan = new Scanner(System.in);
-        String prompt = scan.nextLine();
-        System.out.println("Please enter your left side choice number");
-        int number = scan.nextInt();
-        String[] side1 = new String[number];
-        for (int i = 0; i < number; i++) {
-            System.out.println("\nEnter your choice " + i);
-            side1[i] = scan.nextLine();
-        }
-        System.out.println("Please enter your right side choice number");
-        number = scan.nextInt();
-        String[] side2 = new String[number];
-        for (int i = 0; i < number; i++) {
-            System.out.println("\nEnter your choice " + i);
-            side2[i] = scan.nextLine();
-        }
-        if (type == 1) {
-            System.out.println("Please enter you anwser:\n");
-            String answer = scan.nextLine();
-            System.out.println("Please enter your score\n");
-            int score = scan.nextInt();
+        if (type == Page.TEST) {
             creator.createMapQuestion(prompt, side1, side2, score, answer);
-            return;
+        } else {
+            creator.createMapQuestion(prompt, side1, side2);
         }
-        creator.createMapQuestion(prompt, side1, side2);
-
 	}
-
 }

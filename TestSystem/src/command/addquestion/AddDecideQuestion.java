@@ -2,33 +2,28 @@ package command.addquestion;
 
 import java.util.Scanner;
 
+import Paper.Page;
 import command.AddQuestion;
 import receiver.QuestionCreator;
 
 public class AddDecideQuestion extends AddQuestion {
 
-	private QuestionCreator creator;
+	public AddDecideQuestion(Page page, String prompt, String answer, int score, QuestionCreator creator) {
+		super(page, prompt, answer, score, creator);
+	}
 
-	public AddDecideQuestion(QuestionCreator creator) {
-		this.creator = creator;
-		this.page = creator.getPage();
+	public AddDecideQuestion(Page page, String prompt, QuestionCreator creator) {
+		super(page, prompt, creator);
 	}
 
 	@Override
 	public void execute() {
-		// TODO Auto-generated method stub
-		System.out.println("Enter the prompt for you True/False question:\n");
-		Scanner scan = new Scanner(System.in);
-		String prompt = scan.nextLine();
-		if (page.getType() == 0) {
-			System.out.println("Please enter you answer:\n");
-			String answer = scan.nextLine();
-			System.out.println("Please enter your score\n");
-			int score = scan.nextInt();
+		if (type == Page.TEST) {
 			creator.createDecideQuestion(prompt, score, answer);
-			return;
+
+		} else {
+			creator.createDecideQuestion(prompt);
 		}
-		creator.createDecideQuestion(prompt);
 	}
 
 }
