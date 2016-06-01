@@ -73,18 +73,6 @@ public class Page {
 		return new IteratorQuestion();
 	}
 
-	public void display() {// TODO: 16/5/29 return string
-		Iterator<Question> questions = this.iterator();
-		while(questions.hasNext()) {
-			Question q = questions.next();
-			System.out.println(q.getQuestion());
-			int ty = q.getType();
-			if(type==TEST && ty != Question.ESSAY){
-				System.out.println("The correct answer is " + q.getAnswer().writeAnswer());
-			}
-		}
-	}
-
 	public void setType(int type) {
 		this.type = type;
 	}

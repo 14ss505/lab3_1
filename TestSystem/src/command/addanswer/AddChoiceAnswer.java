@@ -6,18 +6,13 @@ import Paper.Record;
 import Question.Question;
 
 public class AddChoiceAnswer extends AddAnswer {
-	private AnswerCreator creator;
-	private String answer;
-	private Record record;
-
-	public AddChoiceAnswer(Record record,String answer,AnswerCreator creator) {
-		this.creator = creator;
-		this.answer = answer;
-		this.record= record;
+	
+	public AddChoiceAnswer(String pageName,String personName,String answer,AnswerCreator creator) {
+		super(pageName, personName, answer, creator);
 	}
 
 	@Override
 	public void execute() {
-		creator.createChoiceAnswer(record.getPageName(),record.getPersonName(),answer);
+		creator.createChoiceAnswer(pageName,personName,answer);
 	}
 }

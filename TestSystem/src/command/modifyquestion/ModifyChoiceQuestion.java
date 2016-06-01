@@ -11,23 +11,23 @@ import receiver.QuestionModifier;
 public class ModifyChoiceQuestion extends ModifyQuestion {
     protected String[] items;
 
-    public ModifyChoiceQuestion(Page page, Question question, String prompt, int score, String answer, String[] items, QuestionModifier modifier) {
-        super(page, question, prompt, score, answer, modifier);
+    public ModifyChoiceQuestion(String pageName,int index,int type, String prompt, int score, String answer, String[] items, QuestionModifier modifier) {
+        super(pageName,index,type, prompt, score, answer, modifier);
         this.items = items;
     }
 
-    public ModifyChoiceQuestion(Page page, Question question, String prompt, String[] items, QuestionModifier modifier) {
-        super(page, question, prompt, modifier);
+    public ModifyChoiceQuestion(String pageName,int index,int type, String prompt, String[] items, QuestionModifier modifier) {
+        super(pageName,index,type, prompt, modifier);
         this.items = items;
     }
 
     @Override
     public void execute() {
-        if (page.getType() == Page.SURVEY) {
-            modifier.modifyChoiceQuestion(prompt, items);
+        if (type == Page.SURVEY) {
+            modifier.modifyChoiceQuestion(pageName,index,prompt, items);
         }
         else {
-            modifier.modifyChoiceQuestion(prompt, items, score, answer);
+            modifier.modifyChoiceQuestion(pageName,index,prompt, items, score, answer);
         }
     }
 }

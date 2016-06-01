@@ -9,21 +9,21 @@ import receiver.QuestionModifier;
  * Created by mayezhou on 16/5/31.
  */
 public class ModifyEssayQuestion extends ModifyQuestion {
-    public ModifyEssayQuestion(Page page, Question question, String prompt, int score, String answer, QuestionModifier modifier) {
-        super(page, question, prompt, score, answer, modifier);
+    public ModifyEssayQuestion(String pageName,int index,int type, String prompt, int score, String answer, QuestionModifier modifier) {
+        super(pageName,index,type, prompt, score, answer, modifier);
     }
 
-    public ModifyEssayQuestion(Page page, Question question, String prompt, QuestionModifier modifier) {
-        super(page, question, prompt, modifier);
+    public ModifyEssayQuestion(String pageName,int index,int type, String prompt, QuestionModifier modifier) {
+        super(pageName,index,type, prompt, modifier);
     }
 
     @Override
     public void execute() {
-        if (page.getType() == Page.SURVEY) {
-            modifier.modifyEssayQuestion(prompt);
+        if (type == Page.SURVEY) {
+            modifier.modifyEssayQuestion(pageName,index,prompt);
         }
         else {
-            modifier.modifyEssayQuestion(prompt, score, answer);
+            modifier.modifyEssayQuestion(pageName,index,prompt, score, answer);
         }
     }
 }

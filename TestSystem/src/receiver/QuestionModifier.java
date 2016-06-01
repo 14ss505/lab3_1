@@ -7,41 +7,31 @@ import Question.MapQuestion;
 import Question.Question;
 import Question.RankQuestion;
 import Question.ShortEssayQuestion;
+import util.DataCommand;
 
 public class QuestionModifier {
-	private Page page;
-	private Question question;
-	private int index;
+	private DataCommand dataCommand= new DataCommand();
 
-	public QuestionModifier(Page page, Question question) {
-		this.page = page;
-		this.question = question;
-	}
-
-	public void setPage(Page p) {
-		this.page = p;
-	}
-
-	public void setQuestion(Question q) {
-		this.question = q;
-		this.index = page.getQuestionIndex(q);
-	}
-
-	public void modifyTFQuestion(String prompt, int score, String answer) {
+	public void modifyTFQuestion(String pageName,int index,String prompt, int score, String answer) {
+		Page page = dataCommand.getPage(pageName);
 		Question newQuestion = new DecideQuestion();
 		newQuestion.setPrompt(prompt);
 		newQuestion.setScore(score);
 		newQuestion.setAnswer(answer);
 		page.resetQuestion(index, newQuestion);
+		dataCommand.savePage(page);
 	}
 
-	public void modifyTFQuestion(String prompt) {
+	public void modifyTFQuestion(String pageName,int index,String prompt) {
+		Page page = dataCommand.getPage(pageName);
 		Question newQuestion = new DecideQuestion();
 		newQuestion.setPrompt(prompt);
 		page.resetQuestion(index, newQuestion);
+		dataCommand.savePage(page);
 	}
 
-	public void modifyChoiceQuestion(String prompt, String[] items, int score, String answer) {
+	public void modifyChoiceQuestion(String pageName,int index,String prompt, String[] items, int score, String answer) {
+		Page page = dataCommand.getPage(pageName);
 		ChoiceQuestion newQuestion = new ChoiceQuestion();
 		newQuestion.setPrompt(prompt);
 		for (int i = 0; i < items.length; i++) {
@@ -50,32 +40,40 @@ public class QuestionModifier {
 		newQuestion.setScore(score);
 		newQuestion.setAnswer(answer);
 		page.resetQuestion(index, newQuestion);
+		dataCommand.savePage(page);
 	}
 
-	public void modifyChoiceQuestion(String prompt, String[] items) {
+	public void modifyChoiceQuestion(String pageName,int index,String prompt, String[] items) {
+		Page page = dataCommand.getPage(pageName);
 		ChoiceQuestion newQuestion = new ChoiceQuestion();
 		newQuestion.setPrompt(prompt);
 		for (int i = 0; i < items.length; i++) {
 			newQuestion.setItem(items[i]);
 		}
 		page.resetQuestion(index, newQuestion);
+		dataCommand.savePage(page);
 	}
 
-	public void modifyEssayQuestion(String prompt, int score, String answer) {
+	public void modifyEssayQuestion(String pageName,int index,String prompt, int score, String answer) {
+		Page page = dataCommand.getPage(pageName);
 		ShortEssayQuestion text = new ShortEssayQuestion();
 		text.setPrompt(prompt);
 		text.setScore(score);
 		text.setAnswer(answer);
 		page.resetQuestion(index, text);
+		dataCommand.savePage(page);
 	}
 
-	public void modifyEssayQuestion(String prompt) {
+	public void modifyEssayQuestion(String pageName,int index,String prompt) {
+		Page page = dataCommand.getPage(pageName);
 		ShortEssayQuestion text = new ShortEssayQuestion();
 		text.setPrompt(prompt);
 		page.resetQuestion(index, text);
+		dataCommand.savePage(page);
 	}
 
-	public void modifyRankQuestion(String prompt, String[] items, int score, String answer) {
+	public void modifyRankQuestion(String pageName,int index,String prompt, String[] items, int score, String answer) {
+		Page page = dataCommand.getPage(pageName);
 		RankQuestion rankQuestion = new RankQuestion();
 		rankQuestion.setPrompt(prompt);
 		for (int i = 0; i < items.length; i++) {
@@ -84,18 +82,22 @@ public class QuestionModifier {
 		rankQuestion.setScore(score);
 		rankQuestion.setAnswer(answer);
 		page.resetQuestion(index, rankQuestion);
+		dataCommand.savePage(page);
 	}
 
-	public void modifyRankQuestion(String prompt, String[] items) {
+	public void modifyRankQuestion(String pageName,int index,String prompt, String[] items) {
+		Page page = dataCommand.getPage(pageName);
 		RankQuestion rankQuestion = new RankQuestion();
 		rankQuestion.setPrompt(prompt);
 		for (int i = 0; i < items.length; i++) {
 			rankQuestion.setItem(items[i]);
 		}
 		page.resetQuestion(index, rankQuestion);
+		dataCommand.savePage(page);
 	}
 
-	public void modifyMapQuestion(String prompt, String[] side1, String[] side2, int score, String answer) {
+	public void modifyMapQuestion(String pageName,int index,String prompt, String[] side1, String[] side2, int score, String answer) {
+		Page page = dataCommand.getPage(pageName);
 		MapQuestion map = new MapQuestion();
 		map.setPrompt(prompt);
 		map.setSide(1);
@@ -109,9 +111,11 @@ public class QuestionModifier {
 		map.setScore(score);
 		map.setAnswer(answer);
 		page.resetQuestion(index, map);
+		dataCommand.savePage(page);
 	}
 
-	public void modifyMapQuestion(String prompt, String[] side1, String[] side2) {
+	public void modifyMapQuestion(String pageName,int index,String prompt, String[] side1, String[] side2) {
+		Page page = dataCommand.getPage(pageName);
 		MapQuestion map = new MapQuestion();
 		map.setPrompt(prompt);
 		map.setSide(1);
@@ -123,13 +127,6 @@ public class QuestionModifier {
 			map.setItem(side2[i]);
 		}
 		page.resetQuestion(index, map);
-	}
-
-	public Page getPage() {
-		return page;
-	}
-
-	public Question getQuestion() {
-		return question;
+		dataCommand.savePage(page);
 	}
 }

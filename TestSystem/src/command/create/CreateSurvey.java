@@ -15,7 +15,7 @@ public class CreateSurvey extends Create {
 		this.personName = personName;
 	}
 
-	public void execute(String personName) {
+	public void execute() {
 		pc.createPage(Page.TEST,pageName,personName);
 	}
 

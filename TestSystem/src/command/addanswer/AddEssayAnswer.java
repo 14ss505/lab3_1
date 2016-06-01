@@ -6,20 +6,13 @@ import Paper.Record;
 import Question.Question;
 
 public class AddEssayAnswer extends AddAnswer{
-	private AnswerCreator creator;
-	private String answer;
-	private Record record;
-
-	public AddEssayAnswer(Record record,String answer,AnswerCreator creator) {
-		this.creator = creator;
-		this.answer = answer;
-		this.record= record;
+	
+	public AddEssayAnswer(String pageName,String personName,String answer,AnswerCreator creator) {
+		super(pageName, personName, answer, creator);
 	}
-
 
 	@Override
 	public void execute() {
-		creator.createEssayAnswer(record.getPageName(),record.getPersonName(),answer);
+		creator.createEssayAnswer(pageName,personName,answer);
 	}
-
 }

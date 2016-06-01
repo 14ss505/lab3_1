@@ -6,20 +6,13 @@ import Paper.Record;
 import Question.Question;
 
 public class AddMapAnswer  extends AddAnswer{
-	private AnswerCreator creator;
-	private String answer;
-	private Record record;
 
-	public AddMapAnswer(Record record,String answer,AnswerCreator creator) {
-		this.creator = creator;
-		this.answer = answer;
-		this.record= record;
+	public AddMapAnswer(String pageName,String personName,String answer,AnswerCreator creator) {
+		super(pageName, personName, answer, creator);
 	}
-
 
 	@Override
 	public void execute() {
-		creator.createMapAnswer(record.getPageName(),record.getPersonName(),answer);
+		creator.createMapAnswer(pageName,personName,answer);
 	}
-
 }

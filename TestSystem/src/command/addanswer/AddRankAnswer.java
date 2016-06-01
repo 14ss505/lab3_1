@@ -6,20 +6,13 @@ import Paper.Record;
 import Question.Question;
 
 public class AddRankAnswer  extends AddAnswer{
-	private AnswerCreator creator;
-	private String answer;
-	private Record record;
 
-	public AddRankAnswer(Record record,String answer,AnswerCreator creator) {
-		this.creator = creator;
-		this.answer = answer;
-		this.record= record;
+	public AddRankAnswer(String pageName,String personName,String answer,AnswerCreator creator) {
+		super(pageName, personName, answer, creator);
 	}
-
 
 	@Override
 	public void execute() {
-		creator.createRankAnswer(record.getPageName(),record.getPersonName(),answer);
+		creator.createRankAnswer(pageName,personName,answer);
 	}
-
 }

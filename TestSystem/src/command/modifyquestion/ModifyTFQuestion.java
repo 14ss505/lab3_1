@@ -10,21 +10,21 @@ import receiver.QuestionModifier;
  */
 public class ModifyTFQuestion extends ModifyQuestion {
 
-    public ModifyTFQuestion(Page page, Question question, String prompt, int score, String answer, QuestionModifier modifier) {
-        super(page, question, prompt, score, answer, modifier);
+    public ModifyTFQuestion(String pageName,int index,int type, String prompt, int score, String answer, QuestionModifier modifier) {
+        super(pageName,index,type, prompt, score, answer, modifier);
     }
 
-    public ModifyTFQuestion(Page page, Question question, String prompt, QuestionModifier modifier) {
-        super(page, question, prompt, modifier);
+    public ModifyTFQuestion(String pageName,int index,int type, String prompt, QuestionModifier modifier) {
+        super(pageName,index,type, prompt, modifier);
     }
 
     @Override
     public void execute() {
-        if (page.getType() == Page.SURVEY) {
-            modifier.modifyTFQuestion(prompt);
+        if (type == Page.SURVEY) {
+            modifier.modifyTFQuestion(pageName,index,prompt);
         }
         else {
-            modifier.modifyTFQuestion(prompt, score, answer);
+            modifier.modifyTFQuestion(pageName,index,prompt, score, answer);
         }
     }
 }

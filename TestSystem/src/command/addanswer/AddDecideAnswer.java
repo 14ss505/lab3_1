@@ -6,18 +6,13 @@ import Paper.Record;
 import Question.Question;
 
 public class AddDecideAnswer extends AddAnswer{
-	private AnswerCreator creator;
-	private String answer;
-	private Record record;
-
-	public AddDecideAnswer(Record record,String answer,AnswerCreator creator) {
-		this.creator = creator;
-		this.answer = answer;
-		this.record = record;
+	
+	public AddDecideAnswer(String pageName,String personName,String answer,AnswerCreator creator) {
+		super(pageName, personName, answer, creator);
 	}
 
 	@Override
 	public void execute() {
-		creator.createDecideAnswer(record.getPageName(),record.getPersonName(),answer);
+		creator.createDecideAnswer(pageName,personName,answer);
 	}
 }

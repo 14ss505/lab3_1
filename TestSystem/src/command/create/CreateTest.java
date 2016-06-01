@@ -15,7 +15,7 @@ public class CreateTest extends Create {
 		this.personName = personName;
 	}
 	@Override
-	public void execute(String personName) {
+	public void execute() {
 		// TODO Auto-generated method stub
 		pc.createPage(Page.TEST,pageName,personName);
 	}
