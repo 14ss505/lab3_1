@@ -14,7 +14,16 @@ public class Page {
 	protected int type;
 	protected List<Question> questionList = new LinkedList<Question>();
 	private IO io = new IO();
+	protected String personName;
 	
+	public String getPersonName() {
+		return personName;
+	}
+
+	public void setPersonName(String personName) {
+		this.personName = personName;
+	}
+
 	public void setPageName(String pageName){
 		this.pageName = pageName;
 	}

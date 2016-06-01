@@ -6,15 +6,19 @@ import receiver.PageCreator;
 
 public class CreateSurvey extends Create {
 	private PageCreator pc;
+	private String pageName;
+	private String personName;
 
-	public CreateSurvey(PageCreator pc) {
+	public CreateSurvey(PageCreator pc,String pageName,String personName) {
 		this.pc = pc;
+		this.pageName = pageName;
+		this.personName = personName;
 	}
 
 	@Override
 	public void execute() {
 		// TODO Auto-generated method stub
-		pc.createPage(Page.TEST);
+		pc.createPage(Page.TEST,pageName,personName);
 	}
 
 }
