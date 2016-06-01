@@ -1,7 +1,5 @@
 package command.addquestion;
 
-import java.util.Scanner;
-
 import Paper.Page;
 import command.AddQuestion;
 import receiver.QuestionCreator;
@@ -19,10 +17,10 @@ public class AddDecideQuestion extends AddQuestion {
 	@Override
 	public void execute() {
 		if (type == Page.TEST) {
-			creator.createDecideQuestion(prompt, score, answer);
+			creator.createDecideQuestion(page,prompt, score, answer);
 
 		} else {
-			creator.createDecideQuestion(prompt);
+			creator.createDecideQuestion(page,prompt);
 		}
 	}
 

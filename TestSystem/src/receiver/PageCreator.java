@@ -8,6 +8,7 @@ public class PageCreator {
 	Page page;
 
 	public void createPage(int type,String pageName,String personName) {
+		page = new Page();
 		if (type == 0) {
 			page = new Survey();
 			page.setType(Page.SURVEY);
@@ -19,5 +20,9 @@ public class PageCreator {
 			page.setPageName(pageName);
 			page.setPersonName(personName);
 		}
+	}
+	
+	public Page getPage(){
+		return page;
 	}
 }

@@ -21,4 +21,12 @@ public class CreateSurvey extends Create {
 		pc.createPage(Page.TEST,pageName,personName);
 	}
 
+	@Override
+	public Page getPage() {
+		// TODO Auto-generated method stub
+		return pc.getPage();
+	}
+	
+	
+
 }

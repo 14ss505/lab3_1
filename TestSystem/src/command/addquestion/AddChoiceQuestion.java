@@ -21,9 +21,9 @@ public class AddChoiceQuestion extends AddQuestion {
 	@Override
 	public void execute() {
 		if (type == Page.TEST) {
-			creator.createChoiceQuestion(prompt, items, score, answer);
+			creator.createChoiceQuestion(page,prompt, items, score, answer);
 		} else {
-			creator.createChoiceQuestion(prompt, items);
+			creator.createChoiceQuestion(page,prompt, items);
 		}
 	}
 }

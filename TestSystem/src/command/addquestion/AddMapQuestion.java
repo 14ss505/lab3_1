@@ -21,9 +21,9 @@ public class AddMapQuestion extends AddQuestion {
     @Override
 	public void execute() {
         if (type == Page.TEST) {
-            creator.createMapQuestion(prompt, side1, side2, score, answer);
+            creator.createMapQuestion(page,prompt, side1, side2, score, answer);
         } else {
-            creator.createMapQuestion(prompt, side1, side2);
+            creator.createMapQuestion(page,prompt, side1, side2);
         }
 	}
 }
