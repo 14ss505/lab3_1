@@ -19,10 +19,10 @@ public class AddDecideQuestion extends AddQuestion {
 	@Override
 	public void execute() {
 		if (type == Page.TEST) {
-			creator.createDecideQuestion(prompt, score, answer);
+			creator.createDecideQuestion(page.getPageName(),prompt, score, answer);
 
 		} else {
-			creator.createDecideQuestion(prompt);
+			creator.createDecideQuestion(page.getPageName(),prompt);
 		}
 	}
 

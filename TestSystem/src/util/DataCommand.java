@@ -68,14 +68,35 @@ public class DataCommand {
 		List<String> recordNames = io.readRecordInfo(pageName);
 		List<Record> records = new LinkedList<Record>();
 		for(int i=0;i<recordNames.size();i++){
-			records.add(io.readRecord(recordNames.get(i)));
+			Record record = io.readRecord(recordNames.get(i));
+			Page page = io.readPage(pageName);
+			record.setPage(page);
+			records.add(record);
 		}
 		return records;
 	}
 	
+	/*get a record of a pageName of a person*/
+	public  Record getRecord(String pageName,String personName){
+		String recordName = pageName+"-"+personName;
+		Record record = io.readRecord(recordName);
+		Page page = io.readPage(pageName);
+		record.setPage(page);
+		return record;
+	}
+	
+	/* create a record
+	 * use this function when you try to answer a page*/
+	public Page createPage(String pageName,String personName) {
+		Record record = new Record(pageName, personName);
+		this.updateRecordList(record);
+		return this.getPage(pageName);
+	}
+	
+	
 	/*update the registerFile of recordNameList for a certain pageName:pageName-type-personName*/
 	public void updateRecordList(Record record){
-		String pageName = record.getPage().getPageName();
+		String pageName = record.getPageName();
 		String recordName = pageName+"-"+record.getPersonName();
 		List<String> recordNames = io.readRecordInfo(pageName);
 		recordNames.add(recordName);
@@ -84,7 +105,7 @@ public class DataCommand {
 	
 	/*save a record*/
 	public void saveRecord(Record record){
-		String pageName = record.getPage().getPageName();
+		String pageName = record.getPageName();
 		String recordName = pageName+"-"+record.getPersonName();
 		record.grade();
 		io.writeRecord(recordName, record);
@@ -100,7 +121,7 @@ public class DataCommand {
 		return result;
 	}
 	
-	public String tabulate(List<Record> records,int questionIndex){
+	private String tabulate(List<Record> records,int questionIndex){
 		TabulateResult result = null;
 		if(records.size()==0){
 			return "";

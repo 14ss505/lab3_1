@@ -11,25 +11,30 @@ public class Page {
 	public static final int TEST = 1;
 
 	protected String pageName;
-	protected String creatorName;
 	protected int type;
 	protected List<Question> questionList = new LinkedList<Question>();
 	private IO io = new IO();
+	protected String personName;
 	
+	Page(String pageName,String personName){
+		this.pageName = pageName;
+		this.personName = personName;
+	}
+	
+	public String getPersonName() {
+		return personName;
+	}
+
+	public void setPersonName(String personName) {
+		this.personName = personName;
+	}
+
 	public void setPageName(String pageName){
 		this.pageName = pageName;
 	}
 	
 	public String getPageName(){
 		return this.pageName;
-	}
-	
-	public void setCreatorName(String creatorName){
-		this.creatorName = creatorName;
-	}
-	
-	public String getCreatorName(){
-		return this.creatorName;
 	}
 	
 	public void addQuestion(Question question){
@@ -101,8 +106,4 @@ public class Page {
 		
 		
 	}
-	public void save(){
-		io.writePage(this);
-	}
-	
 }

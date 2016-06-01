@@ -2,21 +2,22 @@ package command.addanswer;
 
 import command.AddAnswer;
 import receiver.AnswerCreator;
+import Paper.Record;
 import Question.Question;
 
 public class AddTextAnswer extends AddAnswer{
 	private AnswerCreator creator;
 	private String answer;
-	private Question question;
+	private Record record;
 
-	public AddTextAnswer(AnswerCreator creator,String answer,Question question) {
+	public AddTextAnswer(Record record,String answer,AnswerCreator creator) {
 		this.creator = creator;
 		this.answer = answer;
-		this.question = question;
+		this.record= record;
 	}
 
 	@Override
 	public void execute() {
-		creator.createTextAnswer(question,answer);
+		creator.createTextAnswer(record.getPageName(),record.getPersonName(),answer);
 	}
 }

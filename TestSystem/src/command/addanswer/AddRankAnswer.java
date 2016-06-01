@@ -2,22 +2,24 @@ package command.addanswer;
 
 import command.AddAnswer;
 import receiver.AnswerCreator;
+import Paper.Record;
 import Question.Question;
 
 public class AddRankAnswer  extends AddAnswer{
 	private AnswerCreator creator;
 	private String answer;
-	private Question question;
+	private Record record;
 
-	public AddRankAnswer(AnswerCreator creator,String answer,Question question) {
+	public AddRankAnswer(Record record,String answer,AnswerCreator creator) {
 		this.creator = creator;
 		this.answer = answer;
-		this.question = question;
+		this.record= record;
 	}
+
 
 	@Override
 	public void execute() {
-		creator.createRankAnswer(question,answer);
+		creator.createRankAnswer(record.getPageName(),record.getPersonName(),answer);
 	}
 
 }

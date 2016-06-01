@@ -5,12 +5,14 @@ import Question.Question;
 public class Test extends Page {
 	int totalScore;
 
-	public Test(int totalScore) {
+	public Test(String pageName,String personName,int totalScore) {
+		super(pageName,personName);
 		type = TEST;
 		this.totalScore = totalScore;
 	}
 
-	public Test() {
+	public Test(String pageName,String personName) {
+    	super(pageName,personName);
 		type = TEST;
 	}
 

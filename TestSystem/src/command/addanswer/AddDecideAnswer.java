@@ -2,21 +2,22 @@ package command.addanswer;
 
 import command.AddAnswer;
 import receiver.AnswerCreator;
+import Paper.Record;
 import Question.Question;
 
 public class AddDecideAnswer extends AddAnswer{
 	private AnswerCreator creator;
 	private String answer;
-	private Question question;
+	private Record record;
 
-	public AddDecideAnswer(AnswerCreator creator,String answer,Question question) {
+	public AddDecideAnswer(Record record,String answer,AnswerCreator creator) {
 		this.creator = creator;
 		this.answer = answer;
-		this.question = question;
+		this.record = record;
 	}
 
 	@Override
 	public void execute() {
-		creator.createDecideAnswer(question,answer);
+		creator.createDecideAnswer(record.getPageName(),record.getPersonName(),answer);
 	}
 }

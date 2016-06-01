@@ -18,7 +18,7 @@ public class AddEssayQuestion extends AddQuestion {
 
 	@Override
 	public void execute() {
-		creator.createEssayQuestion(prompt);
+		creator.createEssayQuestion(page.getPageName(),prompt);
 	}
 
 }
