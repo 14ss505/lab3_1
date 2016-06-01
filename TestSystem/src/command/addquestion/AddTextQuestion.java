@@ -19,9 +19,9 @@ public class AddTextQuestion extends AddQuestion {
     @Override
 	public void execute() {
         if (type == Page.TEST) {
-            creator.createTextQuestion(prompt, score, answer);
+            creator.createTextQuestion(page,prompt, score, answer);
         } else {
-            creator.createTextQuestion(prompt);
+            creator.createTextQuestion(page,prompt);
         }
 	}
 }

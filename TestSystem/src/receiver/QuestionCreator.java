@@ -11,7 +11,8 @@ import Question.ShortEssayQuestion;
 public class QuestionCreator {
 	private Page page;
 
-	public void createDecideQuestion(String prompt, int score, String answer) {
+	public void createDecideQuestion(Page page,String prompt, int score, String answer) {
+		this.page = page;
 		DecideQuestion decide = new DecideQuestion();
 		decide.setPrompt(prompt);
 		decide.setScore(score);
@@ -20,14 +21,16 @@ public class QuestionCreator {
 		page.save();
 	}
 	
-	public void createDecideQuestion(String prompt){
+	public void createDecideQuestion(Page page,String prompt){
+		this.page = page;
 		DecideQuestion decide = new DecideQuestion();
 		decide.setPrompt(prompt);
 		page.addQuestion(decide);
 		page.save();
 	}
 	
-	public void createChoiceQuestion(String prompt, String[] items, int score, String answer){
+	public void createChoiceQuestion(Page page,String prompt, String[] items, int score, String answer){
+		this.page = page;
 		ChoiceQuestion choice = new ChoiceQuestion();
 		choice.setPrompt(prompt);
 		for(int i=0; i<items.length; i++){
@@ -39,7 +42,8 @@ public class QuestionCreator {
 		page.save();
 	}
 	
-	public void createChoiceQuestion(String prompt, String[] items){
+	public void createChoiceQuestion(Page page,String prompt, String[] items){
+		this.page = page;
 		ChoiceQuestion choice = new ChoiceQuestion();
 		choice.setPrompt(prompt);
 		for(int i=0; i<items.length; i++){
@@ -49,14 +53,16 @@ public class QuestionCreator {
 		page.save();
 	}
 	
-	public void createTextQuestion(String prompt){
+	public void createTextQuestion(Page page,String prompt){
+		this.page = page;
 		ShortEssayQuestion text = new ShortEssayQuestion();
 		text.setPrompt(prompt);
 		page.addQuestion(text);
 		page.save();
 	}
 	
-	public void createTextQuestion(String prompt, int score, String answer){
+	public void createTextQuestion(Page page,String prompt, int score, String answer){
+		this.page = page;
 		ShortEssayQuestion text = new ShortEssayQuestion();
 		text.setPrompt(prompt);
 		text.setScore(score);
@@ -65,14 +71,16 @@ public class QuestionCreator {
 		page.save();
 	}
 	
-	public void createEssayQuestion(String prompt){
+	public void createEssayQuestion(Page page,String prompt){
+		this.page = page;
 		EssayQuestion question = new EssayQuestion();
 		question.setPrompt(prompt);
 		page.addQuestion(question);
 		page.save();
 	}
 	
-	public void createRankQuestion(String prompt, String[] items){
+	public void createRankQuestion(Page page,String prompt, String[] items){
+		this.page = page;
 		RankQuestion question = new RankQuestion();
 		question.setPrompt(prompt);
 		for(int i=0; i<items.length; i++){
@@ -82,7 +90,8 @@ public class QuestionCreator {
 		page.save();
 	}
 	
-	public void createRankQuestion(String prompt, String[] items, int score, String answer){
+	public void createRankQuestion(Page page,String prompt, String[] items, int score, String answer){
+		this.page = page;
 		RankQuestion question = new RankQuestion();
 		question.setPrompt(prompt);
 		for(int i=0; i<items.length; i++){
@@ -94,7 +103,8 @@ public class QuestionCreator {
 		page.save();
 	}
 	
-	public void createMapQuestion(String prompt, String[] side1, String[] side2){
+	public void createMapQuestion(Page page,String prompt, String[] side1, String[] side2){
+		this.page = page;
 		MapQuestion map = new MapQuestion();
 		map.setPrompt(prompt);
 		map.setSide(1);
@@ -109,7 +119,8 @@ public class QuestionCreator {
 		page.save();
 	}
 	
-	public void createMapQuestion(String prompt, String[] side1, String[] side2, int score, String answer){
+	public void createMapQuestion(Page page,String prompt, String[] side1, String[] side2, int score, String answer){
+		this.page = page;
 		MapQuestion map = new MapQuestion();
 		map.setPrompt(prompt);
 		map.setSide(1);

@@ -19,5 +19,10 @@ public class CreateTest extends Create {
 		// TODO Auto-generated method stub
 		pc.createPage(Page.TEST,pageName,personName);
 	}
+	@Override
+	public Page getPage() {
+		// TODO Auto-generated method stub
+		return pc.getPage();
+	}
 
 }

@@ -8,244 +8,535 @@ import java.util.ArrayList;
 
 import javax.swing.*;
 
+import Paper.Page;
+import agent.AddQuestionAgent;
+import agent.CreateAgent;
+import command.addquestion.AddDecideQuestion;
+import command.create.CreateSurvey;
+import receiver.PageCreator;
+import receiver.QuestionCreator;
 
-class InputTFPanel extends CreatePanel {
-    JTextField jtaQ = new JTextField(20);
+class TFQuestionPanel extends QuestionPanel {
+	JTextField jtaQ = new JTextField(20);
 
-    public InputTFPanel(boolean isTest) {
-        super(isTest);
-        addComponent();
-    }
+	public TFQuestionPanel(boolean isTest) {
+		super(isTest);
+	}
 
-    void addComponent() {
-        add(new JPanel());
-        add(new JLabel("Enter Question:"));
-        add(jtaQ);
-        if (isTest) {
-            add(new JPanel());
-            add(new JPanel());
-            JRadioButton jrbYes = new JRadioButton("T"), jrbNo = new JRadioButton("F");
-            add(jrbYes);
-            add(jrbNo);
-            ButtonGroup bg = new ButtonGroup();
-            bg.add(jrbNo);
-            bg.add(jrbYes);
-        }
-        for (int i = 0; i < 28; i++) {
-            add(new JPanel());
-        }
-        add(jtaAdd);
-        updateUI();
-    }
+	void addComponentForCreating(Page page) {
+		removeAll();
+		add(new JPanel());
+		add(new JLabel("Enter Question:"));
+		add(jtaQ);
+		JRadioButton jrbYes = new JRadioButton("T"), jrbNo = new JRadioButton("F");
+
+		if (isTest) {
+			add(new JPanel());
+			add(new JPanel());
+			add(jrbYes);
+			add(jrbNo);
+			ButtonGroup bg = new ButtonGroup();
+			bg.add(jrbNo);
+			bg.add(jrbYes);
+		}
+		for (int i = 0; i < 28; i++) {
+			add(new JPanel());
+		}
+		add(jtaAdd);
+		jtaAdd.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				String answer="";
+				if(jrbYes.isSelected()){
+					answer="1";
+				}else{
+					answer="0";
+				}
+				/*交互后端*/
+				QuestionCreator qc=new QuestionCreator();
+				AddDecideQuestion adq=new AddDecideQuestion(page,jtaQ.getText(),answer,0,qc);
+				AddQuestionAgent aqa=new AddQuestionAgent();
+				aqa.placeQuestion(adq);
+				
+			}
+			
+		});
+		updateUI();
+	}
+
+	/* 预览题目 */
+	void addComponentForDisplaying() {
+		// 得到question
+
+		String question = "i am a Q";
+		removeAll();
+		jtaQ.setText(question);
+
+		add(new JPanel());
+		add(new JLabel("T/F Question:"));
+		add(jtaQ);
+
+		add(new JPanel());
+		add(new JPanel());
+		JRadioButton jrbYes = new JRadioButton("T"), jrbNo = new JRadioButton("F");
+		add(jrbYes);
+		add(jrbNo);
+		ButtonGroup bg = new ButtonGroup();
+		bg.add(jrbNo);
+		bg.add(jrbYes);
+
+		for (int i = 0; i < 28; i++) {
+			add(new JPanel());
+		}
+		add(jtaNext);
+		updateUI();
+	}
+
+	/* 预览题目和答案 */
+	void addComponentForModifying() {
+		// 得到question和选择
+		String question = "i am a Q";
+
+		removeAll();
+		jtaQ.setText(question);
+		add(new JPanel());
+		add(new JLabel("T/F Question:"));
+		add(jtaQ);
+		if (isTest) {
+			add(new JPanel());
+			add(new JPanel());
+			JRadioButton jrbYes = new JRadioButton("T"), jrbNo = new JRadioButton("F");
+			// here Answer
+			jrbYes.setSelected(true);
+			//
+			add(jrbYes);
+			add(jrbNo);
+			ButtonGroup bg = new ButtonGroup();
+			bg.add(jrbNo);
+			bg.add(jrbYes);
+		}
+		for (int i = 0; i < 28; i++) {
+			add(new JPanel());
+		}
+		add(jtaAdd);
+		updateUI();
+	}
+
+	/* 预览题目 */
+	void addComponentForAnswering() {
+		addComponentForDisplaying();
+	}
 }
 
-class InputSAPanel extends CreatePanel {
-    JTextField jtaQ = new JTextField(20);
-    JTextField jtaA = new JTextField(20);
+class SAQuestionPanel extends QuestionPanel {
+	JTextField jtaQ = new JTextField(20);
+	JTextField jtaA = new JTextField(20);
 
-    public InputSAPanel(boolean isTest) {
-        super(isTest);
-        addComponent();
-    }
+	SAQuestionPanel(boolean isTest) {
+		super(isTest);
+		// TODO Auto-generated constructor stub
+	}
 
-    void addComponent() {
-        add(new JPanel());
-        add(new JLabel("Enter Question:"));
-        add(jtaQ);
-        if (isTest) {
-            add(new JPanel());
-            add(new JPanel());
-            add(new JLabel("Enter Answer:"));
-            add(jtaA);
-        }
-        for (int i = 0; i < 28; i++) {
-            add(new JPanel());
-        }
-        add(jtaAdd);
-        updateUI();
-    }
+	void addComponentForCreating(Page page) {
+		add(new JPanel());
+		add(new JLabel("Enter Question:"));
+		add(jtaQ);
+		if (isTest) {
+			add(new JPanel());
+			add(new JPanel());
+			add(new JLabel("Enter Answer:"));
+			add(jtaA);
+		}
+		for (int i = 0; i < 28; i++) {
+			add(new JPanel());
+		}
+		add(jtaAdd);
+		updateUI();
+	}
+
+	@Override
+	void addComponentForDisplaying() {
+		// TODO Auto-generated method stub
+		// get Question;
+		String question = "i am Q";
+
+		add(new JPanel());
+		add(new JLabel("Short Answer Question:"));
+		add(jtaQ);
+		jtaQ.setText(question);
+		jtaQ.setEditable(false);
+
+		add(new JPanel());
+		add(new JPanel());
+		add(new JLabel("Enter Answer:"));
+		add(jtaA);
+
+		for (int i = 0; i < 28; i++) {
+			add(new JPanel());
+		}
+		add(jtaAdd);
+		updateUI();
+
+	}
+
+	@Override
+	void addComponentForModifying() {
+		// TODO Auto-generated method stub
+		// get Question;Answer
+		String question = "i am Q";
+		String answer = "i am A";
+
+		add(new JPanel());
+		add(new JLabel("Short Answer Question:"));
+		add(jtaQ);
+		jtaQ.setText(question);
+		jtaQ.setEditable(false);
+
+		add(new JPanel());
+		add(new JPanel());
+		add(new JLabel("Enter Answer:"));
+		add(jtaA);
+		jtaA.setText(answer);
+		jtaA.setEditable(false);
+
+		for (int i = 0; i < 28; i++) {
+			add(new JPanel());
+		}
+		add(jtaAdd);
+		updateUI();
+
+	}
 }
 
-class InputEssayPanel extends CreatePanel {
-    JTextField jtaQ = new JTextField(20);
-    JTextArea jtaA = new JTextArea();
+class EssayQuestionPanel extends QuestionPanel {
+	JTextField jtaQ = new JTextField(20);
+	JTextArea jtaA = new JTextArea();
 
-    public InputEssayPanel(boolean isTest) {
-        super(isTest);
-        addComponent();
-    }
+	EssayQuestionPanel(boolean isTest) {
+		super(isTest);
+		// TODO Auto-generated constructor stub
+	}
 
-    void addComponent() {
-        add(new JPanel());
-        add(new JLabel("Enter Question:"));
-        add(jtaQ);
-        if (isTest) {
-            add(new JPanel());
-            add(new JPanel());
-            add(new JLabel("Enter Answer:"));
-            add(jtaA);
-        }
-        for (int i = 0; i < 28; i++) {
-            add(new JPanel());
-        }
-        add(jtaAdd);
-        updateUI();
-    }
+	void addComponentForCreating(Page page) {
+		add(new JPanel());
+		add(new JLabel("Enter Question:"));
+		add(jtaQ);
+		if (isTest) {
+			add(new JPanel());
+			add(new JPanel());
+			add(new JLabel("Enter Answer:"));
+			add(jtaA);
+		}
+		for (int i = 0; i < 28; i++) {
+			add(new JPanel());
+		}
+		add(jtaAdd);
+		updateUI();
+	}
+
+	@Override
+	void addComponentForDisplaying() {
+		// TODO Auto-generated method stub
+		String question = "i am Q";
+
+		add(new JPanel());
+		add(new JLabel("Essay Question:"));
+		add(jtaQ);
+		jtaQ.setText(question);
+		jtaQ.setEditable(false);
+		add(new JPanel());
+
+		add(new JPanel());
+		add(new JLabel("Enter Answer:"));
+		add(jtaA);
+
+		for (int i = 0; i < 28; i++) {
+			add(new JPanel());
+		}
+		add(jtaAdd);
+		updateUI();
+
+	}
+
+	@Override
+	void addComponentForModifying() {
+		// TODO Auto-generated method stub
+		String question = "i am Q";
+		String answer = "i am A";
+
+		add(new JPanel());
+		add(new JLabel("Essay Question:"));
+		add(jtaQ);
+		jtaQ.setText(question);
+		jtaQ.setEditable(false);
+		add(new JPanel());
+
+		add(new JPanel());
+		add(new JLabel("Enter Answer:"));
+		add(jtaA);
+		jtaA.setText(answer);
+		jtaA.setEditable(false);
+
+		for (int i = 0; i < 28; i++) {
+			add(new JPanel());
+		}
+		add(jtaAdd);
+		updateUI();
+
+	}
 }
 
+class MCQuestionPanel extends QuestionPanel {
+	JTextField jtaQ = new JTextField(20);
+	JTextField jtaNum = new JTextField(5);
+	JLabel jlQ = new JLabel("Enter Question:");
+	JLabel jlN = new JLabel("Enter number of answers:");
+	ArrayList<JTextField> jtfAnss = new ArrayList<JTextField>();
 
-class MCInputPanel extends CreatePanel {
-    JTextField jtaQ = new JTextField(20);
-    JTextField jtaNum = new JTextField(5);
-    JLabel jlQ = new JLabel("Enter Question:");
-    JLabel jlN = new JLabel("Enter number of answers:");
-    ArrayList<JTextField> jtfAnss = new ArrayList<JTextField>();
+	MCQuestionPanel(boolean isTest) {
+		super(isTest);
+		// TODO Auto-generated constructor stub
+		GridLayout layout = new GridLayout(0, 3);
+		this.setLayout(layout);
+	}
 
-    public MCInputPanel(boolean isTest) {
-        super(isTest);
-        addComponent();
-        GridLayout layout = new GridLayout(0, 3);
-        this.setLayout(layout);
-    }
+	@Override
+	void addComponentForCreating(Page page) {
+		// totallly 42 grids
+		add(jlQ);
+		add(jtaQ);
+		add(new JPanel());
+		add(jlN);
+		add(jtaNum);
+		add(new JPanel());
+		// 第三行开始，又加12行
+		for (int i = 0; i < 36; i++) {
+			add(new JPanel());
+		}
+		// add(jbtNext);
 
-    @Override
-    void addComponent() {
-        //totallly 42 grids
-        add(jlQ);
-        add(jtaQ);
-        add(new JPanel());
-        add(jlN);
-        add(jtaNum);
-        add(new JPanel());
-        //第三行开始，又加12行
-        for (int i = 0; i < 36; i++) {
-            add(new JPanel());
-        }
-        //add(jbtNext);
+		jtaNum.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				int num = Integer.parseInt(jtaNum.getText());
 
-        jtaNum.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                int num = Integer.parseInt(jtaNum.getText());
+				for (int i = 41; i >= 6; i--) {
+					remove(i);
+				}
+				for (int i = 0; i < num; i++) {
+					JTextField jtaA = new JTextField(10);
+					add(new JLabel("Choice" + (i + 1)));
+					add(jtaA);
+					add(new JPanel());
+					jtfAnss.add(jtaA);
+				}
+				if (isTest) {
+					add(new JPanel());
+					JButton jbtSetAns = new JButton("Set Answers");
+					add(jbtSetAns);
+					add(new JPanel());
+					jbtSetAns.addActionListener(new setAnsListener());
+				} else {
+					add(new JPanel());
+					add(new JPanel());
+					add(new JPanel());
+				}
 
-                for (int i = 41; i >= 6; i--) {
-                    remove(i);
-                }
-                for (int i = 0; i < num; i++) {
-                    JTextField jtaA = new JTextField(10);
-                    add(new JLabel("Choice" + (i + 1)));
-                    add(jtaA);
-                    add(new JPanel());
-                    jtfAnss.add(jtaA);
-                }
-                if (isTest) {
-                    add(new JPanel());
-                    JButton jbtSetAns = new JButton("Set Answers");
-                    add(jbtSetAns);
-                    add(new JPanel());
-                    jbtSetAns.addActionListener(new setAnsListener());
-                } else {
-                    add(new JPanel());
-                    add(new JPanel());
-                    add(new JPanel());
-                }
+				for (int i = 0; i < 36 - 3 * (num + 1); i++) {
+					add(new JPanel());
+				}
+				updateUI();// 刷新界面
+			}
+		});
+	}
 
+	class setAnsListener implements ActionListener {
 
-                for (int i = 0; i < 36 - 3 * (num + 1); i++) {
-                    add(new JPanel());
-                }
-                updateUI();//刷新界面
-            }
-        });
-    }
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			for (int i = 41; i >= 6; i--) {
+				remove(i);
+			}
+			ArrayList<JCheckBox> jtfAnss2 = new ArrayList<JCheckBox>();
+			for (int i = 0; i < jtfAnss.size(); i++) {
+				JCheckBox jchb = new JCheckBox();
+				jchb.setText(jtfAnss.get(i).getText());
+				add(jchb);
+				jtfAnss2.add(jchb);
+				add(new JPanel());
+				add(new JPanel());
 
-    class setAnsListener implements ActionListener {
+			}
+			int num = jtfAnss.size();
+			for (int i = 1; i < 36 - 3 * num; i++) {
+				add(new JPanel());
+			}
+			add(jtaAdd);
+			updateUI();// 刷新界面
+		}
+	}
 
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            for (int i = 41; i >= 6; i--) {
-                remove(i);
-            }
-            ArrayList<JCheckBox> jtfAnss2 = new ArrayList<JCheckBox>();
-            for (int i = 0; i < jtfAnss.size(); i++) {
-                JCheckBox jchb = new JCheckBox();
-                jchb.setText(jtfAnss.get(i).getText());
-                add(jchb);
-                jtfAnss2.add(jchb);
-                add(new JPanel());
-                add(new JPanel());
+	@Override
+	void addComponentForDisplaying() {
+		// TODO Auto-generated method stub
+		// totallly 42 grids
+		String question = "i am Q";
+		JLabel jlQ = new JLabel("Multiple Choice Question");
+		add(jlQ);
+		add(jtaQ);
+		jtaQ.setText(question);
+		add(new JPanel());
 
-            }
-            int num = jtfAnss.size();
-            for (int i = 1; i < 36 - 3 * num; i++) {
-                add(new JPanel());
-            }
-            add(jtaAdd);
-            updateUI();//刷新界面
-        }
-    }
+		// getNum
+		int num = 3;
+		
+		//get Answers
+		ArrayList<String> jtfAnsString = new ArrayList<String>();
+		
+		ArrayList<JCheckBox> jtfAnss2 = new ArrayList<JCheckBox>();
+		for (int i = 0; i < jtfAnss.size(); i++) {
+			JCheckBox jchb = new JCheckBox();
+			jchb.setText(jtfAnsString.get(i));
+			add(jchb);
+			jtfAnss2.add(jchb);
+			add(new JPanel());
+			add(new JPanel());
+
+		}
+		 
+		for (int i = 1; i < 36 - 3 * num; i++) {
+			add(new JPanel());
+		}
+		add(jtaAdd);
+		updateUI();// 刷新界面
+
+	}
+
+	@Override
+	void addComponentForModifying() {
+		// TODO Auto-generated method stub
+		addComponentForDisplaying();
+	}
 }
 
-class RankInputPanel extends CreatePanel {
+class RankQuestionPanel extends QuestionPanel {
 
-    JTextField jtaQ = new JTextField(20);
-    JTextField jtaNum = new JTextField(5);
-    JLabel jlQ = new JLabel("Enter Question:");
-    JLabel jlN = new JLabel("Enter number of elements:");
-    JButton jbtNext = new JButton("Next");
+	JTextField jtaQ = new JTextField(20);
+	JTextField jtaNum = new JTextField(5);
+	JLabel jlQ = new JLabel("Enter Question:");
+	JLabel jlN = new JLabel("Enter number of elements:");
+	JButton jbtNext = new JButton("Next");
 
-    public RankInputPanel(boolean isTest) {
-        super(isTest);
-        GridLayout layout = new GridLayout(0, 3);
-        this.setLayout(layout);
-    }
+	RankQuestionPanel(boolean isTest) {
 
-    @Override
-    void addComponent() {
-        add(jlQ);
-        add(jtaQ);
-        add(new JPanel());
-        add(jlN);
-        add(jtaNum);
-        add(new JPanel());
-        //第三行开始，又加12行
-        for (int i = 1; i < 36; i++) {
-            add(new JPanel());
-        }
-        add(jbtNext);
-        jtaNum.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                int num = Integer.parseInt(jtaNum.getText());
-                ArrayList<JTextField> jtfAns = new ArrayList<JTextField>(num);
-                for (int i = 6; i < 42; i++) {
-                    remove(6);
-                }
-                for (int i = 0; i < num; i++) {
-                    JTextField jtaA = new JTextField(10);
-                    add(new JLabel("Rank" + (i + 1)));
-                    add(jtaA);
-                    add(new JPanel());
-                    jtfAns.add(jtaA);
-                }
-                for (int i = 1; i < 36 - 3 * num; i++) {
-                    add(new JPanel());
-                }
-                add(jbtNext);
-                updateUI();
-            }
-        });
-    }
+		// TODO Auto-generated constructor stub
+		super(isTest);
+		GridLayout layout = new GridLayout(0, 3);
+		this.setLayout(layout);
+	}
+
+	@Override
+	void addComponentForCreating(Page page) {
+		add(jlQ);
+		add(jtaQ);
+		add(new JPanel());
+		add(jlN);
+		add(jtaNum);
+		add(new JPanel());
+		// 第三行开始，又加12行
+		for (int i = 1; i < 36; i++) {
+			add(new JPanel());
+		}
+		add(jbtNext);
+		jtaNum.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				int num = Integer.parseInt(jtaNum.getText());
+				ArrayList<JTextField> jtfAns = new ArrayList<JTextField>(num);
+				for (int i = 6; i < 42; i++) {
+					remove(6);
+				}
+				for (int i = 0; i < num; i++) {
+					JTextField jtaA = new JTextField(10);
+					add(new JLabel("Rank" + (i + 1)));
+					add(jtaA);
+					add(new JPanel());
+					jtfAns.add(jtaA);
+				}
+				for (int i = 1; i < 36 - 3 * num; i++) {
+					add(new JPanel());
+				}
+				add(jbtNext);
+				updateUI();
+			}
+		});
+	}
+
+	@Override
+	void addComponentForDisplaying() {
+		// TODO Auto-generated method stub
+		// totallly 42 grids
+				String question = "i am Q";
+				JLabel jlQ = new JLabel("Multiple Choice Question");
+				add(jlQ);
+				add(jtaQ);
+				jtaQ.setText(question);
+				add(new JPanel());
+
+				// getNum
+				int num = 3;
+				
+				//get Answers
+				ArrayList<String> jtfAnsString = new ArrayList<String>();
+				
+				ArrayList<JCheckBox> jtfAnss2 = new ArrayList<JCheckBox>();
+				for (int i = 0; i < jtfAnss2.size(); i++) {
+					JCheckBox jchb = new JCheckBox();
+					jchb.setText(jtfAnsString.get(i));
+					add(jchb);
+					jtfAnss2.add(jchb);
+					add(new JPanel());
+					add(new JPanel());
+
+				}
+				 
+				for (int i = 1; i < 36 - 3 * num; i++) {
+					add(new JPanel());
+				}
+				add(jtaAdd);
+				updateUI();// 刷新界面
+	}
+
+	@Override
+	void addComponentForModifying() {
+		// TODO Auto-generated method stub
+		addComponentForDisplaying();
+	}
 }
 
-class MapInputPanel extends CreatePanel {
+class MapQuestionPanel extends QuestionPanel {
 
-    public MapInputPanel(boolean isTest) {
-        super(isTest);
-    }
+	MapQuestionPanel(boolean isTest) {
+		super(isTest);
+		// TODO Auto-generated constructor stub
+	}
 
-    @Override
-    void addComponent() {
+	@Override
+	void addComponentForCreating(Page page) {
 
-    }
+	}
+
+	@Override
+	void addComponentForDisplaying() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	void addComponentForModifying() {
+		// TODO Auto-generated method stub
+
+	}
 }
