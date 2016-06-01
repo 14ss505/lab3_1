@@ -1,5 +1,5 @@
 package command;
 
 public abstract class Create {
-	public abstract void execute();
+	public abstract void execute(String personName);
 }

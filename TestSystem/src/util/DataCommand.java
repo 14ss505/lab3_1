@@ -90,12 +90,22 @@ public class DataCommand {
 		io.writeRecord(recordName, record);
 	}
 	
-	/* functions below will be used for tabulate*/
-	public TabulateResult tabulate(List<Record> records,int questionIndex){
-		if(records.size()==0){
-			return null;
-		}
+	/* functions below will be used for tabulate
+	 * you will get string result*/
+	
+	/* get a certain tabulate result string by questionIndex and pageName*/
+	public String tabulate(String pageName,int questionIndex){
+		List<Record> records = this.getAllRecords(pageName);
+		String result = this.tabulate(records, questionIndex);
+		return result;
+	}
+	
+	public String tabulate(List<Record> records,int questionIndex){
 		TabulateResult result = null;
+		if(records.size()==0){
+			return "";
+		}
+		
 		List<Question> questionList = records.get(0).getPage().getQuestionList();
 		Question q = questionList.get(questionIndex);
 		int qtype = q.getType();
@@ -120,6 +130,6 @@ public class DataCommand {
 			result = new TabulateMapResult(records,questionIndex);
 			break;
 		}
-		return result;
+		return result.getResult();
 	}
 }

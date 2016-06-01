@@ -11,10 +11,9 @@ public class CreateSurvey extends Create {
 		this.pc = pc;
 	}
 
-	@Override
-	public void execute() {
+	public void execute(String personName) {
 		// TODO Auto-generated method stub
-		pc.createPage(Page.TEST);
+		pc.createPage(Page.TEST,personName);
 	}
 
 }

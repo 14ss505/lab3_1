@@ -1,10 +1,12 @@
 package Question;
 
 import Answer.Answer;
+import Answer.EssayAnswer;
 
 public class EssayQuestion extends Question {
 	public EssayQuestion(){
 		super(3);
+		answer = new EssayAnswer();
 		this.isGradable = false;
 	}
 	
@@ -15,8 +17,7 @@ public class EssayQuestion extends Question {
 
 	@Override
 	public void setAnswer(String answer) {
-		//Do nothing
-		
+		this.answer.setAnswer(answer);
 	}
 
 	@Override

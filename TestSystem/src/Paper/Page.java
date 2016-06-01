@@ -35,10 +35,6 @@ public class Page {
 	public void addQuestion(Question question){
 		questionList.add(question);
 	}
-	
-	public void addQuestion(Question question){
-		questionList.add(question);
-	}
 
 	public void resetQuestion(int index, Question newQuestion) {
 		questionList.set(index, newQuestion);

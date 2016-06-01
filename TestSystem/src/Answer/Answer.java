@@ -6,6 +6,7 @@ public abstract class Answer {
 	public static final int MAP = 5;
 	public static final int RANK = 4;
 	public static final int TEXT = 2;
+	public static final int ESSAY = 3;
 
 	protected int type;
 

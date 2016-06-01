@@ -7,9 +7,6 @@ import java.util.ArrayList;
 
 import javax.swing.*;
 
-import Interface.MenuOperation;
-import MVC.model.Paper.Page;
-
 public class FirstMenuPanel extends MenuPanel {
 
     private ZButton jbtCreate = new ZButton("Create", "1");

@@ -7,7 +7,7 @@ import Paper.*;
  * Created by mayezhou on 16/5/28.
  */
 public class PageFactory {
-    public static Page createPage(int type){
+    public static Page createPage(int type,String personName){
         Page page = null;
         switch (type) {
             case 0:
