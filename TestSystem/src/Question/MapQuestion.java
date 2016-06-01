@@ -61,7 +61,7 @@ public class MapQuestion extends Question {
         } else {
             side2.remove(index);
         }
-        notifyModifyObservers();
+//        notifyModifyObservers();
     }
 
     public boolean changeItem(int index, String item) {
