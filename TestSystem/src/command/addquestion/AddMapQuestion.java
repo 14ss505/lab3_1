@@ -10,12 +10,12 @@ public class AddMapQuestion extends AddQuestion {
 	private String[] side1;
     private String[] side2;
 
-    public AddMapQuestion(Page page, String prompt, String answer, int score, QuestionCreator creator) {
-        super(page, prompt, answer, score, creator);
+    public AddMapQuestion(String pageName,String personName,int type, String prompt, String answer, int score, QuestionCreator creator) {
+        super(pageName, personName, type, prompt, answer, score, creator);
     }
 
-    public AddMapQuestion(Page page, String prompt, QuestionCreator creator) {
-        super(page, prompt, creator);
+    public AddMapQuestion(String pageName,String personName,int type, String prompt, QuestionCreator creator) {
+        super(pageName, personName, type, prompt, creator);
     }
 
     @Override

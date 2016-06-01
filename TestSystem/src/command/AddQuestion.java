@@ -11,7 +11,7 @@ public abstract class AddQuestion implements Command{
 	protected QuestionCreator creator;
 	protected int score;
 
-	public AddQuestion(Page page, String prompt, String answer, int score, QuestionCreator creator) {
+	public AddQuestion(String pageName,String personName,int type, String prompt, String answer, int score, QuestionCreator creator) {
 		this.score = score;
 		this.page = page;
 		this.type = page.getType();
@@ -20,7 +20,7 @@ public abstract class AddQuestion implements Command{
 		this.creator = creator;
 	}
 
-	public AddQuestion(Page page, String prompt, QuestionCreator creator) {
+	public AddQuestion(String pageName,String personName,int type, String prompt, QuestionCreator creator) {
 		this.page = page;
 		this.type = page.getType();
 		this.prompt = prompt;

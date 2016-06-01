@@ -8,13 +8,13 @@ import receiver.QuestionCreator;
 public class AddChoiceQuestion extends AddQuestion {
 	private String[] items;
 
-	public AddChoiceQuestion(Page page, String promt, String answer, int score, String[] items, QuestionCreator creator) {
-		super(page, promt, answer, score, creator);
+	public AddChoiceQuestion(String pageName,String personName,int type, String promt, String answer, int score, String[] items, QuestionCreator creator) {
+		super(pageName, personName, type, promt, answer, score, creator);
 		this.items = items;
 	}
 
-	public AddChoiceQuestion(Page page, String promt, String[] items, QuestionCreator creator) {
-		super(page, promt, creator);
+	public AddChoiceQuestion( String pageName,String personName,int type, String promt, String[] items, QuestionCreator creator) {
+		super(pageName,personName,type, promt, creator);
 		this.items = items;
 	}
 

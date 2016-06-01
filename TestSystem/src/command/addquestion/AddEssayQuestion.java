@@ -8,12 +8,12 @@ import receiver.QuestionCreator;
 
 public class AddEssayQuestion extends AddQuestion {
 
-	public AddEssayQuestion(Page page, String prompt, String answer, int score, QuestionCreator creator) {
-		super(page, prompt, answer, score, creator);
+	public AddEssayQuestion(String pageName,String personName,int type, String prompt, String answer, int score, QuestionCreator creator) {
+		super(pageName, personName, type, prompt, answer, score, creator);
 	}
 
-	public AddEssayQuestion(Page page, String prompt, QuestionCreator creator) {
-		super(page, prompt, creator);
+	public AddEssayQuestion(String pageName,String personName,int type, String prompt, QuestionCreator creator) {
+		super(pageName, personName, type, prompt, creator);
 	}
 
 	@Override

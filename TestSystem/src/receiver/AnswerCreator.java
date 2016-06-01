@@ -7,7 +7,6 @@ import util.DataCommand;
 
 
 public class AnswerCreator {
-	//private Record record;
 	private DataCommand dataCommand= new DataCommand();
 	
 	public void createDecideAnswer(String pageName,String personName,String answer) {

@@ -87,7 +87,7 @@ public class DataCommand {
 	
 	/* create a record
 	 * use this function when you try to answer a page*/
-	public Page createPage(String pageName,String personName) {
+	public Page createRecord(String pageName,String personName) {
 		Record record = new Record(pageName, personName);
 		this.updateRecordList(record);
 		return this.getPage(pageName);

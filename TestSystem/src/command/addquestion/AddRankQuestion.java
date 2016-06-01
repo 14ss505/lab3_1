@@ -9,13 +9,13 @@ import receiver.QuestionCreator;
 public class AddRankQuestion extends AddQuestion {
     private String[] items;
 
-    public AddRankQuestion(Page page, String prompt, String answer, int score, QuestionCreator creator, String[] items) {
-        super(page, prompt, answer, score, creator);
+    public AddRankQuestion(String pageName,String personName,int type, String prompt, String answer, int score, QuestionCreator creator, String[] items) {
+        super(pageName, personName, type, prompt, answer, score, creator);
         this.items = items;
     }
 
-    public AddRankQuestion(Page page, String prompt, QuestionCreator creator, String[] items) {
-        super(page, prompt, creator);
+    public AddRankQuestion(String pageName,String personName,int type, String prompt, QuestionCreator creator, String[] items) {
+        super(pageName, personName, type, prompt, creator);
         this.items = items;
     }
 
