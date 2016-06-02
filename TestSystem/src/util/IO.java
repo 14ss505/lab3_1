@@ -25,7 +25,7 @@ public class IO {
 		InputStream file;
 		Element root = null;
 		try {
-			file = new FileInputStream("xml/pageInfo.xml");
+			file = new FileInputStream("src/xml/pageInfo.xml");
 			Document document = builder.build(file);// 获得文档对象
 			root = document.getRootElement();// 获得根节点
 		} catch (FileNotFoundException e) {
@@ -58,7 +58,7 @@ public class IO {
 		InputStream file;
 		Element root = null;
 		try {
-			file = new FileInputStream("xml/pageInfo.xml");
+			file = new FileInputStream("src/xml/pageInfo.xml");
 			Document document = builder.build(file);// 获得文档对象
 			root = document.getRootElement();// 获得根节点
 		} catch (FileNotFoundException e) {
@@ -97,7 +97,7 @@ public class IO {
 		InputStream file;
 		Element root = null;
 		try {
-			file = new FileInputStream("xml/pageInfo.xml");
+			file = new FileInputStream("src/xml/pageInfo.xml");
 			Document document = builder.build(file);// 获得文档对象
 			root = document.getRootElement();// 获得根节点
 		} catch (FileNotFoundException e) {
@@ -128,7 +128,7 @@ public class IO {
 		InputStream file;
 		Element root = null;
 		try {
-			file = new FileInputStream("xml/" + pageName + ".xml");
+			file = new FileInputStream("src/xml/" + pageName + ".xml");
 			Document document = builder.build(file);// 获得文档对象
 			root = document.getRootElement();// 获得根节点
 
@@ -278,7 +278,7 @@ public class IO {
 
 		Document doc = new Document(root);
 		try {
-			FileOutputStream out = new FileOutputStream("xml/pageInfo.xml");
+			FileOutputStream out = new FileOutputStream("src/xml/pageInfo.xml");
 			XMLOutputter outputter = new XMLOutputter();
 			Format f = Format.getPrettyFormat();
 			outputter.setFormat(f);
@@ -294,8 +294,7 @@ public class IO {
 	public void writePage(Page page) {
 		Element root = new Element("Page");
 		root.setAttribute("type", page.getType() + "");
-		root.setAttribute("type", page.getPersonName() + "");
-		root.addContent(new Element("pageName").setText(page.getPageName()));
+		root.addContent(new Element("personName").setText(page.getPersonName()));
 		if (page.getType() == Page.TEST) {
 			root.addContent(new Element("score").setText(((Test) page).getTotalScore() + ""));
 		}
@@ -330,7 +329,7 @@ public class IO {
 		root.addContent(questions);
 		Document doc = new Document(root);
 		try {
-			FileOutputStream out = new FileOutputStream("xml/" + page.getPageName() + ".xml");
+			FileOutputStream out = new FileOutputStream("src/xml/" + page.getPageName() + ".xml");
 			XMLOutputter outputter = new XMLOutputter();
 			Format f = Format.getPrettyFormat();
 			outputter.setFormat(f);
@@ -452,11 +451,11 @@ public class IO {
 		InputStream file;
 		Element root = null;
 		try {
-			File recordFile = new File("xml/record/" + pageName + "-recordInfo.xml");
+			File recordFile = new File("src/xml/record/" + pageName + "-recordInfo.xml");
 			if (!recordFile.exists()) {
 				return new LinkedList<String>();
 			}
-			file = new FileInputStream("xml/record/" + pageName + "-recordInfo.xml");
+			file = new FileInputStream("src/xml/record/" + pageName + "-recordInfo.xml");
 
 			Document document = builder.build(file);// 获得文档对象
 			root = document.getRootElement();// 获得根节点
@@ -486,7 +485,7 @@ public class IO {
 		InputStream file;
 		Element root = null;
 		try {
-			file = new FileInputStream("xml/record/" + recordName + ".xml");
+			file = new FileInputStream("src/xml/record/" + recordName + ".xml");
 			Document document = builder.build(file);// 获得文档对象
 			root = document.getRootElement();// 获得根节点
 
@@ -552,7 +551,7 @@ public class IO {
 
 		Document doc = new Document(root);
 		try {
-			FileOutputStream out = new FileOutputStream("xml/record/" + pageName + "-recordInfo.xml");
+			FileOutputStream out = new FileOutputStream("src/xml/record/" + pageName + "-recordInfo.xml");
 			XMLOutputter outputter = new XMLOutputter();
 			Format f = Format.getPrettyFormat();
 			outputter.setFormat(f);
@@ -591,7 +590,7 @@ public class IO {
 
 		Document doc = new Document(root);
 		try {
-			FileOutputStream out = new FileOutputStream("xml/record/" + recordName + ".xml");
+			FileOutputStream out = new FileOutputStream("src/xml/record/" + recordName + ".xml");
 			XMLOutputter outputter = new XMLOutputter();
 			Format f = Format.getPrettyFormat();
 			outputter.setFormat(f);

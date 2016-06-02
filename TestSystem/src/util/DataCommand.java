@@ -23,20 +23,22 @@ public class DataCommand {
 	public Page createRecord(String pageName,String personName) {
 		Record record = new Record(pageName, personName);
 		this.updateRecordList(record);
+		this.saveRecord(record);
 		return this.getPage(pageName);
 	}
 	
-	/* use this function when you try to create a page*/
-	public void createPage(String pageName,String personName,int type) {
+	/* use this function when you try to create a new page*/
+	public void createPage(String pageName,String personName, int type) {
 		Page page;
 		if (type == 0) {
 			page = new Survey(pageName, personName);
 			page.setType(Page.SURVEY);
 		} else {
-			page = new Test(personName, personName);
+			page = new Test(pageName, personName);
 			page.setType(Page.TEST);
 		}
 		this.updatePageList(pageName, type, personName);
+		this.savePage(page);
 	}
 	
 	/*get all pageNames(tests or surveys)*/
@@ -71,6 +73,8 @@ public class DataCommand {
 	
 	/* save a page*/
 	public void savePage(Page page){
+		if(page.getType()==Page.TEST)
+			((Test)page).computeScore();
 		io.writePage(page);
 	}
 	

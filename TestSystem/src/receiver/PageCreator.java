@@ -11,13 +11,6 @@ public class PageCreator {
 
 	public void createPage(int type,String pageName,String personName) {
 
-		if (type == 0) {
-			page = new Survey(pageName, personName);
-			page.setType(Page.SURVEY);
-		} else {
-			page = new Test(personName, personName);
-			page.setType(Page.TEST);
-		}
-		dataCommand.updatePageList(pageName, type, personName);
+		dataCommand.createPage(pageName, personName, type);
 	}
 }

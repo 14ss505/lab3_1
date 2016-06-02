@@ -22,9 +22,9 @@ public class AddRankQuestion extends AddQuestion {
     @Override
 	public void execute() {
         if (type == Page.TEST) {
-            creator.createRankQuestion(page.getPageName(),prompt, items, score, answer);
+            creator.createRankQuestion(pageName,prompt, items, score, answer);
         } else {
-            creator.createRankQuestion(page.getPageName(),prompt, items);
+            creator.createRankQuestion(pageName,prompt, items);
 
         }
 	}

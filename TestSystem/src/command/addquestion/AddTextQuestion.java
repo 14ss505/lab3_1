@@ -1,7 +1,5 @@
 package command.addquestion;
 
-import java.util.Scanner;
-
 import Paper.Page;
 import command.AddQuestion;
 import receiver.QuestionCreator;
@@ -19,9 +17,9 @@ public class AddTextQuestion extends AddQuestion {
     @Override
 	public void execute() {
         if (type == Page.TEST) {
-            creator.createTextQuestion(page.getPageName(),prompt, score, answer);
+            creator.createTextQuestion(pageName,prompt, score, answer);
         } else {
-            creator.createTextQuestion(page.getPageName(),prompt);
+            creator.createTextQuestion(pageName,prompt);
         }
 	}
 }
