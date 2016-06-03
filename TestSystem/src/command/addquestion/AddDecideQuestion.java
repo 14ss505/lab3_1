@@ -3,27 +3,21 @@ package command.addquestion;
 import java.util.Scanner;
 
 import Paper.Page;
+import Question.DecideQuestion;
 import command.AddQuestion;
 import receiver.QuestionCreator;
 
 public class AddDecideQuestion extends AddQuestion {
-
-	public AddDecideQuestion(String pageName,String personName,int type, String prompt, String answer, int score, QuestionCreator creator) {
-		super(pageName, personName, type, prompt, answer, score, creator);
-	}
-
-	public AddDecideQuestion(String pageName,String personName,int type, String prompt, QuestionCreator creator) {
-		super(pageName, personName, type, prompt, creator);
+	Page page;
+	DecideQuestion question;
+	
+	public AddDecideQuestion(Page page, DecideQuestion question, QuestionCreator creator) {
+		super(page, question, creator);
 	}
 
 	@Override
 	public void execute() {
-		if (type == Page.TEST) {
-			creator.createDecideQuestion(pageName,prompt, score, answer);
-
-		} else {
-			creator.createDecideQuestion(pageName,prompt);
-		}
+		creator.createDecideQuestion(page,(DecideQuestion)question);
 	}
 
 }

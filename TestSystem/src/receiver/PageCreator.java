@@ -9,8 +9,7 @@ public class PageCreator {
 	Page page;
 	private DataCommand dataCommand= new DataCommand();
 
-	public void createPage(int type,String pageName,String personName) {
-
-		dataCommand.createPage(pageName, personName, type);
+	public void createPage(Page page) {
+		dataCommand.createPage(page);
 	}
 }

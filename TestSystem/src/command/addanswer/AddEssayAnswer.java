@@ -2,17 +2,20 @@ package command.addanswer;
 
 import command.AddAnswer;
 import receiver.AnswerCreator;
+import Answer.ChoiceAnswer;
+import Answer.EssayAnswer;
+import Paper.Page;
 import Paper.Record;
 import Question.Question;
 
 public class AddEssayAnswer extends AddAnswer{
-	
-	public AddEssayAnswer(String pageName,String personName,String answer,AnswerCreator creator) {
-		super(pageName, personName, answer, creator);
+
+	public AddEssayAnswer(Page page,EssayAnswer answer,int index,AnswerCreator creator) {
+		super(page,answer,index,creator);
 	}
 
 	@Override
 	public void execute() {
-		creator.createEssayAnswer(pageName,personName,answer);
+		creator.createEssayAnswer(page,(EssayAnswer)answer,index);
 	}
 }

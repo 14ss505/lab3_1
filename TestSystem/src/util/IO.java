@@ -144,8 +144,7 @@ public class IO {
 		}
 		Page page;
 		if (root.getAttribute("type").getValue().equals("test")) {
-			Test test = new Test(pageName, root.getChildText("personName"));
-			test.setTotalScore(Integer.parseInt(root.getChildText("score")));
+			Test test = new Test(pageName, root.getChildText("personName"),Integer.parseInt(root.getChildText("totalScore")),Integer.parseInt(root.getChildText("testMinute")));
 			page = test;
 		} else {
 			Survey survey = new Survey(pageName, root.getChildText("personName"));
@@ -185,7 +184,7 @@ public class IO {
 	}
 
 	public Question readDecideQuestion(Element question) {
-		DecideQuestion decide = new DecideQuestion();
+		DecideQuestion decide = new DecideQuestion(question.getChildText("prompt"));
 		decide.setPrompt(question.getChildText("prompt"));
 		decide.setScore(Integer.parseInt(question.getChildText("score")));
 		if (question.getAttributeValue("answer").equals("1")) {
@@ -296,7 +295,8 @@ public class IO {
 		root.setAttribute("type", page.getType() + "");
 		root.addContent(new Element("personName").setText(page.getPersonName()));
 		if (page.getType() == Page.TEST) {
-			root.addContent(new Element("score").setText(((Test) page).getTotalScore() + ""));
+			root.addContent(new Element("totalScore").setText(((Test) page).getTotalScore() + ""));
+			root.addContent(new Element("testMinute").setText(((Test) page).getTestMinute() + ""));
 		}
 
 		List<Question> questionList = page.getQuestionList();
@@ -512,28 +512,23 @@ public class IO {
 			int type = Integer.parseInt(answer.getAttributeValue("type"));
 			switch (type) {
 			case 0:
-				DecideAnswer decide = new DecideAnswer();
-				decide.setAnswer(answer.getText());
+				DecideAnswer decide = new DecideAnswer(answer.getText());
 				record.addAnwser(decide);
 				break;
 			case 1:
-				ChoiceAnswer choice = new ChoiceAnswer();
-				choice.setAnswer(answer.getText());
+				ChoiceAnswer choice = new ChoiceAnswer(answer.getText());
 				record.addAnwser(choice);
 				break;
 			case 2:
-				TextAnswer text = new TextAnswer();
-				text.setAnswer(answer.getText());
+				ShortEssayAnswer text = new ShortEssayAnswer(answer.getText());
 				record.addAnwser(text);
 				break;
 			case 4:
-				RankAnswer rank = new RankAnswer();
-				rank.setAnswer(answer.getText());
+				RankAnswer rank = new RankAnswer(answer.getText());
 				record.addAnwser(rank);
 				break;
 			case 5:
-				MapAnswer map = new MapAnswer();
-				map.setAnswer(answer.getText());
+				MapAnswer map = new MapAnswer(answer.getText());
 				record.addAnwser(map);
 				break;
 			}

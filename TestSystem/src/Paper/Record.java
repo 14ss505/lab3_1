@@ -42,8 +42,16 @@ public class Record {
 		return null;
 	}
 
+	public List<Answer> getAnswerList(){// TODO: prerequirement
+		return answerList; 
+	}
+	
 	public Iterator<Answer> iterator(){
 		return new AnswerIterator();
+	}
+
+	public void resetAnswer(int index, Answer newAnswer) {
+		answerList.set(index, newAnswer);
 	}
 	
 	class AnswerIterator implements Iterator<Answer>{

@@ -8,8 +8,9 @@ public class MapAnswer extends Answer {
     List<String> side2;
     List<Integer> map;
 
-    public MapAnswer() {
+    public MapAnswer(String answer) {
         super(Answer.MAP);
+        setAnswer(answer);
         side1 = new LinkedList<>();
         side2 = new LinkedList<>();
         map = new LinkedList<>();

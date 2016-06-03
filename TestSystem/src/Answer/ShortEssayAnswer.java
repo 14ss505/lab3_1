@@ -1,11 +1,12 @@
 package Answer;
 
-public class TextAnswer extends Answer{
+public class ShortEssayAnswer extends Answer{
 	
 	String text;
 
-	public TextAnswer() {
-		super(Answer.TEXT);
+	public ShortEssayAnswer(String answer) {
+		super(Answer.SHORTESSAY);
+		setAnswer(answer);
 	}
 
 	@Override

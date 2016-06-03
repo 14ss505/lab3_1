@@ -3,8 +3,9 @@ package Answer;
 public class EssayAnswer extends Answer {
 	String Essay;
 
-	public EssayAnswer() {
+	public EssayAnswer(String answer) {
 		super(Answer.ESSAY);
+		setAnswer(answer);
 	}
 
 	@Override

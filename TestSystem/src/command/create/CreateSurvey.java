@@ -6,17 +6,15 @@ import receiver.PageCreator;
 
 public class CreateSurvey extends Create {
 	private PageCreator pc;
-	private String pageName;
-	private String personName;
+	private Page page;
 
-	public CreateSurvey(PageCreator pc,String pageName,String personName) {
+	public CreateSurvey(PageCreator pc,Page page) {
 		this.pc = pc;
-		this.pageName = pageName;
-		this.personName = personName;
+		this.page = page;
 	}
 
 	public void execute() {
-		pc.createPage(Page.TEST,pageName,personName);
+		pc.createPage(page);
 	}
 
 }

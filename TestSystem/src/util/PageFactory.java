@@ -7,14 +7,14 @@ import Paper.*;
  * Created by mayezhou on 16/5/28.
  */
 public class PageFactory {
-    public static Page createPage(int type,String pageName,String personName){
+    public static Page createPage(int type,String pageName,String personName,int totalScore,int testMinute){
         Page page = null;
         switch (type) {
             case 0:
                 page = new Survey(pageName, personName);
                 break;
             case 1:
-                page = new Test(pageName, personName);
+                page = new Test(pageName, personName, totalScore, testMinute);
         }
         return page;
     }

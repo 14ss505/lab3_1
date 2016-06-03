@@ -28,16 +28,8 @@ public class DataCommand {
 	}
 	
 	/* use this function when you try to create a new page*/
-	public void createPage(String pageName,String personName, int type) {
-		Page page;
-		if (type == 0) {
-			page = new Survey(pageName, personName);
-			page.setType(Page.SURVEY);
-		} else {
-			page = new Test(pageName, personName);
-			page.setType(Page.TEST);
-		}
-		this.updatePageList(pageName, type, personName);
+	public void createPage(Page page) {
+		this.updatePageList(page.getPageName(), page.getType(), page.getPersonName());
 		this.savePage(page);
 	}
 	

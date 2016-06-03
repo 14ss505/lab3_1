@@ -1,6 +1,7 @@
 package receiver;
 
 import Answer.*;
+import Paper.Page;
 import Paper.Record;
 import Question.Question;
 import util.DataCommand;
@@ -9,51 +10,39 @@ import util.DataCommand;
 public class AnswerCreator {
 	private DataCommand dataCommand= new DataCommand();
 	
-	public void createDecideAnswer(String pageName,String personName,String answer) {
-		Record record = dataCommand.getRecord(pageName, personName);
-		DecideAnswer decide = new DecideAnswer();
-		decide.setAnswer(answer);
-		record.addAnwser(decide);
+	public void createDecideAnswer(Page page,DecideAnswer answer,int index) {
+		Record record = dataCommand.getRecord(page.getPageName(), page.getPersonName());
+		record.resetAnswer(index, answer);
 		dataCommand.saveRecord(record);
 	}
 	
-	public void createChoiceAnswer(String pageName,String personName,String answer) {
-		Record record = dataCommand.getRecord(pageName, personName);
-		ChoiceAnswer choice = new ChoiceAnswer();
-		choice.setAnswer(answer);
-		record.addAnwser(choice);
+	public void createChoiceAnswer(Page page,ChoiceAnswer answer,int index) {
+		Record record = dataCommand.getRecord(page.getPageName(), page.getPersonName());
+		record.resetAnswer(index, answer);
 		dataCommand.saveRecord(record);
 	}
 	
-	public void createTextAnswer(String pageName,String personName,String answer) {
-		Record record = dataCommand.getRecord(pageName, personName);
-		TextAnswer text = new TextAnswer();
-		text.setAnswer(answer);
-		record.addAnwser(text);
+	public void createShortEssayAnswer(Page page,ShortEssayAnswer answer,int index) {
+		Record record = dataCommand.getRecord(page.getPageName(), page.getPersonName());
+		record.resetAnswer(index, answer);
 		dataCommand.saveRecord(record);
 	}
 	
-	public void createRankAnswer(String pageName,String personName,String answer) {
-		Record record = dataCommand.getRecord(pageName, personName);
-		RankAnswer rank = new RankAnswer();
-		rank.setAnswer(answer);
-		record.addAnwser(rank);
+	public void createRankAnswer(Page page,RankAnswer answer,int index) {
+		Record record = dataCommand.getRecord(page.getPageName(), page.getPersonName());
+		record.resetAnswer(index, answer);
 		dataCommand.saveRecord(record);
 	}
 	
-	public void createMapAnswer(String pageName,String personName,String answer) {
-		Record record = dataCommand.getRecord(pageName, personName);
-		MapAnswer map = new MapAnswer();
-		map.setAnswer(answer);
-		record.addAnwser(map);
+	public void createMapAnswer(Page page,MapAnswer answer,int index) {
+		Record record = dataCommand.getRecord(page.getPageName(), page.getPersonName());
+		record.resetAnswer(index, answer);
 		dataCommand.saveRecord(record);
 	}
 
-	public void createEssayAnswer(String pageName,String personName,String answer) {
-		Record record = dataCommand.getRecord(pageName, personName);
-		EssayAnswer essay = new EssayAnswer();
-		essay.setAnswer(answer);
-		record.addAnwser(essay);
-		dataCommand.saveRecord(record);	
+	public void createEssayAnswer(Page page,EssayAnswer answer,int index) {
+		Record record = dataCommand.getRecord(page.getPageName(), page.getPersonName());
+		record.resetAnswer(index, answer);
+		dataCommand.saveRecord(record);
 	}
 }
