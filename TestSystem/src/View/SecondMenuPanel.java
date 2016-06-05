@@ -13,7 +13,7 @@ public class SecondMenuPanel extends MenuPanel {
     private ZButton jbtEssay = new ZButton("Essay Question", "essay");
     private ZButton jbtRanking = new ZButton("Ranking Question", "rank");
     private ZButton jbtMatching = new ZButton("Matching Question", "map");
-    private JButton jbtPrev = new JButton("Previous");
+    private JButton jbtPrev = new JButton("Finish and Return");
 
     JPanel outter;
 

@@ -10,15 +10,12 @@ public class Record {
 	protected List<Answer> answerList = new LinkedList<Answer>();
 	protected int score;
 	protected String personName;
+	protected String pageName;
 	private Page page;
 
-	public Record(){
-		
-	}
-	
-	public Record(Page page,String personName){
-		this.page=page;
-		this.personName=personName;
+	public Record(String pageName,String personName){
+		this.pageName = pageName;
+		this.personName = personName;
 	}
 	
 	public int getScore() {
@@ -45,8 +42,16 @@ public class Record {
 		return null;
 	}
 
+	public List<Answer> getAnswerList(){// TODO: prerequirement
+		return answerList; 
+	}
+	
 	public Iterator<Answer> iterator(){
 		return new AnswerIterator();
+	}
+
+	public void resetAnswer(int index, Answer newAnswer) {
+		answerList.set(index, newAnswer);
 	}
 	
 	class AnswerIterator implements Iterator<Answer>{
@@ -88,6 +93,14 @@ public class Record {
 	}
 	public void setPage(Page page) {
 		this.page = page;
+	}
+
+	public void setPageName(String pageName) {
+		this.pageName=pageName;
+	}
+	
+	public String getPageName(){
+		return pageName;
 	}
 	
 }

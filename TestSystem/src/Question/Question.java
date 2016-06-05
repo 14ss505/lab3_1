@@ -18,37 +18,13 @@ public abstract class Question {
     protected int type;
     protected Answer answer;
     protected boolean isGradable;
-//    protected ArrayList<ModifyObserver> modifyObservers = new ArrayList<>();
 
     public Question(int type) {
         this.type = type;
     }
-/*
-    public void registerObserver(ModifyObserver o) {
-        modifyObservers.add(o);
-    }
 
-    public void notifyModifyObservers() {
-        for (ModifyObserver o :
-                modifyObservers) {
-            o.accomplishedModify();
-        }
-    }
-
-    public void removeObserver(ModifyObserver o) {
-        try {
-            modifyObservers.remove(o);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-    }
-*/
     public int getType() {
         return type;
-    }
-
-    public String getQuestion() {// TODO: why not abstract
-        return null;
     }
 
     public String getPrompt() {
@@ -86,4 +62,6 @@ public abstract class Question {
     public boolean match(Answer answer) {
         return this.answer.match(answer);
     }
+    
+    public abstract String getQuestion();
 }

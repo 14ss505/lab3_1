@@ -3,29 +3,19 @@ package command.addquestion;
 import java.util.Scanner;
 
 import Paper.Page;
+import Question.ChoiceQuestion;
+import Question.RankQuestion;
 import command.AddQuestion;
 import receiver.QuestionCreator;
 
 public class AddRankQuestion extends AddQuestion {
-    private String[] items;
+   
+	public AddRankQuestion(Page page,RankQuestion question, QuestionCreator creator) {
+		super(page, question, creator);
+	}
 
-    public AddRankQuestion(Page page, String prompt, String answer, int score, QuestionCreator creator, String[] items) {
-        super(page, prompt, answer, score, creator);
-        this.items = items;
-    }
-
-    public AddRankQuestion(Page page, String prompt, QuestionCreator creator, String[] items) {
-        super(page, prompt, creator);
-        this.items = items;
-    }
-
-    @Override
+	@Override
 	public void execute() {
-        if (type == Page.TEST) {
-            creator.createRankQuestion(page,prompt, items, score, answer);
-        } else {
-            creator.createRankQuestion(page,prompt, items);
-
-        }
+		creator.createRankQuestion(page,(RankQuestion)question);
 	}
 }

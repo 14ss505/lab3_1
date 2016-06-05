@@ -2,22 +2,20 @@ package command.addanswer;
 
 import command.AddAnswer;
 import receiver.AnswerCreator;
+import Answer.ChoiceAnswer;
+import Answer.RankAnswer;
+import Paper.Page;
+import Paper.Record;
 import Question.Question;
 
 public class AddRankAnswer  extends AddAnswer{
-	private AnswerCreator creator;
-	private String answer;
-	private Question question;
 
-	public AddRankAnswer(AnswerCreator creator,String answer,Question question) {
-		this.creator = creator;
-		this.answer = answer;
-		this.question = question;
+	public AddRankAnswer(Page page,RankAnswer answer,int index,AnswerCreator creator) {
+		super(page,answer,index,creator);
 	}
 
 	@Override
 	public void execute() {
-		creator.createRankAnswer(question,answer);
+		creator.createRankAnswer(page,(RankAnswer)answer,index);
 	}
-
 }

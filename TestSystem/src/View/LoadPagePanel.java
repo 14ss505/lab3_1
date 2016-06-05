@@ -1,10 +1,17 @@
 package View;
+
 import javax.swing.*;
+
+import Paper.Page;
+import util.DataCommand;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Chow on 2016/5/30.
@@ -14,18 +21,19 @@ public class LoadPagePanel extends JPanel {
 	FirstMenuPanel first;
 	JPanel right;
 	JFrame displayFrame = new JFrame();
-	DisplayPanel displayPanel = new DisplayPanel(
-			"Java的Border是用来呈现围绕Swing组件边缘边框的对象,它本身是一个接口,里面定义了paintBorder、getBorderInsets和isBorderOpaque三个需要实现的方法.如果想用自己的Border类来绘制组件的边框,必须实现这三个方法,里面有很多布局和绘制的问题,比较麻烦.\n"
-					+ "\n"
-					+ "Java为了方便使用,提供了虚拟类AbstractBorder,继承它就可以比较简单的实现自己的边框了,但还是有布局和重绘以及组件位置的问题需要自己实现,为此Java又提供了EmptyBorder、CompoundBorder、EtchedBorder、LineBorder、MatteBorder和TitledBorder为我们可以使用的大部分Border提供了实现,并且创立了工厂类BorderFactory为各种Border实现提供实例.",
-			true);
+	java.util.List<String> pageNames;
+	String choosedPage;
 
-	LoadPagePanel(FirstMenuPanel first, JPanel right) {
+	boolean isTest;
+
+	LoadPagePanel(boolean isTest, FirstMenuPanel first, JPanel right, List<String> pageNames2) {
+		this.pageNames = pageNames2;
+		this.isTest = isTest;
 		this.right = right;
 		this.first = first;
 		setLayout(new BorderLayout());
 		addList();
-		displayFrame.add(displayPanel);
+
 		displayFrame.setSize(800, 600);
 		displayFrame.setLocationRelativeTo(null);
 
@@ -33,12 +41,10 @@ public class LoadPagePanel extends JPanel {
 
 	void addList() {
 		DefaultListModel listModel = new DefaultListModel();
-		listModel.addElement("Debbie Scott");
-		listModel.addElement("Scott Hommel");
-		listModel.addElement("Sharon Zakhour");
-		listModel.addElement("Debbie Scott");
-		listModel.addElement("Scott Hommel");
-		listModel.addElement("Sharon Zakhour");
+
+		for (int i = 0; i < pageNames.size(); i++) {
+			listModel.addElement(pageNames.get(i));
+		}
 		jlist = new JList(listModel);
 		add(new JScrollPane(jlist), BorderLayout.CENTER);
 
@@ -61,9 +67,10 @@ public class LoadPagePanel extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				super.mouseClicked(e);
-				if (e.getClickCount() == 2) {
+				if (e.getClickCount() == 1) {
 					jlist.setSelectionBackground(Color.blue);
 					// add(new JButton("456456"));
+					choosedPage = (String) jlist.getSelectedValue();
 					updateUI();
 				}
 			}
@@ -84,24 +91,40 @@ public class LoadPagePanel extends JPanel {
 		jbtDisPlay.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				// String pageName=(String) jlist.getSelectedValue();
+				DataCommand dc = new DataCommand();
+				Page page = dc.getPage(choosedPage);
+				// 改掉displayPanel
+				// displayFrame.removeAll();
+				displayFrame.add(new DisplayPanel(page, isTest));
 				displayFrame.setVisible(true);
+				// displayFrame.up
+
 			}
 		});
 
 		jbtModify.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				DataCommand dc = new DataCommand();
+				Page page = dc.getPage(choosedPage);
+				// 改掉displayPanel
+				// displayFrame.removeAll();
+				displayFrame.add(new ModifyPanel(page, isTest));
 				displayFrame.setVisible(true);
 			}
 		});
-		
+
 		jbtTake.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				DataCommand dc = new DataCommand();
+				Page page = dc.getPage(choosedPage);
+				displayFrame.add(new TestPanel(page, isTest));
 				displayFrame.setVisible(true);
 			}
 		});
-		
+
 		jbtTabulate.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {

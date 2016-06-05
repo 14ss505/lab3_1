@@ -8,8 +8,9 @@ public class RankAnswer extends Answer{
 	List<String> question = new LinkedList<String>();
 
 
-	public RankAnswer() {
+	public RankAnswer(String answer) {
 		super(Answer.RANK);
+		setAnswer(answer);
 	}
 
 	@Override

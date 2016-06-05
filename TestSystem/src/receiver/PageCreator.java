@@ -3,26 +3,13 @@ package receiver;
 import Paper.Page;
 import Paper.Survey;
 import Paper.Test;
+import util.DataCommand;
 
 public class PageCreator {
 	Page page;
+	private DataCommand dataCommand= new DataCommand();
 
-	public void createPage(int type,String pageName,String personName) {
-		page = new Page();
-		if (type == 0) {
-			page = new Survey();
-			page.setType(Page.SURVEY);
-			page.setPageName(pageName);
-			page.setPersonName(personName);
-		} else {
-			page = new Test();
-			page.setType(Page.TEST);
-			page.setPageName(pageName);
-			page.setPersonName(personName);
-		}
-	}
-	
-	public Page getPage(){
-		return page;
+	public void createPage(Page page) {
+		dataCommand.createPage(page);
 	}
 }

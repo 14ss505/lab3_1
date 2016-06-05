@@ -11,11 +11,15 @@ public class Page {
 	public static final int TEST = 1;
 
 	protected String pageName;
-	protected String creatorName;
 	protected int type;
 	protected List<Question> questionList = new LinkedList<Question>();
 	private IO io = new IO();
 	protected String personName;
+	
+	Page(String pageName,String personName){
+		this.pageName = pageName;
+		this.personName = personName;
+	}
 	
 	public String getPersonName() {
 		return personName;
@@ -31,14 +35,6 @@ public class Page {
 	
 	public String getPageName(){
 		return this.pageName;
-	}
-	
-	public void setCreatorName(String creatorName){
-		this.creatorName = creatorName;
-	}
-	
-	public String getCreatorName(){
-		return this.creatorName;
 	}
 	
 	public void addQuestion(Question question){
@@ -77,18 +73,6 @@ public class Page {
 		return new IteratorQuestion();
 	}
 
-	public void display() {// TODO: 16/5/29 return string
-		Iterator<Question> questions = this.iterator();
-		while(questions.hasNext()) {
-			Question q = questions.next();
-			System.out.println(q.getQuestion());
-			int ty = q.getType();
-			if(type==TEST && ty != Question.ESSAY){
-				System.out.println("The correct answer is " + q.getAnswer().writeAnswer());
-			}
-		}
-	}
-
 	public void setType(int type) {
 		this.type = type;
 	}
@@ -110,8 +94,4 @@ public class Page {
 		
 		
 	}
-	public void save(){
-		io.writePage(this);
-	}
-	
 }

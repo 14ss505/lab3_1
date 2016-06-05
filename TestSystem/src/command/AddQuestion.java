@@ -1,31 +1,19 @@
 package command;
 
 import Paper.Page;
+import Question.Question;
 import receiver.QuestionCreator;
 
 public abstract class AddQuestion implements Command{
-	protected int type;
 	protected Page page;
-	protected String answer;
-	protected String prompt;
+	protected Question question;
 	protected QuestionCreator creator;
-	protected int score;
-
-	public AddQuestion(Page page, String prompt, String answer, int score, QuestionCreator creator) {
-		this.score = score;
+	
+	public AddQuestion(Page page,Question question, QuestionCreator creator) {
 		this.page = page;
-		this.type = page.getType();
-		this.answer = answer;
-		this.prompt = prompt;
+		this.question = question;
 		this.creator = creator;
 	}
-
-	public AddQuestion(Page page, String prompt, QuestionCreator creator) {
-		this.page = page;
-		this.type = page.getType();
-		this.prompt = prompt;
-		this.creator = creator;
-	}
-
+	
 	public abstract void execute();
 }

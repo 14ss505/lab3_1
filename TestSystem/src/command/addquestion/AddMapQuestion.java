@@ -3,6 +3,8 @@ package command.addquestion;
 import java.util.Scanner;
 
 import Paper.Page;
+import Question.ChoiceQuestion;
+import Question.MapQuestion;
 import command.AddQuestion;
 import receiver.QuestionCreator;
 
@@ -10,20 +12,13 @@ public class AddMapQuestion extends AddQuestion {
 	private String[] side1;
     private String[] side2;
 
-    public AddMapQuestion(Page page, String prompt, String answer, int score, QuestionCreator creator) {
-        super(page, prompt, answer, score, creator);
-    }
 
-    public AddMapQuestion(Page page, String prompt, QuestionCreator creator) {
-        super(page, prompt, creator);
-    }
+	public AddMapQuestion(Page page, MapQuestion question, QuestionCreator creator) {
+		super(page, question, creator);
+	}
 
-    @Override
+	@Override
 	public void execute() {
-        if (type == Page.TEST) {
-            creator.createMapQuestion(page,prompt, side1, side2, score, answer);
-        } else {
-            creator.createMapQuestion(page,prompt, side1, side2);
-        }
+		creator.createMapQuestion(page,(MapQuestion)question);
 	}
 }

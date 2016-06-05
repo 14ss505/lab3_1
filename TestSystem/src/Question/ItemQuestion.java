@@ -16,12 +16,10 @@ public abstract class ItemQuestion extends Question {
 
     public void setItem(String item) {
         items.add(item);
-//        notifyModifyObservers();
     }
 
     public void remove(int index) {
         items.remove(index);
-//        notifyModifyObservers();
     }
 
     public boolean changeItem(int index, String item) {
@@ -36,6 +34,5 @@ public abstract class ItemQuestion extends Question {
         for (int i = items.size() - 1; i >= num; i--) {
             items.remove(i);
         }
-//        notifyModifyObservers();
     }
 }

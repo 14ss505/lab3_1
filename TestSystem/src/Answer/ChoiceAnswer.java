@@ -6,8 +6,9 @@ public class ChoiceAnswer extends Answer {
     int[] answer;
     List<String> item;
 
-    public ChoiceAnswer() {
+    public ChoiceAnswer(String answer) {
         super(Answer.CHOICE);
+        setAnswer(answer);
     }
 
     @Override

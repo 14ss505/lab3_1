@@ -1,6 +1,10 @@
 package View;
 
 import javax.swing.*;
+
+import Paper.Page;
+import Question.Question;
+
 import java.awt.*;
 
 /**
@@ -9,7 +13,7 @@ import java.awt.*;
 public class DisplayPanel extends JPanel {
 	JTextArea jta = new JTextArea();
 
-	DisplayPanel(String content, boolean isTest) {
+	DisplayPanel(Page page, boolean isTest) {
 		// 参数是可以显示test或survey内容的数据类的实例
 		setLayout(new CardLayout());
 		/*
@@ -19,29 +23,42 @@ public class DisplayPanel extends JPanel {
 		 * (BorderFactory.createMatteBorder(0, 0, 0, 1, Color.gray));
 		 * add(scrollPane,BorderLayout.CENTER);
 		 */
-
-		TFQuestionPanel tfPanel = new TFQuestionPanel(isTest);
-		MCQuestionPanel mcPanel = new MCQuestionPanel(isTest);
-		SAQuestionPanel saPanel = new SAQuestionPanel(isTest);
-		EssayQuestionPanel essayPanel = new EssayQuestionPanel(isTest);
-		RankQuestionPanel rankingPanel = new RankQuestionPanel(isTest);
-		MapQuestionPanel mappingPanel = new MapQuestionPanel(isTest);
-
-		// cardLayout
-
-		tfPanel.addComponentForDisplaying();
-		mcPanel.addComponentForDisplaying();
-		saPanel.addComponentForDisplaying();
-		essayPanel.addComponentForDisplaying();
-		rankingPanel.addComponentForDisplaying();
-		mappingPanel.addComponentForDisplaying();
-
-		add("tf", tfPanel);
-		add("mc", mcPanel);
-		add("sa", saPanel);
-		add("essay", essayPanel);
-		add("rank", rankingPanel);
-		add("map", mappingPanel);
-
+int index=-1;
+		for(Question question:page.getQuestionList()){
+			index++;
+			switch(question.getType()){
+			case Question.DECIDE:
+				TFQuestionPanel tfPanel = new TFQuestionPanel(isTest,this);
+				tfPanel.addComponentForDisplaying(question,index);
+				add("tf", tfPanel);
+				
+				break;
+			case Question.CHOICE:
+				MCQuestionPanel mcPanel = new MCQuestionPanel(isTest,this);
+				mcPanel.addComponentForDisplaying(question);
+				add("mc", mcPanel);
+				break;
+			case Question.SHORTESSAY:
+				SAQuestionPanel saPanel = new SAQuestionPanel(isTest,this);
+				saPanel.addComponentForDisplaying(question);
+				add("sa", saPanel);
+				break;
+			case Question.ESSAY:
+				EssayQuestionPanel essayPanel = new EssayQuestionPanel(isTest,this);
+				essayPanel.addComponentForDisplaying(question);
+				add("essay", essayPanel);
+				break;
+			case Question.RANK:
+				RankQuestionPanel rankingPanel = new RankQuestionPanel(isTest,this);
+				rankingPanel.addComponentForDisplaying(question);
+				add("rank", rankingPanel);
+				break;
+			case Question.MAP:
+				MapQuestionPanel mappingPanel = new MapQuestionPanel(isTest,this);
+				mappingPanel.addComponentForDisplaying(question);
+				add("map", mappingPanel);
+				break;
+			}
+		}
 	}
 }

@@ -2,22 +2,20 @@ package command.addanswer;
 
 import command.AddAnswer;
 import receiver.AnswerCreator;
+import Answer.ChoiceAnswer;
+import Answer.MapAnswer;
+import Paper.Page;
+import Paper.Record;
 import Question.Question;
 
 public class AddMapAnswer  extends AddAnswer{
-	private AnswerCreator creator;
-	private String answer;
-	private Question question;
 
-	public AddMapAnswer(AnswerCreator creator,String answer,Question question) {
-		this.creator = creator;
-		this.answer = answer;
-		this.question = question;
+	public AddMapAnswer(Page page,MapAnswer answer,int index,AnswerCreator creator) {
+		super(page,answer,index,creator);
 	}
 
 	@Override
 	public void execute() {
-		creator.createMapAnswer(question,answer);
+		creator.createMapAnswer(page,(MapAnswer)answer,index);
 	}
-
 }

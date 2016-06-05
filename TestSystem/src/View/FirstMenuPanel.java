@@ -4,14 +4,18 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 import javax.swing.*;
 
 import Paper.Page;
+import Paper.Survey;
+import Paper.Test;
 import agent.CreateAgent;
 import command.create.CreateSurvey;
 import command.create.CreateTest;
 import receiver.PageCreator;
+import util.DataCommand;
 
 public class FirstMenuPanel extends MenuPanel {
 
@@ -67,8 +71,8 @@ public class FirstMenuPanel extends MenuPanel {
 
 	}
 
-	void addRightDisplayPanel(boolean isTest) {
-		LoadPagePanel loadPagePanel = new LoadPagePanel(this, rightPanel);
+	void addRightDisplayPanel(boolean isTest, java.util.List<String> pageNames) {
+		LoadPagePanel loadPagePanel = new LoadPagePanel(isTest,this, rightPanel, pageNames);
 		rightPanel.add("load", loadPagePanel);
 
 		loadPagePanel.updateUI();
@@ -87,23 +91,23 @@ public class FirstMenuPanel extends MenuPanel {
 		initRegisterPanel(registerPane);
 	}
 
-	void addRightCreatePanel(boolean isTest,Page page) {
-		TFQuestionPanel tfPanel = new TFQuestionPanel(isTest);
-		MCQuestionPanel mcPanel = new MCQuestionPanel(isTest);
-		SAQuestionPanel saPanel = new SAQuestionPanel(isTest);
-		EssayQuestionPanel essayPanel = new EssayQuestionPanel(isTest);
-		RankQuestionPanel rankingPanel = new RankQuestionPanel(isTest);
-		MapQuestionPanel mappingPanel = new MapQuestionPanel(isTest);
+	void addRightCreatePanel(boolean isTest,String pageName,String personName,int type) {
+		TFQuestionPanel tfPanel = new TFQuestionPanel(isTest,rightPanel);
+		MCQuestionPanel mcPanel = new MCQuestionPanel(isTest,rightPanel);
+		SAQuestionPanel saPanel = new SAQuestionPanel(isTest,rightPanel);
+		EssayQuestionPanel essayPanel = new EssayQuestionPanel(isTest,rightPanel);
+		RankQuestionPanel rankingPanel = new RankQuestionPanel(isTest,rightPanel);
+		MapQuestionPanel mappingPanel = new MapQuestionPanel(isTest,rightPanel);
 
 		// cardLayout
 
-		tfPanel.addComponentForCreating(page);
-		mcPanel.addComponentForCreating(page);
-		saPanel.addComponentForCreating(page);
-		essayPanel.addComponentForCreating(page);
-		rankingPanel.addComponentForCreating(page);
-		mappingPanel.addComponentForCreating(page);
-		
+		tfPanel.addComponentForCreating(pageName,personName, type);
+		mcPanel.addComponentForCreating(pageName,personName, type);
+		saPanel.addComponentForCreating(pageName,personName, type);
+		essayPanel.addComponentForCreating(pageName,personName, type);
+		rankingPanel.addComponentForCreating(pageName,personName, type);
+		mappingPanel.addComponentForCreating(pageName,personName, type);
+
 		rightPanel.add("tf", tfPanel);
 		rightPanel.add("mc", mcPanel);
 		rightPanel.add("sa", saPanel);
@@ -126,6 +130,8 @@ public class FirstMenuPanel extends MenuPanel {
 		JTextField jtaName = new JTextField(10);
 		JLabel jlPageTitle = new JLabel("Your Page Title:");
 		JTextField jtaPageTitle = new JTextField(10);
+		JLabel jlTime = new JLabel("Time(unit:minute):");
+		JTextField jtaTime = new JTextField(10);
 		JButton jbtPre = new JButton("Preview");
 		JButton jbtNex = new JButton("Next");
 		registerPane.add(new JPanel());
@@ -135,7 +141,11 @@ public class FirstMenuPanel extends MenuPanel {
 		registerPane.add(new JPanel());
 		registerPane.add(jlPageTitle);
 		registerPane.add(jtaPageTitle);
-		for (int i = 0; i < 25; i++) {
+		registerPane.add(new JPanel());
+		registerPane.add(new JPanel());
+		registerPane.add(jlTime);
+		registerPane.add(jtaTime);
+		for (int i = 0; i < 21; i++) {
 			registerPane.add(new JPanel());
 		}
 		registerPane.add(jbtPre);
@@ -167,34 +177,34 @@ public class FirstMenuPanel extends MenuPanel {
 				}
 				// choose test or survey
 				if (jrbT.isSelected()) {
-					
 
-					/*交互后端*/
-					//receiver
-					PageCreator pc=new PageCreator();
-					//command
-					CreateTest cs=new CreateTest(pc,jtaPageTitle.getText(),jtaName.getText());
-					//invoker
-					CreateAgent ca=new CreateAgent();
+					/* 交互后端 */
+					// receiver
+					PageCreator pc = new PageCreator();
+					// command
+					int totalScore = 0,testMinute = 0;//@@@@需要获取totalScore,以及testMinute
+					Test test = new Test(jtaPageTitle.getText(), jtaName.getText(),totalScore,testMinute);
+					CreateTest cs = new CreateTest(pc, test);
+					// invoker
+					CreateAgent ca = new CreateAgent();
 					ca.placeCreateOrder(cs);
-					Page page=cs.getPage();
-					
+
 					// add every input panel for test
-					addRightCreatePanel(true,page);
+					addRightCreatePanel(true,jtaPageTitle.getText(),jtaName.getText(),Page.TEST);
 
 				} else {
-					//receiver
-					PageCreator pc=new PageCreator();
-					//command
-					CreateSurvey cs=new CreateSurvey(pc,jtaPageTitle.getText(),jtaName.getText());
-					//invoker
-					CreateAgent ca=new CreateAgent();
+					// receiver
+					PageCreator pc = new PageCreator();
+					// command
+					Survey survey = new Survey(jtaPageTitle.getText(), jtaName.getText());
+					CreateSurvey cs = new CreateSurvey(pc, survey);
+					// invoker
+					CreateAgent ca = new CreateAgent();
 					ca.placeCreateOrder(cs);
-					Page page=cs.getPage();
-					
+
 					// add every input panel for test
-				 
-					addRightCreatePanel(false,page);
+
+					addRightCreatePanel(false,jtaPageTitle.getText(),jtaName.getText(),Page.SURVEY);
 				}
 
 			}
@@ -245,20 +255,26 @@ public class FirstMenuPanel extends MenuPanel {
 				CardLayout card = (CardLayout) rightPanel.getLayout();
 				card.show(rightPanel, "blank");
 				rightPanel.updateUI();
-				
+
 				// choose test or survey
 				if (jrbT.isSelected()) {
+
+					DataCommand dc = new DataCommand();
+
+					java.util.List<String> pageNames =   dc.getAllPageName(1);
 					// add every input panel for test
-					addRightDisplayPanel(true);
-					
-					
-					
-                //load test pages name and display in the load panel
+					addRightDisplayPanel(true, pageNames);
+
+					// load test pages name and display in the load panel
 				} else {
-					addRightDisplayPanel(false);
-					
-					/*交互后端*/
-					
+					DataCommand dc = new DataCommand();
+
+					ArrayList<String> pageNames = (ArrayList<String>) dc.getAllPageName(0);
+
+					addRightDisplayPanel(false, pageNames);
+
+					/* 交互后端 */
+
 				}
 				card = (CardLayout) rightPanel.getLayout();
 				card.show(rightPanel, "load");

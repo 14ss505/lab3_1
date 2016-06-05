@@ -1,12 +1,24 @@
 package Question;
 
+import java.util.List;
+
 import Answer.Answer;
+import Answer.EssayAnswer;
 
 public class EssayQuestion extends Question {
-	public EssayQuestion(){
-		super(3);
+	public EssayQuestion(String prompt){
+		super(ESSAY);
+		this.prompt = prompt;
+		//answer = new EssayAnswer();
 		this.isGradable = false;
 	}
+	
+	public EssayQuestion(){
+		super(ESSAY);
+		//answer = new EssayAnswer();
+		this.isGradable = false;
+	}
+	
 	
 	@Override
 	public String getQuestion(){
@@ -15,8 +27,7 @@ public class EssayQuestion extends Question {
 
 	@Override
 	public void setAnswer(String answer) {
-		//Do nothing
-		
+		this.answer.setAnswer(answer);
 	}
 
 	@Override

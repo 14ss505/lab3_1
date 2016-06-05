@@ -4,8 +4,9 @@ public class DecideAnswer extends Answer{
 	
 	int answer;
 
-	public DecideAnswer() {
+	public DecideAnswer(String answer) {
 		super(Answer.DECIDE);
+		 setAnswer(answer);
 	}
 
 	@Override

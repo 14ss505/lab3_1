@@ -3,22 +3,20 @@ package command.addquestion;
 import java.util.Scanner;
 
 import Paper.Page;
+import Question.ChoiceQuestion;
+import Question.EssayQuestion;
 import command.AddQuestion;
 import receiver.QuestionCreator;
 
 public class AddEssayQuestion extends AddQuestion {
 
-	public AddEssayQuestion(Page page, String prompt, String answer, int score, QuestionCreator creator) {
-		super(page, prompt, answer, score, creator);
-	}
-
-	public AddEssayQuestion(Page page, String prompt, QuestionCreator creator) {
-		super(page, prompt, creator);
+	public AddEssayQuestion(Page page, EssayQuestion question, QuestionCreator creator) {
+		super(page, question, creator);
 	}
 
 	@Override
 	public void execute() {
-		creator.createEssayQuestion(page,prompt);
+		creator.createEssayQuestion(page,(EssayQuestion)question);
 	}
 
 }

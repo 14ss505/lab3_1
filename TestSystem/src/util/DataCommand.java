@@ -5,6 +5,8 @@ import java.util.List;
 
 import Paper.Page;
 import Paper.Record;
+import Paper.Survey;
+import Paper.Test;
 import Question.Question;
 import TabulateResult.TabulateChoiceResult;
 import TabulateResult.TabulateDecideResult;
@@ -17,12 +19,18 @@ import TabulateResult.TabulateTextResult;
 public class DataCommand {
 	private IO io = new IO();
 
-	public IO getIo() {
-		return io;
+	/* use this function when you try to answer a page*/
+	public Page createRecord(String pageName,String personName) {
+		Record record = new Record(pageName, personName);
+		this.updateRecordList(record);
+		this.saveRecord(record);
+		return this.getPage(pageName);
 	}
-
-	public void setIo(IO io) {
-		this.io = io;
+	
+	/* use this function when you try to create a new page*/
+	public void createPage(Page page) {
+		this.updatePageList(page.getPageName(), page.getType(), page.getPersonName());
+		this.savePage(page);
 	}
 	
 	/*get all pageNames(tests or surveys)*/
@@ -42,6 +50,44 @@ public class DataCommand {
 		return io.readPage(pageName);
 	}
 	
+	/*get all record of a pageName*/
+	public  List<Record> getAllRecords(String pageName){
+		List<String> recordNames = io.readRecordInfo(pageName);
+		List<Record> records = new LinkedList<Record>();
+		for(int i=0;i<recordNames.size();i++){
+			Record record = io.readRecord(recordNames.get(i));
+			Page page = io.readPage(pageName);
+			record.setPage(page);
+			records.add(record);
+		}
+		return records;
+	}
+	
+	/* save a page*/
+	public void savePage(Page page){
+		if(page.getType()==Page.TEST)
+			((Test)page).computeScore();
+		io.writePage(page);
+	}
+	
+	/*get a record of a pageName of a person*/
+	public  Record getRecord(String pageName,String personName){
+		String recordName = pageName+"-"+personName;
+		Record record = io.readRecord(recordName);
+		Page page = io.readPage(pageName);
+		record.setPage(page);
+		return record;
+	}
+	
+	/*save a record*/
+	public void saveRecord(Record record){
+		String pageName = record.getPageName();
+		String recordName = pageName+"-"+record.getPersonName();
+		record.grade();
+		io.writeRecord(recordName, record);
+	}
+	
+
 	/*update the registerFile of pageNameList:pageName-type-personName*/
 	public void updatePageList(String pageName,int type,String personName){
 		List<List<String>> pageName_type_personName = io.readpageName_type_personNameInfo();
@@ -58,44 +104,31 @@ public class DataCommand {
 		io.writeInfo(pageName_type_personName);
 	}
 	
-	/* save a page*/
-	public void savePage(Page page){
-		io.writePage(page);
-	}
-	
-	/*get all record of a pageName*/
-	public  List<Record> getAllRecords(String pageName){
-		List<String> recordNames = io.readRecordInfo(pageName);
-		List<Record> records = new LinkedList<Record>();
-		for(int i=0;i<recordNames.size();i++){
-			records.add(io.readRecord(recordNames.get(i)));
-		}
-		return records;
-	}
-	
 	/*update the registerFile of recordNameList for a certain pageName:pageName-type-personName*/
 	public void updateRecordList(Record record){
-		String pageName = record.getPage().getPageName();
+		String pageName = record.getPageName();
 		String recordName = pageName+"-"+record.getPersonName();
 		List<String> recordNames = io.readRecordInfo(pageName);
 		recordNames.add(recordName);
 		io.writeRecordInfo(pageName, recordNames);
 	}
 	
-	/*save a record*/
-	public void saveRecord(Record record){
-		String pageName = record.getPage().getPageName();
-		String recordName = pageName+"-"+record.getPersonName();
-		record.grade();
-		io.writeRecord(recordName, record);
+	/* functions below will be used for tabulate
+	 * you will get string result*/
+	
+	/* get a certain tabulate result string by questionIndex and pageName*/
+	public String tabulate(String pageName,int questionIndex){
+		List<Record> records = this.getAllRecords(pageName);
+		String result = this.tabulate(records, questionIndex);
+		return result;
 	}
 	
-	/* functions below will be used for tabulate*/
-	public TabulateResult tabulate(List<Record> records,int questionIndex){
-		if(records.size()==0){
-			return null;
-		}
+	private String tabulate(List<Record> records,int questionIndex){
 		TabulateResult result = null;
+		if(records.size()==0){
+			return "";
+		}
+		
 		List<Question> questionList = records.get(0).getPage().getQuestionList();
 		Question q = questionList.get(questionIndex);
 		int qtype = q.getType();
@@ -120,6 +153,6 @@ public class DataCommand {
 			result = new TabulateMapResult(records,questionIndex);
 			break;
 		}
-		return result;
+		return result.getResult();
 	}
 }

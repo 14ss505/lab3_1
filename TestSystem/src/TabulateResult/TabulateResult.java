@@ -9,7 +9,7 @@ public abstract class TabulateResult {
 	protected Question question;
 	protected int questionIndex;
 	protected List<Record> records;
-	protected String result;
+	protected String result="";
 	
 	public TabulateResult(List<Record> records,int questionIndex){
 		this.records=records;

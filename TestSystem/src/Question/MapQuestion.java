@@ -10,9 +10,30 @@ public class MapQuestion extends Question {
     protected List<String> side2 = new LinkedList<String>();
     protected int side;
 
+    public MapQuestion(String prompt, List<String> side1, List<String> side2 , MapAnswer answer, int score) {
+        super(MAP);
+        this.prompt = prompt; 
+        this.side1 = side1;
+    	this.side2 = side2;
+        this.answer = answer;
+        this.setAnswer(answer.getAnswer());
+		this.score = score;
+        this.isGradable = true;
+    }
+    
+    public MapQuestion(String prompt, List<String> side1, List<String> side2) {
+        super(MAP);
+        this.prompt = prompt; 
+        this.side1 = side1;
+    	this.side2 = side2;
+       // this.answer = new MapAnswer();
+       this.isGradable = true;
+    }
+    
     public MapQuestion() {
-        super(5);
-        this.answer = new MapAnswer();
+        super(MAP);
+       // this.answer = new MapAnswer();
+        this.isGradable = true;
     }
 
 	@Override
@@ -38,6 +59,11 @@ public class MapQuestion extends Question {
         this.side = side;
     }
 
+    public void setBothSide(List<String> side1, List<String> side2){
+    	this.side1 = side1;
+    	this.side2 = side2;
+    }
+    
     public List<String> getItem() {
         // TODO Auto-generated method stub
         if (side == 1) {
@@ -61,7 +87,6 @@ public class MapQuestion extends Question {
         } else {
             side2.remove(index);
         }
-//        notifyModifyObservers();
     }
 
     public boolean changeItem(int index, String item) {
