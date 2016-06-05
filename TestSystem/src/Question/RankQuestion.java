@@ -21,7 +21,6 @@ public class RankQuestion extends ItemQuestion {
 		super(RANK);
 		this.prompt = prompt;
 		this.items = items;
-		this.answer = new RankAnswer("");
 		this.setIsScore(true);
 	}
 	

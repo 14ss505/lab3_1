@@ -19,6 +19,7 @@ public abstract class QuestionPanel extends JPanel {
 	JButton jtaPre = new JButton("Previous");
 	JButton jtaSubmit = new JButton("Submit");
 	JButton jtaModify = new JButton("Modify");
+	QuestionPanel me;
 
 	JPanel outter;
 	String pageName;
@@ -30,6 +31,7 @@ public abstract class QuestionPanel extends JPanel {
 	boolean isTest;
 
 	QuestionPanel(boolean isTest, JPanel outter) {
+		this.me=this;
 		this.outter = outter;
 		GridLayout layout = new GridLayout(0, 4);
 		setLayout(layout);
@@ -62,6 +64,21 @@ public abstract class QuestionPanel extends JPanel {
 				// TODO Auto-generated method stub
 				CardLayout card = (CardLayout) outter.getLayout();
 				card.previous(outter);
+
+			}
+
+		});
+		jtaSubmit.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				CardLayout card = (CardLayout) outter.getLayout();
+			//	card.previous(outter);
+				
+				outter.remove(me);
+				outter.updateUI();
+				//card.removeLayoutComponent(me);
 
 			}
 

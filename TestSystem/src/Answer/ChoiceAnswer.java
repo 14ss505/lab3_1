@@ -35,19 +35,25 @@ public class ChoiceAnswer extends Answer {
    }
 
    public void setAnswer(String answer) {
+	   if(answer.equals("")){
+		  this.setDefaultAnswer();
+		   return;
+	   }
         String[] answers = answer.split(" ");
         this.answer = new int[answers.length];
-        System.out.println("set:choice answer array length"+answers.length);
         for (int i = 0; i < answers.length; i++) {
-        	System.out.println("set:choice answer"+"序号："+i+" 内容："+answers[i]);
-            this.answer[i] = Integer.parseInt(answers[i]);
+        	this.answer[i] = Integer.parseInt(answers[i]);
         }
     }
 
+   public void setDefaultAnswer(){
+	    this.answer = new int[1];
+		this.answer[0] = -1;
+   }
+   
     @Override
     public String writeAnswer() {//must invoke setAnswer first
         String ret = "";
-        System.out.println("write:choice answer array length"+answer.length);
         for (int i = 0; i < answer.length-1; i++) {
             ret += answer[i] + " ";
         }

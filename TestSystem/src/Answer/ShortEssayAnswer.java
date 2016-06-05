@@ -13,8 +13,16 @@ public class ShortEssayAnswer extends Answer{
 		return text;
 	}
 
-	public void setAnswer(String anwser) {
-		text = anwser;
+	public void setAnswer(String answer) {
+		if(answer.equals("")){
+			this.setDefaultAnswer();
+			return;
+		}
+		text = answer;
+	}
+
+	public void setDefaultAnswer(){
+		text = "";
 	}
 
 	@Override

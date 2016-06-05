@@ -57,8 +57,6 @@ public class DataCommand {
 		List<Record> records = new LinkedList<Record>();
 		for(int i=0;i<recordNames.size();i++){
 			Record record = io.readRecord(recordNames.get(i));
-			Page page = io.readPage(pageName);
-			record.setPage(page);
 			records.add(record);
 		}
 		return records;
@@ -75,8 +73,6 @@ public class DataCommand {
 	public  Record getRecord(String pageName,String personName){
 		String recordName = pageName+"-"+personName;
 		Record record = io.readRecord(recordName);
-		Page page = io.readPage(pageName);
-		record.setPage(page);
 		return record;
 	}
 	
@@ -116,6 +112,20 @@ public class DataCommand {
 	
 	/* functions below will be used for tabulate
 	 * you will get string result*/
+	public String tabulate(String pageName){
+		String result = "";
+		List<Record> records = this.getAllRecords(pageName);
+		if(records.size() == 0 ){
+			result = "Hi,guy,no one has taken the page!";
+			return result;
+		}
+			
+		int questionNum = records.get(0).getPage().getQuestionSize();
+		for(int i=0;i<questionNum;i++){
+			result +="第"+i+"题："+ this.tabulate(records, i)+"\n";
+		}
+		return result;
+	}
 	
 	/* get a certain tabulate result string by questionIndex and pageName*/
 	public String tabulate(String pageName,int questionIndex){
@@ -135,22 +145,22 @@ public class DataCommand {
 		int qtype = q.getType();
 		
 		switch (qtype) {
-		case 1:
+		case Question.DECIDE:
 			result = new TabulateDecideResult(records,questionIndex);
 			break;
-		case 2:
+		case Question.CHOICE:
 			result = new TabulateChoiceResult(records,questionIndex);
 			break;
-		case 3:
+		case Question.SHORTESSAY:
 			result = new TabulateShortEssayResult(records,questionIndex);
             break;
-        case 4:
+        case Question.ESSAY:
         	result = new TabulateEssayResult(records,questionIndex);
             break;
-		case 5:
+		case Question.RANK:
 			result = new TabulateRankResult(records,questionIndex);
 			break;
-		case 6:
+		case Question.MAP:
 			result = new TabulateMapResult(records,questionIndex);
 			break;
 		}

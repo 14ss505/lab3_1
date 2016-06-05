@@ -23,11 +23,23 @@ public class RankAnswer extends Answer{
 	}
 
 	public void setAnswer(String answer) {
+		if(answer.equals("")){
+			this.setDefaultAnswer();
+			return;
+		}
+		
 		String[] answers = answer.split(" ");
         rank.clear();
 		for(int i=0; i<answers.length; i++){
 			rank.add(Integer.parseInt(answers[i]));
-			System.out.println("rank answer :"+i+":::"+Integer.parseInt(answers[i]));
+			System.out.println("rank answer"+i+":"+Integer.parseInt(answers[i]));
+		}
+	}
+	
+	public void setDefaultAnswer(){
+		rank.clear();
+		for(int i=0; i<question.size(); i++){
+			rank.add(-1);
 		}
 	}
 	

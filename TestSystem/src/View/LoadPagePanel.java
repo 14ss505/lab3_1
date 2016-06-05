@@ -10,6 +10,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,6 +26,7 @@ public class LoadPagePanel extends JPanel {
 	JFrame displayFrame = new JFrame();
 	java.util.List<String> pageNames;
 	String choosedPage;
+	
 
 	boolean isTest;
 
@@ -31,6 +35,7 @@ public class LoadPagePanel extends JPanel {
 		this.isTest = isTest;
 		this.right = right;
 		this.first = first;
+		
 		setLayout(new BorderLayout());
 		addList();
 
@@ -67,12 +72,12 @@ public class LoadPagePanel extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				super.mouseClicked(e);
-				if (e.getClickCount() == 1) {
+				//if (e.getClickCount() == 1) {
 					jlist.setSelectionBackground(Color.blue);
 					// add(new JButton("456456"));
 					choosedPage = (String) jlist.getSelectedValue();
 					updateUI();
-				}
+			//	}
 			}
 		});
 
@@ -92,6 +97,9 @@ public class LoadPagePanel extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// String pageName=(String) jlist.getSelectedValue();
+				displayFrame = new JFrame();
+				displayFrame.setSize(800, 600);
+				displayFrame.setLocationRelativeTo(null);
 				DataCommand dc = new DataCommand();
 				System.out.println(choosedPage);
 				Page page = dc.getPage(choosedPage);
@@ -108,6 +116,9 @@ public class LoadPagePanel extends JPanel {
 		jbtModify.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				displayFrame = new JFrame();
+				displayFrame.setSize(800, 600);
+				displayFrame.setLocationRelativeTo(null);
 				DataCommand dc = new DataCommand();
 				Page page = dc.getPage(choosedPage);
 				// 改掉displayPanel
@@ -120,17 +131,44 @@ public class LoadPagePanel extends JPanel {
 		jbtTake.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				displayFrame = new JFrame();
+				displayFrame.setSize(800, 600);
+				displayFrame.setLocationRelativeTo(null);
 				String name=JOptionPane.showInputDialog("Please your name then we can have a drink");
+				if(name.equals("")){
+					name="shabi";
+				}
+				final String name1=name;
 				DataCommand dc = new DataCommand();
 				Page page = dc.createRecord(choosedPage,name);
-				displayFrame.add(new TestPanel(page, isTest,name));
+				displayFrame.add(new TestPanel(page, isTest,name,displayFrame));
+			
+				displayFrame.addWindowListener(new WindowAdapter(){
+
+
+					@Override
+					public void windowClosing(WindowEvent arg0) {
+						// TODO Auto-generated method stub
+						DataCommand ass=new DataCommand();
+						JOptionPane.showMessageDialog(null, "your sexy score:"+ass.getRecord(choosedPage, name1).getTotalScore());
+					}
+
+					
+				
+					
+				});
 				displayFrame.setVisible(true);
 			}
 		});
 
 		jbtTabulate.addActionListener(new ActionListener() {
 			@Override
-			public void actionPerformed(ActionEvent e) {
+			public void actionPerformed(ActionEvent jerk) {
+				displayFrame = new JFrame();
+				displayFrame.setSize(800, 600);
+				displayFrame.setLocationRelativeTo(null);
+				DataCommand ass=new DataCommand();
+				JOptionPane.showMessageDialog(null, "your sexy tabulatiooooooon:"+ass.tabulate(choosedPage));
 				displayFrame.setVisible(true);
 			}
 		});

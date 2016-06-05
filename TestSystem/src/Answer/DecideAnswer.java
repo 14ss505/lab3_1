@@ -5,7 +5,7 @@ public class DecideAnswer extends Answer{
 
 	public DecideAnswer(String answer) {
 		super(Answer.DECIDE);
-		 setAnswer(answer);
+		setAnswer(answer);
 	}
 
 	public String getAnswer() {
@@ -15,9 +15,17 @@ public class DecideAnswer extends Answer{
 
 
 	public void setAnswer(String answer) {
+		if(answer.equals("")){
+			this.setDefaultAnswer();
+			return;
+		}
+			
 		this.answer = answer;
 	}
 
+	public void setDefaultAnswer(){
+	    answer = "-1";
+	}
 
 	@Override
 	public String writeAnswer() {

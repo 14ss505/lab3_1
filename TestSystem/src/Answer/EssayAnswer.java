@@ -12,10 +12,18 @@ public class EssayAnswer extends Answer {
 		return Essay;
 	}
 
-	public void setAnswer(String anwser) {
-		Essay = anwser;
+	public void setAnswer(String answer) {
+		if(answer.equals("")){
+			this.setDefaultAnswer();
+			return;
+		}
+		Essay = answer;
 	}
 
+	public void setDefaultAnswer(){
+		Essay = "";
+	}
+	
 	@Override
 	public String writeAnswer() {
 		return Essay;

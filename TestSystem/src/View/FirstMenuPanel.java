@@ -21,6 +21,7 @@ public class FirstMenuPanel extends MenuPanel {
 
 	private ZButton jbtCreate = new ZButton("Create", "1");
 	private ZButton jbtDisplay = new ZButton("Choose a Page to do something", "1");
+	private JButton jbtSearch = new JButton("Enquery");
 
 	JPanel rightPanel;
 	public ArrayList<ZButton> jbtGroup = new ArrayList<ZButton>();
@@ -31,7 +32,26 @@ public class FirstMenuPanel extends MenuPanel {
 		jbtGroup.add(0, jbtCreate);
 		jbtGroup.add(1, jbtDisplay);
 		this.add(jbtCreate);
+
 		this.add(jbtDisplay);
+		this.add(jbtSearch);
+
+		jbtSearch.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String name=JOptionPane.showInputDialog("Please enter your oops name to search for your rap sheet!");
+				if(name.equals("")){
+					name="shabi";
+				}
+				DataCommand dc=new DataCommand();
+				String bitch="";
+				java.util.List<String> shits=dc.getAllPageName(1, name);
+				for(int i=0;i<shits.size();i++){
+					bitch+=shits.get(i);
+				}
+				JOptionPane.showMessageDialog(null, "you have created those pussy pages:"+bitch);
+			}
+		});
 
 		jbtCreate.addActionListener(new ActionListener() {
 			@Override
@@ -91,16 +111,15 @@ public class FirstMenuPanel extends MenuPanel {
 		initRegisterPanel(registerPane);
 	}
 
-	void addRightCreatePanel(boolean isTest,Page page) {
-		TFQuestionPanel tfPanel = new TFQuestionPanel(isTest,rightPanel);
-		MCQuestionPanel mcPanel = new MCQuestionPanel(isTest,rightPanel);
-		SAQuestionPanel saPanel = new SAQuestionPanel(isTest,rightPanel);
-		EssayQuestionPanel essayPanel = new EssayQuestionPanel(isTest,rightPanel);
-		RankQuestionPanel rankingPanel = new RankQuestionPanel(isTest,rightPanel);
-		MapQuestionPanel mappingPanel = new MapQuestionPanel(isTest,rightPanel);
+	void addRightCreatePanel(boolean isTest, Page page) {
+		TFQuestionPanel tfPanel = new TFQuestionPanel(isTest, rightPanel);
+		MCQuestionPanel mcPanel = new MCQuestionPanel(isTest, rightPanel);
+		SAQuestionPanel saPanel = new SAQuestionPanel(isTest, rightPanel);
+		EssayQuestionPanel essayPanel = new EssayQuestionPanel(isTest, rightPanel);
+		RankQuestionPanel rankingPanel = new RankQuestionPanel(isTest, rightPanel);
+		MapQuestionPanel mappingPanel = new MapQuestionPanel(isTest, rightPanel);
 
 		// cardLayout
-		
 
 		tfPanel.addComponentForCreating(page);
 		mcPanel.addComponentForCreating(page);
@@ -184,7 +203,7 @@ public class FirstMenuPanel extends MenuPanel {
 					PageCreator pc = new PageCreator();
 					// command
 					int testMinute = Integer.parseInt(jtaTime.getText());// @@@@需要获取totalScore,以及testMinute
-					Test test = new Test(jtaPageTitle.getText(), jtaName.getText() ,testMinute);
+					Test test = new Test(jtaPageTitle.getText(), jtaName.getText(), testMinute);
 					CreateTest cs = new CreateTest(pc, test);
 					// invoker
 					CreateAgent ca = new CreateAgent();
@@ -270,7 +289,7 @@ public class FirstMenuPanel extends MenuPanel {
 				} else {
 					DataCommand dc = new DataCommand();
 
-					ArrayList<String> pageNames = (ArrayList<String>) dc.getAllPageName(0);
+					java.util.List<String> pageNames = dc.getAllPageName(0);
 
 					addRightDisplayPanel(false, pageNames);
 

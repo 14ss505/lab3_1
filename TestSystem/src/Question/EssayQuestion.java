@@ -18,7 +18,6 @@ public class EssayQuestion extends Question {
 	public EssayQuestion(String prompt){
 		super(ESSAY);
 		this.prompt = prompt;
-		answer = new EssayAnswer("");
 		this.setIsScore(false);
 	}
 	

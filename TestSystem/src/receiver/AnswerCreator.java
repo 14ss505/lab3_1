@@ -12,37 +12,37 @@ public class AnswerCreator {
 	
 	public void createDecideAnswer(Page page,DecideAnswer answer,int index,String personName) {
 		Record record = dataCommand.getRecord(page.getPageName(), personName);
-		record.resetAnswer(index, answer);
+		record.setAnswer(index, answer);
 		dataCommand.saveRecord(record);
 	}
 	
 	public void createChoiceAnswer(Page page,ChoiceAnswer answer,int index,String personName) {
 		Record record = dataCommand.getRecord(page.getPageName(), personName);
-		record.resetAnswer(index, answer);
+		record.setAnswer(index, answer);
 		dataCommand.saveRecord(record);
 	}
 	
 	public void createShortEssayAnswer(Page page,ShortEssayAnswer answer,int index,String personName) {
 		Record record = dataCommand.getRecord(page.getPageName(), personName);
-		record.resetAnswer(index, answer);
+		record.setAnswer(index, answer);
 		dataCommand.saveRecord(record);
 	}
 	
 	public void createRankAnswer(Page page,RankAnswer answer,int index,String personName) {
 		Record record = dataCommand.getRecord(page.getPageName(), personName);
-		record.resetAnswer(index, answer);
+		record.setAnswer(index, answer);
 		dataCommand.saveRecord(record);
 	}
 	
 	public void createMapAnswer(Page page,MapAnswer answer,int index,String personName) {
 		Record record = dataCommand.getRecord(page.getPageName(),  personName);
-		record.resetAnswer(index, answer);
+		record.setAnswer(index, answer);
 		dataCommand.saveRecord(record);
 	}
 
 	public void createEssayAnswer(Page page,EssayAnswer answer,int index,String personName) {
 		Record record = dataCommand.getRecord(page.getPageName(), personName);
-		record.resetAnswer(index, answer);
+		record.setAnswer(index, answer);
 		dataCommand.saveRecord(record);
 	}
 }

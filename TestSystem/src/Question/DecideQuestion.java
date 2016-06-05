@@ -16,7 +16,6 @@ public class DecideQuestion extends PromptQuestion {
 	public DecideQuestion(String prompt){
 		super(DECIDE);
 		this.prompt = prompt;
-		this.answer = new DecideAnswer("");
 		this.setIsScore(true);
 	}
 	

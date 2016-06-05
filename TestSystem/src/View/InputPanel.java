@@ -3,9 +3,13 @@ package View;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.lang.reflect.Array;
+import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import javax.swing.*;
 
@@ -16,6 +20,8 @@ import Answer.MapAnswer;
 import Answer.RankAnswer;
 import Answer.ShortEssayAnswer;
 import Paper.Page;
+import Paper.Test;
+import Paper.Survey;
 import Question.ChoiceQuestion;
 import Question.DecideQuestion;
 import Question.EssayQuestion;
@@ -25,14 +31,21 @@ import Question.RankQuestion;
 import Question.ShortEssayQuestion;
 import agent.AddAnswerAgent;
 import agent.AddQuestionAgent;
+import agent.CreateAgent;
 import agent.ModifyQuestionAgent;
-import command.addanswer.*;
+import command.addanswer.AddChoiceAnswer;
+import command.addanswer.AddDecideAnswer;
+import command.addanswer.AddEssayAnswer;
+import command.addanswer.AddMapAnswer;
+import command.addanswer.AddRankAnswer;
+import command.addanswer.AddShortEssayAnswer;
 import command.addquestion.AddChoiceQuestion;
 import command.addquestion.AddDecideQuestion;
 import command.addquestion.AddEssayQuestion;
 import command.addquestion.AddMapQuestion;
 import command.addquestion.AddRankQuestion;
 import command.addquestion.AddShortEssayQuestion;
+import command.create.CreateSurvey;
 import command.modifyquestion.ModifyChoiceQuestion;
 import command.modifyquestion.ModifyDecideQuestion;
 import command.modifyquestion.ModifyEssayQuestion;
@@ -40,6 +53,7 @@ import command.modifyquestion.ModifyMapQuestion;
 import command.modifyquestion.ModifyRankQuestion;
 import command.modifyquestion.ModifyShortEssayQuestion;
 import receiver.AnswerCreator;
+import receiver.PageCreator;
 import receiver.QuestionCreator;
 import receiver.QuestionModifier;
 
@@ -60,12 +74,12 @@ class TFQuestionPanel extends QuestionPanel {
 		add(new JPanel());
 		add(new JLabel("Enter Question:"));
 		add(jtaQ);
-		add(new JPanel());
-		add(new JPanel());
-		add(new JLabel("Enter Score:"));
-		add(jtaS);
 
 		if (isTest) {
+			add(new JPanel());
+			add(new JPanel());
+			add(new JLabel("Enter Score:"));
+			add(jtaS);
 
 			add(new JPanel());
 			add(new JPanel());
@@ -100,17 +114,29 @@ class TFQuestionPanel extends QuestionPanel {
 				} else {
 					answer = "0";
 				}
-				/* 交互后端 */
-				QuestionCreator qc = new QuestionCreator();
+				if (isTest) {
+					/* 交互后端 */
+					QuestionCreator qc = new QuestionCreator();
 
-				DecideAnswer decideAnswer = new DecideAnswer(answer);// @@@@统一一下answer
-																		// 的string格式
-				DecideQuestion question = new DecideQuestion(jtaQ.getText(), decideAnswer,
-						Integer.parseInt(jtaS.getText()));
-				AddDecideQuestion adq = new AddDecideQuestion(page, question, qc);
+					DecideAnswer decideAnswer = new DecideAnswer(answer);// @@@@统一一下answer
+																			// 的string格式
+					DecideQuestion question = new DecideQuestion(jtaQ.getText(), decideAnswer,
+							Integer.parseInt(jtaS.getText()));
+					AddDecideQuestion adq = new AddDecideQuestion(page, question, qc);
 
-				AddQuestionAgent aqa = new AddQuestionAgent();
-				aqa.placeQuestion(adq);
+					AddQuestionAgent aqa = new AddQuestionAgent();
+					aqa.placeQuestion(adq);
+				} else {
+					/* 交互后端 */
+					QuestionCreator qc = new QuestionCreator();
+
+					DecideQuestion question = new DecideQuestion(jtaQ.getText());
+					AddDecideQuestion adq = new AddDecideQuestion(page, question, qc);
+
+					AddQuestionAgent aqa = new AddQuestionAgent();
+					aqa.placeQuestion(adq);
+				}
+
 				JOptionPane.showMessageDialog(null, "successful", "Add", JOptionPane.INFORMATION_MESSAGE);
 				// outter.removeAll();
 				CardLayout card = (CardLayout) outter.getLayout();
@@ -297,8 +323,14 @@ class TFQuestionPanel extends QuestionPanel {
 				// TODO Auto-generated method stub
 				/* answer */
 				AnswerCreator receiver = new AnswerCreator();
+				String ans="";
+				if(jrbYes.isSelected()){
+					ans="1";
+				}else{
+					ans="0";
+				}
 
-				DecideAnswer answer = new DecideAnswer(String.valueOf(jrbYes.isSelected()));// @@@@统一一下answer
+				DecideAnswer answer = new DecideAnswer(ans);// @@@@统一一下answer
 																							// 的string格式
 				AddDecideAnswer command = new AddDecideAnswer(page, answer, index, receiver, name);
 				AddAnswerAgent invoker = new AddAnswerAgent();
@@ -328,11 +360,11 @@ class SAQuestionPanel extends QuestionPanel {
 		add(new JLabel("Enter Question:"));
 		add(jtaQ);
 
-		add(new JPanel());
-		add(new JPanel());
-		add(new JLabel("Enter Score:"));
-		add(jtaS);
 		if (isTest) {
+			add(new JPanel());
+			add(new JPanel());
+			add(new JLabel("Enter Score:"));
+			add(jtaS);
 			add(new JPanel());
 			add(new JPanel());
 			add(new JLabel("Enter Answer:"));
@@ -348,17 +380,27 @@ class SAQuestionPanel extends QuestionPanel {
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
 
-				/* 交互后端 */
-				QuestionCreator qc = new QuestionCreator();
+				if (isTest) {
+					/* 交互后端 */
+					QuestionCreator qc = new QuestionCreator();
 
-				ShortEssayAnswer answer = new ShortEssayAnswer(jtaA.getText());// @@@@统一一下answer
-																				// 的string格式
-				ShortEssayQuestion question = new ShortEssayQuestion(jtaQ.getText(), answer,
-						Integer.parseInt(jtaS.getText()));
-				AddShortEssayQuestion adq = new AddShortEssayQuestion(page, question, qc);
+					ShortEssayAnswer answer = new ShortEssayAnswer(jtaA.getText());// @@@@统一一下answer
+																					// 的string格式
+					ShortEssayQuestion question = new ShortEssayQuestion(jtaQ.getText(), answer,
+							Integer.parseInt(jtaS.getText()));
+					AddShortEssayQuestion adq = new AddShortEssayQuestion(page, question, qc);
 
-				AddQuestionAgent aqa = new AddQuestionAgent();
-				aqa.placeQuestion(adq);
+					AddQuestionAgent aqa = new AddQuestionAgent();
+					aqa.placeQuestion(adq);
+				} else {
+					/* 交互后端 */
+					QuestionCreator qc = new QuestionCreator();
+					ShortEssayQuestion question = new ShortEssayQuestion(jtaQ.getText());
+					AddShortEssayQuestion adq = new AddShortEssayQuestion(page, question, qc);
+
+					AddQuestionAgent aqa = new AddQuestionAgent();
+					aqa.placeQuestion(adq);
+				}
 
 				JOptionPane.showMessageDialog(null, "successful", "Add", JOptionPane.INFORMATION_MESSAGE);
 				// outter.removeAll();
@@ -566,11 +608,11 @@ class EssayQuestionPanel extends QuestionPanel {
 		add(new JLabel("Enter Question:"));
 		add(jtaQ);
 
-		add(new JPanel());
-		add(new JPanel());
-		add(new JLabel("Enter Score:"));
-		add(jtaS);
 		if (isTest) {
+			add(new JPanel());
+			add(new JPanel());
+			add(new JLabel("Enter Score:"));
+			add(jtaS);
 			add(new JPanel());
 			add(new JPanel());
 			add(new JLabel("Enter Answer:"));
@@ -587,13 +629,24 @@ class EssayQuestionPanel extends QuestionPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				/* 交互后端 */
-				QuestionCreator qc = new QuestionCreator();
-				EssayAnswer answer = new EssayAnswer(jtaA.getText());
-				EssayQuestion question = new EssayQuestion(jtaQ.getText(), answer, Integer.parseInt(jtaS.getText()));
-				AddEssayQuestion adq = new AddEssayQuestion(page, question, qc);
-				AddQuestionAgent aqa = new AddQuestionAgent();
-				aqa.placeQuestion(adq);
+				if (isTest) {
+					/* 交互后端 */
+					QuestionCreator qc = new QuestionCreator();
+					EssayAnswer answer = new EssayAnswer(jtaA.getText());
+					EssayQuestion question = new EssayQuestion(jtaQ.getText(), answer,
+							Integer.parseInt(jtaS.getText()));
+					AddEssayQuestion adq = new AddEssayQuestion(page, question, qc);
+					AddQuestionAgent aqa = new AddQuestionAgent();
+					aqa.placeQuestion(adq);
+				} else {
+					/* 交互后端 */
+					QuestionCreator qc = new QuestionCreator();
+
+					EssayQuestion question = new EssayQuestion(jtaQ.getText());
+					AddEssayQuestion adq = new AddEssayQuestion(page, question, qc);
+					AddQuestionAgent aqa = new AddQuestionAgent();
+					aqa.placeQuestion(adq);
+				}
 
 				JOptionPane.showMessageDialog(null, "successful", "Add", JOptionPane.INFORMATION_MESSAGE);
 				// outter.removeAll();
@@ -806,10 +859,16 @@ class MCQuestionPanel extends QuestionPanel {
 		add(jlQ);
 		add(jtaQ);
 		add(new JPanel());
+		if (isTest) {
+			add(new JLabel("Enter Score:"));
+			add(jtaS);
+			add(new JPanel());
+		} else {
+			add(new JPanel());
+			add(new JPanel());
+			add(new JPanel());
+		}
 
-		add(new JLabel("Enter Score:"));
-		add(jtaS);
-		add(new JPanel());
 		add(jlN);
 		add(jtaNum);
 		add(new JLabel("输入后敲击回车"));
@@ -843,8 +902,10 @@ class MCQuestionPanel extends QuestionPanel {
 					jbtSetAns.addActionListener(new setAnsListener());
 				} else {
 					add(new JPanel());
+					JButton jbtSetAns = new JButton("Next");
+					add(jbtSetAns);
 					add(new JPanel());
-					add(new JPanel());
+					jbtSetAns.addActionListener(new setAnsListener());
 				}
 
 				for (int i = 0; i < 33 - 3 * (num + 1); i++) {
@@ -859,23 +920,26 @@ class MCQuestionPanel extends QuestionPanel {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			for (int i = 41; i >= 6; i--) {
-				remove(i);
-			}
 			ArrayList<JCheckBox> jtfAnss2 = new ArrayList<JCheckBox>();
-			for (int i = 0; i < jtfAnss.size(); i++) {
-				JCheckBox jchb = new JCheckBox();
-				jchb.setText(jtfAnss.get(i).getText());
-				items.add(jtfAnss.get(i).getText());
-				add(jchb);
-				jtfAnss2.add(jchb);
-				add(new JPanel());
-				add(new JPanel());
+			if (isTest) {
+				for (int i = 41; i >= 6; i--) {
+					remove(i);
+				}
 
-			}
-			int num = jtfAnss.size();
-			for (int i = 1; i < 36 - 3 * num; i++) {
-				add(new JPanel());
+				for (int i = 0; i < jtfAnss.size(); i++) {
+					JCheckBox jchb = new JCheckBox();
+					jchb.setText(jtfAnss.get(i).getText());
+					items.add(jtfAnss.get(i).getText());
+					add(jchb);
+					jtfAnss2.add(jchb);
+					add(new JPanel());
+					add(new JPanel());
+
+				}
+				int num = jtfAnss.size();
+				for (int i = 1; i < 36 - 3 * num; i++) {
+					add(new JPanel());
+				}
 			}
 			add(jtaAdd);
 			jtaAdd.addActionListener(new ActionListener() {
@@ -883,24 +947,36 @@ class MCQuestionPanel extends QuestionPanel {
 				@Override
 				public void actionPerformed(ActionEvent arg0) {
 					// TODO Auto-generated method stub
-					String ans = "";
-					for (int i = 0; i < jtfAnss2.size(); i++) {
-						if (jtfAnss2.get(i).isSelected()) {
-							ans += i;
-							ans += " ";
+					if (isTest) {
+						String ans = "";
+						for (int i = 0; i < jtfAnss2.size(); i++) {
+							if (jtfAnss2.get(i).isSelected()) {
+								ans += i;
+								ans += " ";
+							}
 						}
-					}
-					ans = ans.substring(0, ans.length() - 1);
-					// System.out.println(ans);
+						ans = ans.substring(0, ans.length() - 1);
+						// System.out.println(ans);
 
-					/* 交互后端 */
-					QuestionCreator qc = new QuestionCreator();
-					ChoiceAnswer answer = new ChoiceAnswer(ans);
-					ChoiceQuestion question = new ChoiceQuestion(jtaQ.getText(), items, answer,
-							Integer.parseInt(jtaS.getText()));
-					AddChoiceQuestion adq = new AddChoiceQuestion(page, question, qc);
-					AddQuestionAgent aqa = new AddQuestionAgent();
-					aqa.placeQuestion(adq);
+						/* 交互后端 */
+						QuestionCreator qc = new QuestionCreator();
+						ChoiceAnswer answer = new ChoiceAnswer(ans);
+						ChoiceQuestion question = new ChoiceQuestion(jtaQ.getText(), items, answer,
+								Integer.parseInt(jtaS.getText()));
+						AddChoiceQuestion adq = new AddChoiceQuestion(page, question, qc);
+						AddQuestionAgent aqa = new AddQuestionAgent();
+						aqa.placeQuestion(adq);
+					} else {
+
+						/* 交互后端 */
+						QuestionCreator qc = new QuestionCreator();
+
+						ChoiceQuestion question = new ChoiceQuestion(jtaQ.getText(), items);
+						AddChoiceQuestion adq = new AddChoiceQuestion(page, question, qc);
+						AddQuestionAgent aqa = new AddQuestionAgent();
+						aqa.placeQuestion(adq);
+					}
+
 					JOptionPane.showMessageDialog(null, "successful", "Add", JOptionPane.INFORMATION_MESSAGE);
 					// outter.removeAll();
 					CardLayout card = (CardLayout) outter.getLayout();
@@ -1280,12 +1356,19 @@ class RankQuestionPanel extends QuestionPanel {
 		add(new JPanel());
 		JTextField jtaS = new JTextField(20);
 
-		add(new JLabel("Enter Score:"));
-		add(jtaS);
-		add(new JPanel());
+		if (isTest) {
+			add(new JLabel("Enter Score:"));
+			add(jtaS);
+			add(new JPanel());
+		} else {
+			add(new JPanel());
+			add(new JPanel());
+			add(new JPanel());
+		}
+
 		add(jlN);
 		add(jtaNum);
-		add(new JPanel());
+		add(new JLabel("哥们 敲回车"));
 		// 第三行开始，又加12行
 		for (int i = 1; i < 34; i++) {
 			add(new JPanel());
@@ -1297,6 +1380,7 @@ class RankQuestionPanel extends QuestionPanel {
 				int num = Integer.parseInt(jtaNum.getText());
 
 				ArrayList<JTextField> jtfAns = new ArrayList<JTextField>(num);
+
 				for (int i = 9; i < 42; i++) {
 					remove(9);
 				}
@@ -1316,6 +1400,7 @@ class RankQuestionPanel extends QuestionPanel {
 					@Override
 					public void actionPerformed(ActionEvent arg0) {
 						// TODO Auto-generated method stub
+
 						String ans = "";
 						for (int i = 0; i < num; i++) {
 							items.add(jtfAns.get(i).getText());
@@ -1325,15 +1410,24 @@ class RankQuestionPanel extends QuestionPanel {
 						}
 						ans = ans.substring(0, ans.length() - 1);
 						// System.out.println(ans);
+						if (isTest) {
+							/* 交互后端 */
+							QuestionCreator qc = new QuestionCreator();
+							RankAnswer answer = new RankAnswer(ans);
+							RankQuestion question = new RankQuestion(jtaQ.getText(), items, answer,
+									Integer.parseInt(jtaS.getText()));
+							AddRankQuestion adq = new AddRankQuestion(page, question, qc);
+							AddQuestionAgent aqa = new AddQuestionAgent();
+							aqa.placeQuestion(adq);
+						} else {
+							QuestionCreator qc = new QuestionCreator();
 
-						/* 交互后端 */
-						QuestionCreator qc = new QuestionCreator();
-						RankAnswer answer = new RankAnswer(ans);
-						RankQuestion question = new RankQuestion(jtaQ.getText(), items, answer,
-								Integer.parseInt(jtaS.getText()));
-						AddRankQuestion adq = new AddRankQuestion(page, question, qc);
-						AddQuestionAgent aqa = new AddQuestionAgent();
-						aqa.placeQuestion(adq);
+							RankQuestion question = new RankQuestion(jtaQ.getText(), items);
+							AddRankQuestion adq = new AddRankQuestion(page, question, qc);
+							AddQuestionAgent aqa = new AddQuestionAgent();
+							aqa.placeQuestion(adq);
+						}
+
 						JOptionPane.showMessageDialog(null, "successful", "Add", JOptionPane.INFORMATION_MESSAGE);
 						// outter.removeAll();
 						CardLayout card = (CardLayout) outter.getLayout();
@@ -1538,10 +1632,13 @@ class RankQuestionPanel extends QuestionPanel {
 			add(new JPanel());
 
 		}
+
+		add(new JLabel("将选项序号输入 以空格隔开"));
+		JTextField ans = new JTextField(10);
+		add(ans);
 		add(new JPanel());
 		add(new JPanel());
-		JTextField ans = new JTextField();
-		add(new JPanel());
+
 		add(jtaPre);
 		add(jtaSubmit);
 		add(new JPanel());
@@ -1598,11 +1695,17 @@ class MapQuestionPanel extends QuestionPanel {
 		add(jlQ);
 		add(jtaQ);
 		add(new JPanel());
-
-		add(new JPanel());
-		add(jlS);
-		add(jtaS);
-		add(new JPanel());
+		if (isTest) {
+			add(new JPanel());
+			add(jlS);
+			add(jtaS);
+			add(new JPanel());
+		} else {
+			add(new JPanel());
+			add(new JPanel());
+			add(new JPanel());
+			add(new JPanel());
+		}
 
 		add(jlLN);
 		add(new JPanel());
@@ -1673,7 +1776,9 @@ class MapQuestionPanel extends QuestionPanel {
 					add(new JPanel());
 					add(new JPanel());
 					add(new JPanel());
-					add(new JPanel());
+					JButton jbtSetAns = new JButton("Next");
+					add(jbtSetAns);
+					jbtSetAns.addActionListener(new setAnsListener());
 				}
 				updateUI();// 刷新界面
 			}
@@ -1692,76 +1797,97 @@ class MapQuestionPanel extends QuestionPanel {
 			add(new JLabel(jtaQ.getText()));
 			add(new JPanel());
 
-			add(new JPanel());
-			add(jlS);
-			add(new JLabel(jtaS.getText()));
-			add(new JPanel());
-
+			
 			ArrayList<JTextField> labels = new ArrayList<JTextField>();
-			for (int i = 0; i < min; i++) {
-				JLabel jtaAL = new JLabel(lefts.get(i).getText());
-				JLabel jtaAR = new JLabel(rights.get(i).getText());
-				add(jtaAL);
-				JTextField label = new JTextField(5);
-				labels.add(label);
-				add(label);
-
+			if (isTest) {
 				add(new JPanel());
-				add(jtaAR);
-
-			}
-			for (int i = 0; i < max - min; i++) {
-				if (leftBig) {
+				add(jlS);
+				add(new JLabel(jtaS.getText()));
+				add(new JPanel());
+				for (int i = 0; i < min; i++) {
 					JLabel jtaAL = new JLabel(lefts.get(i).getText());
+					JLabel jtaAR = new JLabel(rights.get(i).getText());
 					add(jtaAL);
 					JTextField label = new JTextField(5);
 					labels.add(label);
 					add(label);
-					add(new JPanel());
-					add(new JPanel());
-				} else {
-					JLabel jtaAR = new JLabel(rights.get(i).getText());
-					add(new JPanel());
-					add(new JPanel());
 
 					add(new JPanel());
 					add(jtaAR);
+
 				}
-			}
-			for (int i = 0; i < 16; i++) {
+				for (int i = 0; i < max - min; i++) {
+					if (leftBig) {
+						JLabel jtaAL = new JLabel(lefts.get(i).getText());
+						add(jtaAL);
+						JTextField label = new JTextField(5);
+						labels.add(label);
+						add(label);
+						add(new JPanel());
+						add(new JPanel());
+					} else {
+						JLabel jtaAR = new JLabel(rights.get(i).getText());
+						add(new JPanel());
+						add(new JPanel());
+
+						add(new JPanel());
+						add(jtaAR);
+					}
+				}
+				for (int i = 0; i < 16; i++) {
+					add(new JPanel());
+				}
+				add(new JPanel());
+				add(new JPanel());
 				add(new JPanel());
 			}
-			add(new JPanel());
-			add(new JPanel());
-			add(new JPanel());
-
 			add(jtaAdd);
 			jtaAdd.addActionListener(new ActionListener() {
 
 				@Override
 				public void actionPerformed(ActionEvent arg0) {
 					// TODO Auto-generated method stub
-					int[][] ans = new int[labels.size()][2];
-					for (int i = 0; i < labels.size(); i++) {
-						ans[i][0] = i;
-						ans[i][1] = Integer.parseInt(labels.get(i).getText());
+					if (isTest) {
+						int[][] ans = new int[labels.size()][2];
+						for (int i = 0; i < labels.size(); i++) {
+							ans[i][0] = i;
+							ans[i][1] = Integer.parseInt(labels.get(i).getText());
+						}
+						List<String> items1 = new ArrayList<String>();
+						List<String> items2 = new ArrayList<String>();
+						for (int i = 0; i < lefts.size(); i++) {
+							items1.add(lefts.get(i).getText());
+						}
+						for (int i = 0; i < rights.size(); i++) {
+							items2.add(rights.get(i).getText());
+						}
+						/* 交互后端 */
+						QuestionCreator qc = new QuestionCreator();
+						MapAnswer answer = new MapAnswer(ans);
+						MapQuestion question = new MapQuestion(jtaQ.getText(), items1, items2, answer,
+								Integer.parseInt(jtaS.getText()));
+						AddMapQuestion adq = new AddMapQuestion(page, question, qc);
+						AddQuestionAgent aqa = new AddQuestionAgent();
+						aqa.placeQuestion(adq);
+					} else {
+
+						List<String> items1 = new ArrayList<String>();
+						List<String> items2 = new ArrayList<String>();
+						for (int i = 0; i < lefts.size(); i++) {
+							items1.add(lefts.get(i).getText());
+						}
+						for (int i = 0; i < rights.size(); i++) {
+							items2.add(rights.get(i).getText());
+						}
+						/* 交互后端 */
+						QuestionCreator qc = new QuestionCreator();
+
+						MapQuestion question = new MapQuestion(jtaQ.getText(), items1, items2);
+						AddMapQuestion adq = new AddMapQuestion(page, question, qc);
+						AddQuestionAgent aqa = new AddQuestionAgent();
+						aqa.placeQuestion(adq);
 					}
-					List<String> items1 = new ArrayList<String>();
-					List<String> items2 = new ArrayList<String>();
-					for (int i = 0; i < lefts.size(); i++) {
-						items1.add(lefts.get(i).getText());
-					}
-					for (int i = 0; i < rights.size(); i++) {
-						items2.add(rights.get(i).getText());
-					}
-					/* 交互后端 */
-					QuestionCreator qc = new QuestionCreator();
-					MapAnswer answer = new MapAnswer(ans);
-					MapQuestion question = new MapQuestion(jtaQ.getText(), items1, items2, answer,
-							Integer.parseInt(jtaS.getText()));
-					AddMapQuestion adq = new AddMapQuestion(page, question, qc);
-					AddQuestionAgent aqa = new AddQuestionAgent();
-					aqa.placeQuestion(adq);
+
 					JOptionPane.showMessageDialog(null, "successful", "Add", JOptionPane.INFORMATION_MESSAGE);
 					// outter.removeAll();
 					CardLayout card = (CardLayout) outter.getLayout();
@@ -1833,6 +1959,11 @@ class MapQuestionPanel extends QuestionPanel {
 		for (int i = 0; i < 16; i++) {
 			add(new JPanel());
 		}
+		add(jtaPre);
+
+		add(new JPanel());
+		add(jtaNext);
+		updateUI();// 刷新界面
 	}
 
 	public void addComponentForModifying(Page page, Question question1, int index) {
@@ -1897,7 +2028,7 @@ class MapQuestionPanel extends QuestionPanel {
 			if (leftBig) {
 				JTextField jtf1 = new JTextField((min + i) + ") " + items1.get(min + i));
 
-				JTextField jtf3 = new JTextField(""+a[min + i][1]);
+				JTextField jtf3 = new JTextField("" + a[min + i][1]);
 				jtf1.setEditable(false);
 
 				jtf3.setEditable(false);
@@ -2059,7 +2190,6 @@ class MapQuestionPanel extends QuestionPanel {
 				JTextField jtf3 = new JTextField();
 				jtf1.setEditable(false);
 
-				 
 				lefts.add(jtf1);
 				pair.add(jtf3);
 
@@ -2096,7 +2226,14 @@ class MapQuestionPanel extends QuestionPanel {
 				int[][] ans = new int[lefts.size()][2];
 				for (int i = 0; i < lefts.size(); i++) {
 					ans[i][0] = i;
-					ans[i][1] = Integer.parseInt(pair.get(i).getText());
+					Pattern pattern = Pattern.compile("[0-9]*");
+				        
+					if(pattern.matcher(pair.get(i).getText()).matches()){
+						ans[i][1] = Integer.parseInt(pair.get(i).getText());
+					}else{
+						ans[i][1]=-1;
+					}
+					
 				}
 				List<String> items1 = new ArrayList<String>();
 				List<String> items2 = new ArrayList<String>();

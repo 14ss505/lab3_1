@@ -570,33 +570,48 @@ public class IO {
 		String[] pageName_personName = recordName.split("-");
 		Record record = new Record(pageName_personName[0],pageName_personName[1]);
 		
-		record.addScore(Integer.parseInt(root.getChildText("score")));
+		Page page = this.readPage(pageName_personName[0]);
+		record.setPage(page);
+		
+		if(page.getType()==Page.TEST){
+			record.setTotalScore(Integer.parseInt(root.getChildText("score")));
+		}
+		
 		Element answers = root.getChild("answers");
 		List<Element> answerList = answers.getChildren();
-		System.out.println(answerList.size());
+		
 		for (int i = 0; i < answerList.size(); i++) {
 			Element answer = answerList.get(i);
 			int type = Integer.parseInt(answer.getAttributeValue("type"));
 			switch (type) {
-			case 0:
+			case Answer.DECIDE:{
 				DecideAnswer decide = new DecideAnswer(answer.getText());
-				record.addAnwser(decide);
+				record.setAnswer(i,decide);
 				break;
-			case 1:
+			}
+			case Answer.CHOICE:{
 				ChoiceAnswer choice = new ChoiceAnswer(answer.getText());
-				record.addAnwser(choice);
+				record.setAnswer(i,choice);
 				break;
-			case 2:
+			}
+			case Answer.SHORTESSAY:{
 				ShortEssayAnswer text = new ShortEssayAnswer(answer.getText());
-				record.addAnwser(text);
+				record.setAnswer(i,text);
 				break;
-			case 4:
+			}
+			case Answer.ESSAY:{
+				EssayAnswer essay = new EssayAnswer(answer.getText());
+				record.setAnswer(i,essay);
+				break;
+			}
+			case Answer.RANK:{
 				RankAnswer rank = new RankAnswer(answer.getText());
-				record.addAnwser(rank);
+				record.setAnswer(i,rank);
 				break;
-			case 5:{
+			}
+			case Answer.MAP:{
 				MapAnswer map = new MapAnswer(transMapAnswer(answer.getText()));
-				record.addAnwser(map);
+				record.setAnswer(i,map);
 				break;
 			}
 			}
@@ -632,13 +647,17 @@ public class IO {
 
 	public void writeRecord(String recordName, Record record) {
 		Element root = new Element("Record");
-		//Element personName = new Element("personName");
-		//personName.setText(record.getPersonName());
-		//root.addContent(personName);
-		Element score = new Element("score");
-		score.setText(record.getScore() + "");
+		Page page = record.getPage();
+		if(page.getType()==Page.TEST){
+			root.addContent(new Element("pageType").setText("test"));
+			Element score = new Element("score");
+			score.setText(record.getTotalScore() + "");
+			root.addContent(score);
+		}else{
+			root.addContent(new Element("pageType").setText("survey"));
+		}
+		
 		Element answers = new Element("answers");
-		root.addContent(score);
 		Iterator<Answer> iterator = record.iterator();
 
 		while (iterator.hasNext()) {

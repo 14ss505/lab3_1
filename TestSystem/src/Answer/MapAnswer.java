@@ -16,15 +16,6 @@ public class MapAnswer extends Answer {
         side2 = new LinkedList<>();
     }
 
-    public String[] getAnswer() {//get correct answer
-        String[] ret = new String[map.size()];;
-        for (int i = 0; i < map.size(); i++) {
-            ret[i]= "< " + side1.get(i) + ", " + side2.get(map.get(i)) + ">";
-        }
-        return ret;
-    }
-    
-
     public int[][] getAnswerPair() {//get correct answer
     	int[][] answerPair = new int[map.size()][2];
 		for(int i=0;i<map.size();i++){
@@ -39,12 +30,18 @@ public class MapAnswer extends Answer {
     public void setAnswer(int[][] answerPair) {//reset
     	map.clear();
         for (int i = 0; i <answerPair.length; i++) {
-        	System.out.println(answerPair[i][0]+" :::"+answerPair[i][1]);
-            map.add(answerPair[i][0],answerPair[i][1]);
+        	map.add(answerPair[i][0],answerPair[i][1]);
             System.out.println("map"+i+":::"+map.get(i));
         }
     }
 
+	public void setDefaultAnswer(){
+		map.clear();
+        for (int i = 0; i <side1.size(); i++) {
+        	map.add(i,0);
+        }
+	}
+    
     public void setQuestion(List<String> side1, List<String> side2) {
         this.side1 = side1;
         this.side2 = side2;

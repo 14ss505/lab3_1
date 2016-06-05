@@ -20,11 +20,13 @@ public class TabulateDecideResult extends TabulateResult{
 		int Fnum = 0;
 		for(int i =0 ;i<records.size();i++){
 			DecideAnswer answer = (DecideAnswer) records.get(i).getAnswer(questionIndex);
-			int answerInt = Integer.parseInt(answer.getAnswer());
-			if(answerInt==1)
+			int answerInt = Integer.parseInt(answer.writeAnswer());
+			if(answerInt==1){
 				Tnum++;
-			else
+			}
+			else{
 				Fnum++;
+			}
 		}
 		result = "选择'T'的人次为："+Tnum+"\n选择'F'的人次为："+Fnum;
 	}
