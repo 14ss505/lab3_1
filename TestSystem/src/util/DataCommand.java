@@ -5,23 +5,18 @@ import java.util.List;
 
 import Paper.Page;
 import Paper.Record;
-import Paper.Survey;
 import Paper.Test;
 import Question.Question;
-import TabulateResult.TabulateChoiceResult;
-import TabulateResult.TabulateDecideResult;
-import TabulateResult.TabulateEssayResult;
-import TabulateResult.TabulateMapResult;
-import TabulateResult.TabulateRankResult;
-import TabulateResult.TabulateResult;
-import TabulateResult.TabulateTextResult;
+import TabulateResult.*;
 
 public class DataCommand {
 	private IO io = new IO();
 
 	/* use this function when you try to answer a page*/
 	public Page createRecord(String pageName,String personName) {
+		Page page = io.readPage(pageName);
 		Record record = new Record(pageName, personName);
+		record.setPage(page);
 		this.updateRecordList(record);
 		this.saveRecord(record);
 		return this.getPage(pageName);
@@ -30,9 +25,15 @@ public class DataCommand {
 	/* use this function when you try to create a new page*/
 	public void createPage(Page page) {
 		this.updatePageList(page.getPageName(), page.getType(), page.getPersonName());
+		createPageAnswerRecordList(page.getPageName());
 		this.savePage(page);
 	}
 	
+	private void createPageAnswerRecordList(String pageName) {
+		List<String> recordName = new LinkedList<String>();
+		io.writeRecordInfo(pageName, recordName);
+	}
+
 	/*get all pageNames(tests or surveys)*/
 	public List<String> getAllPageName(int type){
 		List<String>[] pageName = io.readInfo();
@@ -141,7 +142,7 @@ public class DataCommand {
 			result = new TabulateChoiceResult(records,questionIndex);
 			break;
 		case 3:
-			result = new TabulateTextResult(records,questionIndex);
+			result = new TabulateShortEssayResult(records,questionIndex);
             break;
         case 4:
         	result = new TabulateEssayResult(records,questionIndex);

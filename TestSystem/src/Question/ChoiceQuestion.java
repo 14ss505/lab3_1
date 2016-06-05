@@ -12,29 +12,21 @@ public class ChoiceQuestion extends ItemQuestion {
 		this.prompt = prompt;
 		this.items = items;
 		this.answer = answer;
-		this.setAnswer(answer.getAnswer());
+		answer.setItem(items);
 		this.score = score;
-        this.isGradable = true;
+		this.setIsScore(true);
     }
 	
 	public ChoiceQuestion(String prompt, List<String> items){
 		super(CHOICE);
 		this.prompt = prompt;
 		this.items = items;
-		//this.answer = new ChoiceAnswer();
-        this.isGradable = true;
-    }
-
-	public ChoiceQuestion(){
-		super(CHOICE);
-		//this.answer = new ChoiceAnswer();
-        this.isGradable = true;
+		this.setIsScore(true);
     }
 	
-	@Override
 	public void setAnswer(String answer) {
-        super.setAnswer(answer);
-        ((ChoiceAnswer)this.answer).setItem(items);
+		((ChoiceAnswer)this.answer).setItem(items);
+		((ChoiceAnswer)this.answer).setAnswer(answer);
 	}
 
 	@Override

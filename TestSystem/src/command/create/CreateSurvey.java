@@ -1,20 +1,20 @@
 package command.create;
 
-import Paper.Page;
+import Paper.Survey;
 import command.Create;
 import receiver.PageCreator;
 
 public class CreateSurvey extends Create {
 	private PageCreator pc;
-	private Page page;
+	private Survey survey;
 
-	public CreateSurvey(PageCreator pc,Page page) {
+	public CreateSurvey(PageCreator pc,Survey survey) {
 		this.pc = pc;
-		this.page = page;
+		this.survey = survey;
 	}
 
 	public void execute() {
-		pc.createPage(page);
+		pc.createPage(survey);
 	}
 
 }

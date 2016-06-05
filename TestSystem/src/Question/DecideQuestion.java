@@ -1,6 +1,7 @@
 package Question;
 
 import Answer.DecideAnswer;
+import Answer.MapAnswer;
 import Paper.Page;
 
 public class DecideQuestion extends PromptQuestion {
@@ -8,23 +9,16 @@ public class DecideQuestion extends PromptQuestion {
 		super(DECIDE);
 		this.prompt = prompt;
 		this.answer = answer;
-		this.setAnswer(answer.getAnswer());
 		this.score = score;
-		this.isGradable = true;
+		this.setIsScore(true);
 	}
 
 	public DecideQuestion(String prompt){
 		super(DECIDE);
 		this.prompt = prompt;
-		//this.answer = new DecideAnswer();
-		this.isGradable = true;
+		this.answer = new DecideAnswer("");
+		this.setIsScore(true);
 	}
-	/*
-	public DecideQuestion(){
-		super(DECIDE);
-		//this.answer = new DecideAnswer();
-		this.isGradable = true;
-	}*/
 	
 	@Override
 	public String getQuestion(){
@@ -32,4 +26,8 @@ public class DecideQuestion extends PromptQuestion {
 		return ret;
 	}
 	
+	public void setAnswer(String answer) {
+        ((DecideAnswer)this.answer).setAnswer(answer);
+	}
+
 }

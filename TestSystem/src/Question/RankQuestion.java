@@ -2,38 +2,32 @@ package Question;
 
 import java.util.List;
 
+import Answer.ChoiceAnswer;
 import Answer.RankAnswer;
 
 public class RankQuestion extends ItemQuestion {
+	
 	public RankQuestion(String prompt, List<String> items, RankAnswer answer, int score){
 		super(RANK);
 		this.prompt = prompt;
 		this.items = items;
 		this.answer = answer;
-		this.setAnswer(answer.getAnswer());
+		answer.setQuestion(items);
 		this.score = score;
-        this.isGradable = true;
+		this.setIsScore(true);
     }
 	
 	public RankQuestion(String prompt, List<String> items){
 		super(RANK);
 		this.prompt = prompt;
 		this.items = items;
-		//this.answer = new RankAnswer();
-        this.isGradable = true;
-    }
-
-	public RankQuestion(){
-		super(RANK);
-		//this.answer = new RankAnswer();
-        this.isGradable = true;
-    }
+		this.answer = new RankAnswer("");
+		this.setIsScore(true);
+	}
 	
-	
-	@Override
 	public void setAnswer(String answer) {
-        super.setAnswer(answer);
         ((RankAnswer)this.answer).setQuestion(items);
+        ((RankAnswer)this.answer).setAnswer(answer);
 	}
 
 	@Override

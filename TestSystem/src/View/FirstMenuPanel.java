@@ -72,7 +72,7 @@ public class FirstMenuPanel extends MenuPanel {
 	}
 
 	void addRightDisplayPanel(boolean isTest, java.util.List<String> pageNames) {
-		LoadPagePanel loadPagePanel = new LoadPagePanel(isTest,this, rightPanel, pageNames);
+		LoadPagePanel loadPagePanel = new LoadPagePanel(isTest, this, rightPanel, pageNames);
 		rightPanel.add("load", loadPagePanel);
 
 		loadPagePanel.updateUI();
@@ -91,7 +91,7 @@ public class FirstMenuPanel extends MenuPanel {
 		initRegisterPanel(registerPane);
 	}
 
-	void addRightCreatePanel(boolean isTest,String pageName,String personName,int type) {
+	void addRightCreatePanel(boolean isTest,Page page) {
 		TFQuestionPanel tfPanel = new TFQuestionPanel(isTest,rightPanel);
 		MCQuestionPanel mcPanel = new MCQuestionPanel(isTest,rightPanel);
 		SAQuestionPanel saPanel = new SAQuestionPanel(isTest,rightPanel);
@@ -100,13 +100,14 @@ public class FirstMenuPanel extends MenuPanel {
 		MapQuestionPanel mappingPanel = new MapQuestionPanel(isTest,rightPanel);
 
 		// cardLayout
+		
 
-		tfPanel.addComponentForCreating(pageName,personName, type);
-		mcPanel.addComponentForCreating(pageName,personName, type);
-		saPanel.addComponentForCreating(pageName,personName, type);
-		essayPanel.addComponentForCreating(pageName,personName, type);
-		rankingPanel.addComponentForCreating(pageName,personName, type);
-		mappingPanel.addComponentForCreating(pageName,personName, type);
+		tfPanel.addComponentForCreating(page);
+		mcPanel.addComponentForCreating(page);
+		saPanel.addComponentForCreating(page);
+		essayPanel.addComponentForCreating(page);
+		rankingPanel.addComponentForCreating(page);
+		mappingPanel.addComponentForCreating(page);
 
 		rightPanel.add("tf", tfPanel);
 		rightPanel.add("mc", mcPanel);
@@ -182,15 +183,15 @@ public class FirstMenuPanel extends MenuPanel {
 					// receiver
 					PageCreator pc = new PageCreator();
 					// command
-					int totalScore = 0,testMinute = 0;//@@@@需要获取totalScore,以及testMinute
-					Test test = new Test(jtaPageTitle.getText(), jtaName.getText(),totalScore,testMinute);
+					int testMinute = Integer.parseInt(jtaTime.getText());// @@@@需要获取totalScore,以及testMinute
+					Test test = new Test(jtaPageTitle.getText(), jtaName.getText() ,testMinute);
 					CreateTest cs = new CreateTest(pc, test);
 					// invoker
 					CreateAgent ca = new CreateAgent();
 					ca.placeCreateOrder(cs);
 
 					// add every input panel for test
-					addRightCreatePanel(true,jtaPageTitle.getText(),jtaName.getText(),Page.TEST);
+					addRightCreatePanel(true, test);
 
 				} else {
 					// receiver
@@ -204,7 +205,7 @@ public class FirstMenuPanel extends MenuPanel {
 
 					// add every input panel for test
 
-					addRightCreatePanel(false,jtaPageTitle.getText(),jtaName.getText(),Page.SURVEY);
+					addRightCreatePanel(false, survey);
 				}
 
 			}
@@ -261,7 +262,7 @@ public class FirstMenuPanel extends MenuPanel {
 
 					DataCommand dc = new DataCommand();
 
-					java.util.List<String> pageNames =   dc.getAllPageName(1);
+					java.util.List<String> pageNames = dc.getAllPageName(1);
 					// add every input panel for test
 					addRightDisplayPanel(true, pageNames);
 

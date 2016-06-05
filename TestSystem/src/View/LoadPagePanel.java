@@ -93,7 +93,9 @@ public class LoadPagePanel extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				// String pageName=(String) jlist.getSelectedValue();
 				DataCommand dc = new DataCommand();
+				System.out.println(choosedPage);
 				Page page = dc.getPage(choosedPage);
+				
 				// 改掉displayPanel
 				// displayFrame.removeAll();
 				displayFrame.add(new DisplayPanel(page, isTest));
@@ -109,7 +111,7 @@ public class LoadPagePanel extends JPanel {
 				DataCommand dc = new DataCommand();
 				Page page = dc.getPage(choosedPage);
 				// 改掉displayPanel
-				// displayFrame.removeAll();
+				//displayFrame.removeAll();
 				displayFrame.add(new ModifyPanel(page, isTest));
 				displayFrame.setVisible(true);
 			}
@@ -118,9 +120,10 @@ public class LoadPagePanel extends JPanel {
 		jbtTake.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				String name=JOptionPane.showInputDialog("Please your name then we can have a drink");
 				DataCommand dc = new DataCommand();
-				Page page = dc.getPage(choosedPage);
-				displayFrame.add(new TestPanel(page, isTest));
+				Page page = dc.createRecord(choosedPage,name);
+				displayFrame.add(new TestPanel(page, isTest,name));
 				displayFrame.setVisible(true);
 			}
 		});

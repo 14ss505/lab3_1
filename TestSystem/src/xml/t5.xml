@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Page type="test">
+  <personName>mm</personName>
+  <totalScore>1120</totalScore>
+  <testMinute>12</testMinute>
+  <questions>
+    <question type="0" isScore="1" pageType="test">
+      <prompt>are you not ok?</prompt>
+      <answer>true</answer>
+      <score>1000</score>
+    </question>
+    <question type="1" isScore="1" pageType="test">
+      <prompt>choose any two</prompt>
+      <items>
+        <item>mmy</item>
+        <item>zjy</item>
+        <item>xxy</item>
+      </items>
+      <answer>0 1</answer>
+      <score>10</score>
+    </question>
+    <question type="2" isScore="1" pageType="test">
+      <prompt>describe ymm how beautiful</prompt>
+      <answer>very very beautiful</answer>
+      <score>100</score>
+    </question>
+    <question type="3" isScore="0" pageType="test">
+      <prompt>anyway</prompt>
+    </question>
+    <question type="3" isScore="0" pageType="test">
+      <prompt>111</prompt>
+    </question>
+    <question type="4" isScore="1" pageType="test">
+      <prompt>rank fat</prompt>
+      <items>
+        <item>mmy</item>
+        <item>zjy</item>
+        <item>xxy</item>
+      </items>
+      <answer>0 1 2</answer>
+      <score>10</score>
+    </question>
+    <question type="5" isScore="1" pageType="test">
+      <prompt>which two are couples</prompt>
+      <side1>
+        <left>zjy</left>
+        <left>xxy</left>
+      </side1>
+      <side2>
+        <right>llt</right>
+        <right>qzx</right>
+      </side2>
+      <answer>1 0</answer>
+      <score>0</score>
+    </question>
+  </questions>
+</Page>
+

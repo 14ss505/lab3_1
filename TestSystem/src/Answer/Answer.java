@@ -13,9 +13,6 @@ public abstract class Answer {
 	public Answer(int type) {
 		this.type = type;
 	}
-
-	public abstract String getAnswer();
-	public abstract void setAnswer(String answer);
 	public abstract String writeAnswer();
 	public int getType() {
 		return type;

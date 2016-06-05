@@ -10,12 +10,12 @@ import Question.Question;
 
 public class AddChoiceAnswer extends AddAnswer {
 	
-	public AddChoiceAnswer(Page page,ChoiceAnswer answer,int index,AnswerCreator creator) {
-		super(page,answer,index,creator);
+	public AddChoiceAnswer(Page page,ChoiceAnswer answer,int index,AnswerCreator creator,String personName) {
+		super(page,answer,index,creator, personName);
 	}
 
 	@Override
 	public void execute() {
-		creator.createChoiceAnswer(page,(ChoiceAnswer)answer,index);
+		creator.createChoiceAnswer(page,(ChoiceAnswer)answer,index,personName);
 	}
 }

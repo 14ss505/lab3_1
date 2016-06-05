@@ -10,12 +10,12 @@ import Question.Question;
 
 public class AddMapAnswer  extends AddAnswer{
 
-	public AddMapAnswer(Page page,MapAnswer answer,int index,AnswerCreator creator) {
-		super(page,answer,index,creator);
+	public AddMapAnswer(Page page,MapAnswer answer,int index,AnswerCreator creator,String personName) {
+		super(page,answer,index,creator, personName);
 	}
-
+	
 	@Override
 	public void execute() {
-		creator.createMapAnswer(page,(MapAnswer)answer,index);
+		creator.createMapAnswer(page,(MapAnswer)answer,index,personName);
 	}
 }

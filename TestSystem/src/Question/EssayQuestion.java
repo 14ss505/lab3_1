@@ -6,28 +6,29 @@ import Answer.Answer;
 import Answer.EssayAnswer;
 
 public class EssayQuestion extends Question {
+	
+	public EssayQuestion(String prompt,EssayAnswer answer,int score ){
+		super(ESSAY);
+		this.prompt = prompt;
+		this.answer = answer;
+		this.score = score;
+		this.setIsScore(false);
+	}
+	
 	public EssayQuestion(String prompt){
 		super(ESSAY);
 		this.prompt = prompt;
-		//answer = new EssayAnswer();
-		this.isGradable = false;
+		answer = new EssayAnswer("");
+		this.setIsScore(false);
 	}
-	
-	public EssayQuestion(){
-		super(ESSAY);
-		//answer = new EssayAnswer();
-		this.isGradable = false;
-	}
-	
 	
 	@Override
 	public String getQuestion(){
 		return "Essay: "+prompt;
 	}
 
-	@Override
 	public void setAnswer(String answer) {
-		this.answer.setAnswer(answer);
+		((EssayAnswer)(this.answer)).setAnswer(answer);
 	}
 
 	@Override

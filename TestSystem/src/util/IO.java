@@ -85,11 +85,6 @@ public class IO {
 	}
 
 	/*
-	 * read all pages(tests and surveys) from pageInfo.xml :
-	 * pageName,personName,type
-	 */
-
-	/*
 	 * read all type-pageName-personName from pageInfo.xml :
 	 * pageName,personName,type
 	 */
@@ -121,9 +116,7 @@ public class IO {
 		return pageName_type_personName;
 	}
 
-	/* read a certain page by pageName */
-
-	/* read a certain page from 'pageName'.xml : score,type,questions */
+	/* read a certain page from 'pageName'.xml : totalScore,testMinute,type,questions */
 	public Page readPage(String pageName) {
 		InputStream file;
 		Element root = null;
@@ -150,10 +143,13 @@ public class IO {
 			Survey survey = new Survey(pageName, root.getChildText("personName"));
 			page = survey;
 		}
-		page.setPageName(pageName);
-
+		
 		Element questions = root.getChild("questions");
 		List<Element> questionList = questions.getChildren();
+		System.out.println("read page-->question num:"+questionList.size());
+		if(questionList.size()==0){
+			return page;
+		}
 		for (int i = 0; i < questionList.size(); i++) {
 			Element question = questionList.get(i);
 			int type = Integer.parseInt(question.getAttributeValue("type"));
@@ -166,7 +162,7 @@ public class IO {
 				q = this.readChoiceQuestion(question);
 				break;
 			case 2:
-				q = this.readTextAnswer(question);
+				q = this.readShortEssayAnswer(question);
 				break;
 			case 3:
 				q = this.readEssayQuestion(question);
@@ -184,82 +180,116 @@ public class IO {
 	}
 
 	public Question readDecideQuestion(Element question) {
-		DecideQuestion decide = new DecideQuestion(question.getChildText("prompt"));
-		decide.setPrompt(question.getChildText("prompt"));
-		decide.setScore(Integer.parseInt(question.getChildText("score")));
-		if (question.getAttributeValue("answer").equals("1")) {
-			decide.setAnswer(question.getChildText("answer"));
+		DecideQuestion decide ;
+		String prompt = question.getChildText("prompt");
+		
+		if (question.getAttributeValue("pageType").equals("test")&&question.getAttributeValue("isScore").equals("1")) {
+			DecideAnswer answer = new DecideAnswer(question.getChildText("answer"));
+			int score = Integer.parseInt(question.getChildText("score"));
+			decide = new DecideQuestion(prompt, answer, score);
+		}else{
+			 decide = new DecideQuestion(prompt);
 		}
 		return decide;
 	}
 
 	public Question readChoiceQuestion(Element question) {
-		ChoiceQuestion choice = new ChoiceQuestion();
-		choice.setPrompt(question.getChildText("prompt"));
-		choice.setScore(Integer.parseInt(question.getChildText("score")));
+		ChoiceQuestion choice;
+		String prompt = question.getChildText("prompt");
+		
 		List<Element> items = question.getChild("items").getChildren();
+		List<String> itemstr = new LinkedList<String>();
 		for (int i = 0; i < items.size(); i++) {
 			Element item = items.get(i);
-			choice.setItem(item.getText());
+			System.out.println("items:"+i+" :"+item.getText());
+			itemstr.add(item.getText());
 		}
-		if (question.getAttributeValue("answer").equals("1")) {
-			choice.setAnswer(question.getChildText("answer"));
+	
+		if (question.getAttributeValue("pageType").equals("test")&&question.getAttributeValue("isScore").equals("1")) {
+			ChoiceAnswer answer = new ChoiceAnswer(question.getChildText("answer"));
+			int score = Integer.parseInt(question.getChildText("score"));
+			choice = new ChoiceQuestion(prompt, itemstr, answer, score);
+		}else{
+			choice = new ChoiceQuestion(question.getChildText("prompt"), itemstr);
 		}
 		return choice;
 	}
 
-	public Question readTextAnswer(Element question) {
-		ShortEssayQuestion text = new ShortEssayQuestion();
-		text.setPrompt(question.getChildText("prompt"));
-		text.setScore(Integer.parseInt(question.getChildText("score")));
-		if (question.getAttributeValue("answer").equals("1")) {
-			text.setAnswer(question.getChildText("answer"));
+	public Question readShortEssayAnswer(Element question) {
+		ShortEssayQuestion text ;
+		String prompt = question.getChildText("prompt");
+		
+		if (question.getAttributeValue("pageType").equals("test")&&question.getAttributeValue("isScore").equals("1")) {
+			ShortEssayAnswer answer = new ShortEssayAnswer(question.getChildText("answer"));
+			int score  = Integer.parseInt(question.getChildText("score"));
+			text = new ShortEssayQuestion(prompt, answer, score);
+		}
+		else{
+			text = new ShortEssayQuestion(prompt);
 		}
 		return text;
 	}
 
 	public Question readEssayQuestion(Element question) {
-		EssayQuestion essay = new EssayQuestion();
-		essay.setPrompt(question.getChildText("prompt"));
+		EssayQuestion essay;
+		String prompt = question.getChildText("prompt");
+		
+		if (question.getAttributeValue("pageType").equals("test")) {
+			EssayAnswer answer = new EssayAnswer(question.getChildText("answer"));
+			int score  = Integer.parseInt(question.getChildText("score"));
+			essay = new EssayQuestion(prompt, answer, score);
+		}else{
+			essay = new EssayQuestion(prompt);
+		}
 		return essay;
 	}
 
 	public Question readRankQuestion(Element question) {
-		RankQuestion rank = new RankQuestion();
-		rank.setPrompt(question.getChildText("prompt"));
-		rank.setScore(Integer.parseInt(question.getChildText("score")));
+		RankQuestion rank ;
+		String prompt = question.getChildText("prompt");
+		
 		List<Element> items = question.getChild("items").getChildren();
+		List<String> itemstr = new LinkedList<String>();
 		for (int i = 0; i < items.size(); i++) {
-			rank.setItem(items.get(i).getText());
+			Element item = items.get(i);
+			itemstr.add(item.getText());
 		}
-		System.out.println(question.getChildText("answer"));
-		if (question.getAttributeValue("answer").equals("1")) {
-			rank.setAnswer(question.getChildText("answer"));
+		
+		if (question.getAttributeValue("pageType").equals("test")&&question.getAttributeValue("isScore").equals("1")) {
+			RankAnswer answer = new RankAnswer(question.getChildText("answer"));
+			int score = Integer.parseInt(question.getChildText("score"));
+			rank = new RankQuestion(prompt, itemstr, answer, score);
+		}else{
+			rank = new RankQuestion(prompt, itemstr);
 		}
 		return rank;
 	}
 
 	public Question readMapQuestion(Element question) {
-		MapQuestion map = new MapQuestion();
-		map.setPrompt(question.getChildText("prompt"));
+		MapQuestion map ;
+		String prompt = question.getChildText("prompt");
+		
 		Element side1 = question.getChild("side1");
 		List<Element> sideList1 = side1.getChildren();
-		map.setSide(1);
+		List<String> side1Str = new LinkedList<String>();
 		for (int j = 0; j < sideList1.size(); j++) {
-			map.setItem(sideList1.get(j).getText());
+			side1Str.add(sideList1.get(j).getText());
 		}
 		Element side2 = question.getChild("side2");
 		List<Element> sideList2 = side2.getChildren();
-		map.setSide(2);
+		List<String> side2Str = new LinkedList<String>();
 		for (int j = 0; j < sideList2.size(); j++) {
-			map.setItem(sideList2.get(j).getText());
+			side2Str.add(sideList2.get(j).getText());
 		}
-		if (question.getAttributeValue("isScore").equals("1")) {
-			map.setScore(Integer.parseInt(question.getChildText("score")));
+		
+		if (question.getAttributeValue("pageType").equals("test")&&question.getAttributeValue("isScore").equals("1")) {
+			MapAnswer answer = new MapAnswer(transMapAnswer(question.getChildText("answer")));
+			int score = Integer.parseInt(question.getChildText("score"));
+			 map = new MapQuestion(prompt, side1Str, side2Str, answer, score);
+		}else{
+			 map = new MapQuestion(prompt, side1Str, side2Str);
 		}
-		if (question.getAttributeValue("answer").equals("1")) {
-			map.setAnswer(question.getChildText("answer"));
-		}
+		
 		return map;
 	}
 
@@ -292,37 +322,52 @@ public class IO {
 
 	public void writePage(Page page) {
 		Element root = new Element("Page");
-		root.setAttribute("type", page.getType() + "");
 		root.addContent(new Element("personName").setText(page.getPersonName()));
 		if (page.getType() == Page.TEST) {
+			root.setAttribute("type", "test");
 			root.addContent(new Element("totalScore").setText(((Test) page).getTotalScore() + ""));
 			root.addContent(new Element("testMinute").setText(((Test) page).getTestMinute() + ""));
+		}else{
+			root.setAttribute("type", "survey");
 		}
 
 		List<Question> questionList = page.getQuestionList();
+		System.out.println("write page-->question num:"+questionList.size());
 		Element questions = new Element("questions");
 		for (int i = 0; i < questionList.size(); i++) {
 			Question question = questionList.get(i);
 			Element qe = null;
 			switch (question.getType()) {
-			case 0:
-				qe = this.savePromptQuestion(question);
+			case 0:{
+				qe = this.savePromptQuestion(question,page.getType());
+				System.out.println("save decide question");
 				break;
-			case 1:
-				qe = this.saveItemQuestion(question);
+			}
+			case 1:{
+				qe = this.saveItemQuestion(question,page.getType());
+				System.out.println("save choice question");
 				break;
-			case 2:
-				qe = this.savePromptQuestion(question);
+			}
+			case 2:{
+				qe = this.savePromptQuestion(question,page.getType());
+				System.out.println("save short essay question");
 				break;
-			case 3:
-				qe = this.saveEssayQuestion(question);
+			}
+			case 3:{
+				qe = this.saveEssayQuestion(question,page.getType());
+				System.out.println("save essay question");
 				break;
-			case 4:
-				qe = this.saveItemQuestion(question);
+			}
+			case 4:{
+				qe = this.saveItemQuestion(question,page.getType());
+				System.out.println("save rank question");
 				break;
-			case 5:
-				qe = this.savaMapQuestion(question);
+			}
+			case 5:{
+				qe = this.savaMapQuestion(question,page.getType());
+				System.out.println("save map question");
 				break;
+			}
 			}
 			questions.addContent(qe);
 		}
@@ -344,106 +389,128 @@ public class IO {
 		}
 	}
 
-	public Element savePromptQuestion(Question question) {
+	public Element savePromptQuestion(Question question,int pageType) {
 		PromptQuestion promptQuestion = (PromptQuestion) question;
 		Element ret = new Element("question");
 		ret.setAttribute("type", question.getType() + "");
 		ret.setAttribute("isScore", "1");
-		int anwser = 1;
-		if (promptQuestion.getAnswer() == null)
-			anwser = 0;
-		ret.setAttribute("answer", anwser + "");
+		if (pageType == Page.TEST)
+			ret.setAttribute("pageType", "test");
+		else
+			ret.setAttribute("pageType", "survey");
+		
 		Element prompt = new Element("prompt");
 		prompt.setText(question.getPrompt());
 		ret.addContent(prompt);
-		if (promptQuestion.getAnswer() != null) {
-			Answer an = promptQuestion.getAnswer();
+		
+		if (pageType == Page.TEST) {
 			Element answerElement = new Element("answer");
+			Answer an = promptQuestion.getAnswer();
 			answerElement.setText(an.writeAnswer());
 			ret.addContent(answerElement);
+			ret.addContent(new Element("score").setText(question.getScore() + ""));
 		}
 
-		ret.addContent(new Element("score").setText(question.getScore() + ""));
 		return ret;
 	}
 
-	public Element saveItemQuestion(Question question) {
+	public Element saveItemQuestion(Question question,int pageType) {
 		ItemQuestion item = (ItemQuestion) question;
 		Element ret = new Element("question");
 		ret.setAttribute("type", question.getType() + "");
 		ret.setAttribute("isScore", "1");
-		int anwser = 1;
-		if (item.getAnswer() == null)
-			anwser = 0;
-		ret.setAttribute("answer", anwser + "");
+		if (pageType == Page.TEST)
+			ret.setAttribute("pageType", "test");
+		else
+			ret.setAttribute("pageType", "survey");
+		
 		Element prompt = new Element("prompt");
 		prompt.setText(question.getPrompt());
 		ret.addContent(prompt);
+		
 		List<String> items = item.getItem();
 		Element itemElement = new Element("items");
 		for (int j = 0; j < items.size(); j++) {
 			itemElement.addContent(new Element("item").setText(items.get(j)));
 		}
+		
 		ret.addContent(itemElement);
-		if (item.getAnswer() != null) {
-			Answer an = item.getAnswer();
+		if (pageType == Page.TEST) {
 			Element answerElement = new Element("answer");
+			Answer an = item.getAnswer();
 			answerElement.setText(an.writeAnswer());
 			ret.addContent(answerElement);
+			ret.addContent(new Element("score").setText(question.getScore() + ""));
 		}
-
-		ret.addContent(new Element("score").setText(question.getScore() + ""));
+		
 		return ret;
 	}
 
-	public Element savaMapQuestion(Question question) {
+	public Element savaMapQuestion(Question question,int pageType) {
 		MapQuestion map = (MapQuestion) question;
 		Element ret = new Element("question");
 		ret.setAttribute("type", question.getType() + "");
 		ret.setAttribute("isScore", "1");
-		int anwser = 1;
-		if (map.getAnswer() == null)
-			anwser = 0;
-		ret.setAttribute("answer", anwser + "");
+		if (pageType == Page.TEST)
+			ret.setAttribute("pageType", "test");
+		else
+			ret.setAttribute("pageType", "survey");
+		
 		Element prompt = new Element("prompt");
 		prompt.setText(question.getPrompt());
 		ret.addContent(prompt);
 
-		map.setSide(1);
-		List<String> side1 = map.getItem();
+		List<String> side1 = map.getLeftItem();
 		Element item1 = new Element("side1");
 		for (int j = 0; j < side1.size(); j++) {
 			item1.addContent(new Element("left").setText(side1.get(j)));
 		}
 		ret.addContent(item1);
 
-		map.setSide(2);
-		List<String> side2 = map.getItem();
+		List<String> side2 = map.getRightItem();
 		Element item2 = new Element("side2");
 		for (int j = 0; j < side2.size(); j++) {
 			item2.addContent(new Element("right").setText(side2.get(j)));
 		}
 		ret.addContent(item2);
-		if (map.getAnswer() != null) {
-			Answer an = map.getAnswer();
+		
+		if (pageType == Page.TEST) {
 			Element answerElement = new Element("answer");
+			MapAnswer an = (MapAnswer)map.getAnswer();
 			answerElement.setText(an.writeAnswer());
 			ret.addContent(answerElement);
+		    ret.addContent(new Element("score").setText(question.getScore() + ""));
 		}
 
-		ret.addContent(new Element("score").setText(question.getScore() + ""));
 		return ret;
 	}
 
-	public Element saveEssayQuestion(Question question) {
+	public Element saveEssayQuestion(Question question,int pageType) {
 		Element ret = new Element("question");
 		ret.setAttribute("type", question.getType() + "");
 		ret.setAttribute("isScore", "0");
-		ret.setAttribute("answer", "0");
+		if (pageType == Page.TEST)
+			ret.setAttribute("pageType", "test");
+		else
+			ret.setAttribute("pageType", "survey");
+		
 		Element prompt = new Element("prompt");
 		prompt.setText(question.getPrompt());
+		if (pageType == Page.TEST) {
+			ret.addContent(new Element("score").setText(question.getScore() + ""));
+		}
 		ret.addContent(prompt);
 		return ret;
+	}
+
+	public int[][] transMapAnswer(String answer){
+		String[] answers = answer.split(" ");
+		int[][] answerPair = new int[answers.length][2];
+		for(int i=0;i<answers.length;i++){
+			answerPair[i][0]=i;
+			answerPair[i][1]=Integer.parseInt(answers[i]);
+		}
+		return answerPair;
 	}
 
 	/* get all recordNames of a page */
@@ -527,10 +594,11 @@ public class IO {
 				RankAnswer rank = new RankAnswer(answer.getText());
 				record.addAnwser(rank);
 				break;
-			case 5:
-				MapAnswer map = new MapAnswer(answer.getText());
+			case 5:{
+				MapAnswer map = new MapAnswer(transMapAnswer(answer.getText()));
 				record.addAnwser(map);
 				break;
+			}
 			}
 		}
 		return record;

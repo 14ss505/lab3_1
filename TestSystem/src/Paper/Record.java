@@ -51,7 +51,7 @@ public class Record {
 	}
 
 	public void resetAnswer(int index, Answer newAnswer) {
-		answerList.set(index, newAnswer);
+		answerList.add(index, newAnswer);
 	}
 	
 	class AnswerIterator implements Iterator<Answer>{
@@ -73,13 +73,15 @@ public class Record {
 	}
 
 	public void grade(){
-		if(page.getType()==0)//survey
+		if(page.getType()==Page.SURVEY)//survey
+			return;
+		if(answerList.size()==0)
 			return;
 		Iterator<Question> questionIterator = page.iterator();
 		Iterator<Answer> answerIterator = this.iterator();
 		if(questionIterator.hasNext()){
 			Question q = questionIterator.next();
-			if(q.IsGradable()){
+			if(q.isScore()){
 				if(q.match(answerIterator.next())){
 					this.addScore(q.getScore());
 				}

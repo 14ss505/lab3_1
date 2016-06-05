@@ -8,12 +8,10 @@ public class EssayAnswer extends Answer {
 		setAnswer(answer);
 	}
 
-	@Override
 	public String getAnswer() {
 		return Essay;
 	}
 
-	@Override
 	public void setAnswer(String anwser) {
 		Essay = anwser;
 	}

@@ -22,10 +22,9 @@ public class TabulateChoiceResult extends TabulateResult{
 		int[] answersNum = new int[items.size()];
 		for(int i =0 ;i<records.size();i++){
 			ChoiceAnswer answer = (ChoiceAnswer) records.get(i).getAnswer(questionIndex);
-			String[] answers = answer.getAnswer().split(" ");
+			int[] answers = answer.getIntAnswer();
 			for (int j = 0; j < answers.length; j++) {
-				if(answers[j].equals("1"))
-					answersNum[j]++;
+				answersNum[answers[j]]++;
 			}
 		}
 		

@@ -9,13 +9,13 @@ import Paper.Record;
 import Question.Question;
 
 public class AddEssayAnswer extends AddAnswer{
-
-	public AddEssayAnswer(Page page,EssayAnswer answer,int index,AnswerCreator creator) {
-		super(page,answer,index,creator);
+	
+	public AddEssayAnswer(Page page,EssayAnswer answer,int index,AnswerCreator creator,String personName) {
+		super(page,answer,index,creator, personName);
 	}
 
 	@Override
 	public void execute() {
-		creator.createEssayAnswer(page,(EssayAnswer)answer,index);
+		creator.createEssayAnswer(page,(EssayAnswer)answer,index,personName);
 	}
 }

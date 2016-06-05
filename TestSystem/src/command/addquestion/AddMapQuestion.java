@@ -9,10 +9,7 @@ import command.AddQuestion;
 import receiver.QuestionCreator;
 
 public class AddMapQuestion extends AddQuestion {
-	private String[] side1;
-    private String[] side2;
-
-
+	
 	public AddMapQuestion(Page page, MapQuestion question, QuestionCreator creator) {
 		super(page, question, creator);
 	}

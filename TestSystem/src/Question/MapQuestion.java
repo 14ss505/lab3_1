@@ -1,5 +1,6 @@
 package Question;
 
+import Answer.ChoiceAnswer;
 import Answer.MapAnswer;
 
 import java.util.LinkedList;
@@ -16,9 +17,8 @@ public class MapQuestion extends Question {
         this.side1 = side1;
     	this.side2 = side2;
         this.answer = answer;
-        this.setAnswer(answer.getAnswer());
-		this.score = score;
-        this.isGradable = true;
+        answer.setQuestion(side1, side2);
+        this.setIsScore(true);
     }
     
     public MapQuestion(String prompt, List<String> side1, List<String> side2) {
@@ -26,20 +26,12 @@ public class MapQuestion extends Question {
         this.prompt = prompt; 
         this.side1 = side1;
     	this.side2 = side2;
-       // this.answer = new MapAnswer();
-       this.isGradable = true;
+        this.setIsScore(true);
     }
     
-    public MapQuestion() {
-        super(MAP);
-       // this.answer = new MapAnswer();
-        this.isGradable = true;
-    }
-
-	@Override
-	public void setAnswer(String answer) {
-        super.setAnswer(answer);
+	public void setAnswer(int[][] answerPair) {
         ((MapAnswer)this.answer).setQuestion(side1, side2);
+        ((MapAnswer)this.answer).setAnswer(answerPair);
 	}
 
     @Override
@@ -64,12 +56,12 @@ public class MapQuestion extends Question {
     	this.side2 = side2;
     }
     
-    public List<String> getItem() {
-        // TODO Auto-generated method stub
-        if (side == 1) {
-            return side1;
-        }
-        return side2;
+    public List<String> getLeftItem() {
+        return side1;
+    }
+    
+    public List<String> getRightItem() {
+       return side2;
     }
 
     public void setItem(String item) {

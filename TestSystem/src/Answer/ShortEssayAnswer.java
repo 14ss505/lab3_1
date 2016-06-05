@@ -9,12 +9,10 @@ public class ShortEssayAnswer extends Answer{
 		setAnswer(answer);
 	}
 
-	@Override
 	public String getAnswer() {
 		return text;
 	}
 
-	@Override
 	public void setAnswer(String anwser) {
 		text = anwser;
 	}

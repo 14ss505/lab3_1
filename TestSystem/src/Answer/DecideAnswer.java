@@ -1,24 +1,21 @@
 package Answer;
 
 public class DecideAnswer extends Answer{
-	
-	int answer;
+	String answer;
 
 	public DecideAnswer(String answer) {
 		super(Answer.DECIDE);
 		 setAnswer(answer);
 	}
 
-	@Override
 	public String getAnswer() {
 		String ret = ""+answer;
 		return ret;
 	}
 
 
-	@Override
-	public void setAnswer(String anwser) {
-		this.answer = Integer.parseInt(anwser);
+	public void setAnswer(String answer) {
+		this.answer = answer;
 	}
 
 

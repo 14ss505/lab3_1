@@ -6,32 +6,42 @@ import java.util.List;
 public class MapAnswer extends Answer {
     List<String> side1;
     List<String> side2;
-    List<Integer> map;
+    List<Integer> map ;
 
-    public MapAnswer(String answer) {
+    public MapAnswer(int[][] answerPair) {
         super(Answer.MAP);
-        setAnswer(answer);
+        map = new LinkedList<Integer>();
+        setAnswer(answerPair);
         side1 = new LinkedList<>();
         side2 = new LinkedList<>();
-        map = new LinkedList<>();
     }
 
-    @Override
-    public String getAnswer() {//get correct answer
-        String ret = "";
+    public String[] getAnswer() {//get correct answer
+        String[] ret = new String[map.size()];;
         for (int i = 0; i < map.size(); i++) {
-            ret += "< " + side1.get(i) + ", " + side2.get(map.get(i)) + ">\n";
+            ret[i]= "< " + side1.get(i) + ", " + side2.get(map.get(i)) + ">";
         }
         return ret;
     }
+    
 
+    public int[][] getAnswerPair() {//get correct answer
+    	int[][] answerPair = new int[map.size()][2];
+		for(int i=0;i<map.size();i++){
+			answerPair[i][0]=i;
+			answerPair[i][1]=map.get(i);
+			System.out.println("left"+i+":"+answerPair[i][0]);
+			System.out.println("right"+i+":"+answerPair[i][1]);
+		}
+		return answerPair;
+    }
 
-    @Override
-    public void setAnswer(String answer) {//reset
-        String[] answers = answer.split(" ");
-        map.clear();
-        for (int i = 0; i < answers.length; i++) {
-            map.add(Integer.parseInt(answers[i]));
+    public void setAnswer(int[][] answerPair) {//reset
+    	map.clear();
+        for (int i = 0; i <answerPair.length; i++) {
+        	System.out.println(answerPair[i][0]+" :::"+answerPair[i][1]);
+            map.add(answerPair[i][0],answerPair[i][1]);
+            System.out.println("map"+i+":::"+map.get(i));
         }
     }
 
@@ -44,9 +54,13 @@ public class MapAnswer extends Answer {
     @Override
     public String writeAnswer() {
         String ret = "";
-        for (int i = 0; i < map.size(); i++) {
+        System.out.println("map size:::"+ map.size());
+        for (int i = 0; i < map.size()-1; i++) {
             ret += map.get(i) + " ";
         }
+        if(map.size()>0)
+        	ret+=map.get(map.size()-1);
+        System.out.println("map write answer"+ret);
         return ret;
     }
 

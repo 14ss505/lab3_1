@@ -1,21 +1,21 @@
 package command.create;
 
-import Paper.Page;
+import Paper.Test;
 import command.Create;
 import receiver.PageCreator;
 
 public class CreateTest extends Create {
 	private PageCreator pc;
-	private Page page;
+	private Test test;
 	
-	public CreateTest(PageCreator pc,Page page) {
+	public CreateTest(PageCreator pc,Test test) {
 		this.pc = pc;
-		this.page = page;
+		this.test = test;
 	}
 	@Override
 	public void execute() {
 		// TODO Auto-generated method stub
-		pc.createPage(page);
+		pc.createPage(test);
 	}
 
 }

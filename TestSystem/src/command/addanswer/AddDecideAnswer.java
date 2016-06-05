@@ -10,12 +10,12 @@ import Question.Question;
 
 public class AddDecideAnswer extends AddAnswer{
 
-	public AddDecideAnswer(Page page,DecideAnswer answer,int index,AnswerCreator creator) {
-		super(page,answer,index,creator);
+	public AddDecideAnswer(Page page,DecideAnswer answer,int index,AnswerCreator creator,String personName) {
+		super(page,answer,index,creator, personName);
 	}
-
+	
 	@Override
 	public void execute() {
-		creator.createDecideAnswer(page,(DecideAnswer)answer,index);
+		creator.createDecideAnswer(page,(DecideAnswer)answer,index,personName);
 	}
 }

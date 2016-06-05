@@ -17,7 +17,7 @@ public abstract class Question {
     protected int score;
     protected int type;
     protected Answer answer;
-    protected boolean isGradable;
+    protected boolean isScore;
 
     public Question(int type) {
         this.type = type;
@@ -30,15 +30,7 @@ public abstract class Question {
     public String getPrompt() {
         return prompt;
     }
-
-    public boolean IsGradable(){
-    	return isGradable;
-    }
-
-    public void setIsGradable(boolean isGradable){
-    	this.isGradable=isGradable;
-    }
-
+    
     public void setPrompt(String prompt) {
         this.prompt = prompt;
     }
@@ -54,14 +46,18 @@ public abstract class Question {
     public Answer getAnswer() {
         return answer;
     }
-
-    public void setAnswer(String answer) {
-        this.answer.setAnswer(answer);
-    }
-
+    
     public boolean match(Answer answer) {
         return this.answer.match(answer);
     }
     
     public abstract String getQuestion();
+
+	public boolean isScore() {
+		return isScore;
+	}
+
+	public void setIsScore(boolean isScore) {
+		this.isScore = isScore;
+	}
 }

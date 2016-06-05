@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <totalInfo>
-  <pageName type="test" personName="mm">mmt2</pageName>
+  <pageName type="test" personName="mmy">t1</pageName>
+  <pageName type="test" personName="mmm">t2</pageName>
+  <pageName type="test" personName="mmm">test66</pageName>
 </totalInfo>
 

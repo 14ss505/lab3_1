@@ -23,39 +23,42 @@ public class DisplayPanel extends JPanel {
 		 * (BorderFactory.createMatteBorder(0, 0, 0, 1, Color.gray));
 		 * add(scrollPane,BorderLayout.CENTER);
 		 */
-int index=-1;
-		for(Question question:page.getQuestionList()){
+		System.out.println(page.getPageName());
+		System.out.println(page.getQuestionList().size());
+		
+		int index = -1;
+		for (Question question : page.getQuestionList()) {
 			index++;
-			switch(question.getType()){
+			switch (question.getType()) {
 			case Question.DECIDE:
-				TFQuestionPanel tfPanel = new TFQuestionPanel(isTest,this);
-				tfPanel.addComponentForDisplaying(question,index);
+				TFQuestionPanel tfPanel = new TFQuestionPanel(isTest, this);
+				tfPanel.addComponentForDisplaying(question, index);
 				add("tf", tfPanel);
-				
+
 				break;
 			case Question.CHOICE:
-				MCQuestionPanel mcPanel = new MCQuestionPanel(isTest,this);
-				mcPanel.addComponentForDisplaying(question);
+				MCQuestionPanel mcPanel = new MCQuestionPanel(isTest, this);
+				mcPanel.addComponentForDisplaying(question,index);
 				add("mc", mcPanel);
 				break;
 			case Question.SHORTESSAY:
-				SAQuestionPanel saPanel = new SAQuestionPanel(isTest,this);
-				saPanel.addComponentForDisplaying(question);
+				SAQuestionPanel saPanel = new SAQuestionPanel(isTest, this);
+				saPanel.addComponentForDisplaying(question,index);
 				add("sa", saPanel);
 				break;
 			case Question.ESSAY:
-				EssayQuestionPanel essayPanel = new EssayQuestionPanel(isTest,this);
-				essayPanel.addComponentForDisplaying(question);
+				EssayQuestionPanel essayPanel = new EssayQuestionPanel(isTest, this);
+				essayPanel.addComponentForDisplaying(question,index);
 				add("essay", essayPanel);
 				break;
 			case Question.RANK:
-				RankQuestionPanel rankingPanel = new RankQuestionPanel(isTest,this);
-				rankingPanel.addComponentForDisplaying(question);
+				RankQuestionPanel rankingPanel = new RankQuestionPanel(isTest, this);
+				rankingPanel.addComponentForDisplaying(question,index);
 				add("rank", rankingPanel);
 				break;
 			case Question.MAP:
-				MapQuestionPanel mappingPanel = new MapQuestionPanel(isTest,this);
-				mappingPanel.addComponentForDisplaying(question);
+				MapQuestionPanel mappingPanel = new MapQuestionPanel(isTest, this);
+				mappingPanel.addComponentForDisplaying(question,index);
 				add("map", mappingPanel);
 				break;
 			}

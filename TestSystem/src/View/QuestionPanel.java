@@ -22,6 +22,7 @@ public abstract class QuestionPanel extends JPanel {
 
 	JPanel outter;
 	String pageName;
+	Page page;
 	String personName;
 	int type;
 	int score;
@@ -60,8 +61,8 @@ public abstract class QuestionPanel extends JPanel {
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
 				CardLayout card = (CardLayout) outter.getLayout();
+				card.previous(outter);
 
-				card.last(outter);
 			}
 
 		});
@@ -77,17 +78,18 @@ public abstract class QuestionPanel extends JPanel {
 
 	}
 
-	void addComponentForCreating(String pageName, String personName, int type) {
-	}
-
-	void addComponentForDisplaying(Question question) {
+	void addComponentForCreating(Page page) {
 	}
 
 	void addComponentForModifying() {
 	}
 
-	void addComponentForAnswering() {
-		// addComponentForDisplaying();
+	abstract void addComponentForAnswering(Page page, Question question, int index,String name);
+	// addComponentForDisplaying();
+
+	void addComponentForDisplaying(Question question, int index) {
+		// TODO Auto-generated method stub
+
 	}
 
 }

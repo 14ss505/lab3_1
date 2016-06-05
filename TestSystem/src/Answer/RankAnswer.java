@@ -10,24 +10,24 @@ public class RankAnswer extends Answer{
 
 	public RankAnswer(String answer) {
 		super(Answer.RANK);
+		System.out.println("rank answer :"+answer);
 		setAnswer(answer);
 	}
 
-	@Override
-	public String getAnswer() {
-		String ret = "";
+	public String[] getAnswer() {
+		String[] ret = new String[question.size()];
 		for(int i=0; i<question.size(); i++){
-			ret+=" " + question.get(rank.get(i));
+			ret[i]= question.get(rank.get(i));
 		}
 		return ret;
 	}
 
-	@Override
 	public void setAnswer(String answer) {
 		String[] answers = answer.split(" ");
-		rank.clear();
+        rank.clear();
 		for(int i=0; i<answers.length; i++){
 			rank.add(Integer.parseInt(answers[i]));
+			System.out.println("rank answer :"+i+":::"+Integer.parseInt(answers[i]));
 		}
 	}
 	
@@ -38,9 +38,11 @@ public class RankAnswer extends Answer{
 	@Override
 	public String writeAnswer() {
 		String ret = "";
-		for(int i=0; i<rank.size(); i++){
+		for(int i=0; i<rank.size()-1; i++){
 			ret += rank.get(i) + " ";
 		}
+		if(rank.size()>0)
+			ret +=rank.get(rank.size()-1);
 		return ret;
 	}
 
